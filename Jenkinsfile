@@ -41,7 +41,7 @@ sh 'docker build -t z0s3r77/tomcat-hipotecas:${BUILD_NUMBER} .'
 		stage('Push Image'){
 			steps{
 			
-			sh 'docker push z0s3r77/tomcat-hipotecas:${BUILD_NUMBER} .'
+			sh 'docker push z0s3r77/tomcat-hipotecas:${BUILD_NUMBER} '
 
 			
 			}
