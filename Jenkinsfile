@@ -26,7 +26,7 @@ pipeline {
 		stage('Build Docker Image'){
 			steps {
 
-sh 'docker build -t z0s3r77/tomcat-hipotecas:${BUILD_NUMBER} .'
+sh 'docker build -t z0s3r77/tomcat-hipotecas:latest .'
 			}
 		}
 
@@ -41,7 +41,7 @@ sh 'docker build -t z0s3r77/tomcat-hipotecas:${BUILD_NUMBER} .'
 		stage('Push Image'){
 			steps{
 			
-			sh 'docker push z0s3r77/tomcat-hipotecas:${BUILD_NUMBER} '
+			sh 'docker push z0s3r77/tomcat-hipotecas:latest '
 
 			
 			}
