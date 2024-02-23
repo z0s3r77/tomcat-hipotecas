@@ -37,7 +37,16 @@ sh 'docker build -t z0s3r77/tomcat-hipotecas:${BUILD_NUMBER} .'
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
     			}
 		}
-		
+
+		stage('Push Image'){
+			steps{
+			
+			sh 'docker push z0s3r77/tomcat-hipotecas:${BUILD_NUMBER} .'
+
+			
+			}
+			
+		}
 	}	
 
 }
