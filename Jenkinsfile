@@ -8,9 +8,15 @@ pipeline {
 
 			steps{
 
-			git branch: 'master', credentialsId: 'Github', url: 'https://github.com/z0s3r77/tomcat-hipotecas'
+			git branch: 'dev', credentialsId: 'Github', url: 'https://github.com/z0s3r77/tomcat-hipotecas'
 			}
 
+		}
+
+		stage('Maven compile webapp'){
+			steps{
+			sh 'mvn clean package'
+			}			
 		}
 
 		stage('Build Docker Image'){
