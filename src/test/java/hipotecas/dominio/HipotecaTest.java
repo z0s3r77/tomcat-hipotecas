@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 
 import interfaces.Prestamo;
+import interfaces.Usuario;
 
 class HipotecaTest {
 	
@@ -15,7 +16,7 @@ class HipotecaTest {
 	final double interes = 4.5;
 	final int plazoMensual = 12;
 	final int plazoAmortizacionEnAnnos = 5;
-	
+	final Usuario usuario = null;
 
 	@Test
 	void testHipotecaEmptyConstructor() {
@@ -36,7 +37,7 @@ class HipotecaTest {
 	@Test
 	void testHipotecaConstructor() {
 		
-		Hipoteca hipoteca = new Hipoteca(capital, interes, plazoMensual, plazoAmortizacionEnAnnos);
+		Hipoteca hipoteca = new Hipoteca(capital, interes, plazoMensual, plazoAmortizacionEnAnnos, usuario);
 		
 		assertNotNull(hipoteca);
 	}

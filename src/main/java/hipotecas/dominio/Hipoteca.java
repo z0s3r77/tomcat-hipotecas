@@ -4,6 +4,7 @@
 package hipotecas.dominio;
 
 import interfaces.Prestamo;
+import interfaces.Usuario;
 
 /**
  * @author zoser
@@ -15,9 +16,9 @@ public class Hipoteca extends Prestamo {
 		super();
 	}
 
-	public Hipoteca(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos) {
+	public Hipoteca(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos, Usuario usuario) {
 
-		super(capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnAnnos);
+		super(capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnAnnos, usuario);
 	}
 
 }

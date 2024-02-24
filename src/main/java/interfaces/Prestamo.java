@@ -13,17 +13,18 @@ public abstract class Prestamo {
 	private double interes;
 	private int frecuenciaDePagoEnMeses; 
 	private int plazoDeAmortizacionEnAnnos; 
-	
+	private Usuario usuario;
 	
 	public Prestamo() {
 		
 	}
 	
-	public Prestamo(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos) {
+	public Prestamo(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos, Usuario usuario) {
 		this.capital = capital;
 		this.interes = interes;
 		this.frecuenciaDePagoEnMeses = frecuenciaDePagoEnMeses;
 		this.plazoDeAmortizacionEnAnnos = plazoDeAmortizacionEnAnnos;
+		this.usuario = usuario;
 	}
 	
 	public double getCapital() {
@@ -42,6 +43,10 @@ public abstract class Prestamo {
 		return this.plazoDeAmortizacionEnAnnos;
 	}
 	
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+	
 	public void setCapital(double capital) {
 		this.capital = capital;
 	}
@@ -56,5 +61,9 @@ public abstract class Prestamo {
 	
 	public void setPlazoDeAmortizacionEnAnnos(int plazoDeAmortizacionEnAnnos) {
 		this.plazoDeAmortizacionEnAnnos = plazoDeAmortizacionEnAnnos;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }
