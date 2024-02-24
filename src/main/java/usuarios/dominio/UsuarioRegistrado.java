@@ -2,8 +2,7 @@ package usuarios.dominio;
 
 import java.util.List;
 
-import interfaces.Usuario;
-import interfaces.Prestamo;
+import prestamos.dominio.Prestamo;
 
 public class UsuarioRegistrado implements Usuario {
 

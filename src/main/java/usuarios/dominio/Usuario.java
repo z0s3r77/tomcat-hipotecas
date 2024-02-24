@@ -1,4 +1,4 @@
-package interfaces;
+package usuarios.dominio;
 
 public interface Usuario {
 

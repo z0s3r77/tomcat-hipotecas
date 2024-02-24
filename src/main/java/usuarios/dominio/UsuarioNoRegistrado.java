@@ -1,7 +1,5 @@
 package usuarios.dominio;
 
-import interfaces.Usuario;
-
 public class UsuarioNoRegistrado implements Usuario  {
 
 	private String ip;

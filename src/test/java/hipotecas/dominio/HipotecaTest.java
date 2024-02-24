@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
-
-import interfaces.Prestamo;
-import interfaces.RegistroAmortizacion;
-import interfaces.Usuario;
+import prestamos.dominio.Hipoteca;
+import prestamos.dominio.Prestamo;
+import prestamos.dominio.RegistroAmortizacion;
+import usuarios.dominio.Usuario;
 
 class HipotecaTest {
 	

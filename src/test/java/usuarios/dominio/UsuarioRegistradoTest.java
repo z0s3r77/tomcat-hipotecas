@@ -9,8 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import interfaces.Prestamo;
-import interfaces.Usuario;
+import prestamos.dominio.Prestamo;
 
 class UsuarioRegistradoTest {
 

@@ -1,11 +1,9 @@
 /**
  * 
  */
-package hipotecas.dominio;
+package prestamos.dominio;
 
-import interfaces.Prestamo;
-import interfaces.RegistroAmortizacion;
-import interfaces.Usuario;
+import usuarios.dominio.Usuario;
 
 /**
  * @author zoser

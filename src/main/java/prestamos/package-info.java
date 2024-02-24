@@ -5,4 +5,4 @@
  * @author zoser
  *
  */
-package hipotecas;
+package prestamos;

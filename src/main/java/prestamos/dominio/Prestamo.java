@@ -1,10 +1,12 @@
 /**
  * 
  */
-package interfaces;
+package prestamos.dominio;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import usuarios.dominio.Usuario;
 
 /**
  * @author zoser

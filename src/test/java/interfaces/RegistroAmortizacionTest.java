@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
+import prestamos.dominio.RegistroAmortizacion;
+
 class RegistroAmortizacionTest {
 
 	final int numeroDePago = 1;
