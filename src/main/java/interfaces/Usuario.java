@@ -1,14 +1,7 @@
 package interfaces;
 
-public abstract class Usuario {
-	
-	private String ip;
-	
-	public String getIp() {
-		return this.ip;
-	};
+public interface Usuario {
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
+	public String getIp();
+
 }
