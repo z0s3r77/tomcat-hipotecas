@@ -15,7 +15,7 @@ class HipotecaTest {
 	final double capital = 120.000;
 	final double interes = 4.5;
 	final int plazoMensual = 12;
-	final int plazoAmortizacionEnAnnos = 5;
+	final int plazoAmortizacionEnMeses = 5;
 	final Usuario usuario = null;
 
 	@Test
@@ -37,7 +37,7 @@ class HipotecaTest {
 	@Test
 	void testHipotecaConstructor() {
 		
-		Hipoteca hipoteca = new Hipoteca(capital, interes, plazoMensual, plazoAmortizacionEnAnnos, usuario);
+		Hipoteca hipoteca = new Hipoteca(capital, interes, plazoMensual, plazoAmortizacionEnMeses, usuario);
 		
 		assertNotNull(hipoteca);
 	}
@@ -50,10 +50,14 @@ class HipotecaTest {
 		hipoteca.setCapital(capital);
 		hipoteca.setInteres(interes);
 		hipoteca.setFrecuenciaDePagoEnMeses(plazoMensual);
+		hipoteca.setPlazoDeAmortizacionEnMeses(plazoAmortizacionEnMeses);
+		hipoteca.setUsuario(usuario);
 		
 		assertEquals(hipoteca.getCapital(), 0 ,capital);
 		assertEquals(hipoteca.getInteres(),0 , interes);
 		assertEquals(hipoteca.getFrecuenciaDePagoEnMeses(), plazoMensual);
+		assertEquals(hipoteca.getPlazoDeAmortizacionEnMeses(), plazoAmortizacionEnMeses);
+		assertEquals(hipoteca.getUsuario(), usuario);
 	
 	}
 	
