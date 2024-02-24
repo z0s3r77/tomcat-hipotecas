@@ -9,18 +9,15 @@ import interfaces.Prestamo;
  * @author zoser
  *
  */
-public class Hipoteca extends Prestamo{
+public class Hipoteca extends Prestamo {
 
-	
 	public Hipoteca() {
 		super();
 	}
-	
-	public Hipoteca(double capital, double interes, int plazoMensual) {
-		
-		super(capital, interes, plazoMensual);
+
+	public Hipoteca(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos) {
+
+		super(capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnAnnos);
 	}
-	
-	
-	
+
 }

@@ -16,9 +16,14 @@ Requisitos Funcionales:
 - Se debe registrar como debug en un archivo llamado AppHipoteques.txt todas las simulaciones que se realicen, tanto de un usuario identificado como si no lo es. Esto debe incluir la fecha, hora, IP, nombre de usuario y los datos de la simulación de la hipoteca (importe, interés y meses).
 
 
-## Junit 4
-Se pretende usar Junit4 para implementar o no tdd, pero implementar test.
+## Junit 5 & Mockito
+Se pretende usar Junit5 para implementar o no tdd, pero implementar test.
 
+
+## Maven
+Es el gestor de dependencias del proyecto
+
+## Java 15
 
 ## Docker
 
