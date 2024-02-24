@@ -1,0 +1,69 @@
+package hipotecas.dominio;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import prestamos.dominio.Hipoteca;
+import prestamos.dominio.Prestamo;
+import prestamos.dominio.PrestamoRepository;
+
+
+public class PrestamoRepositoryTest {
+	
+	
+	private PrestamoRepository prestamoRepositoryMock;
+	
+	@BeforeEach
+	void setUp() {
+		prestamoRepositoryMock = mock(PrestamoRepository.class);
+	}
+	
+	
+	@Test
+	void testGuardarPrestamo() {
+		
+		Prestamo prestamo = new Hipoteca();
+		
+		doNothing().when(prestamoRepositoryMock).guardarPrestamo(prestamo);
+        prestamoRepositoryMock.guardarPrestamo(prestamo);
+      
+        verify(prestamoRepositoryMock, times(1)).guardarPrestamo(prestamo);
+	}
+	
+	@Test
+	void testEliminarPrestamo() {
+		
+		Prestamo prestamo = new Hipoteca();
+
+        doNothing().when(prestamoRepositoryMock).eliminarPrestamo(prestamo);
+	
+        prestamoRepositoryMock.eliminarPrestamo(prestamo);
+        
+        verify(prestamoRepositoryMock, times(1)).eliminarPrestamo(prestamo);
+        
+	}
+	
+	
+	@Test
+	void testObtenerTodosLosPrestamosDeUnUsuario() {
+		
+		int usuarioId = 123; 
+		List<Prestamo> prestamosDeUnUsuario = new ArrayList<Prestamo>();
+    
+		when(prestamoRepositoryMock.obtenerTodosLosPrestamosDeUnUsuario(usuarioId)).thenReturn(prestamosDeUnUsuario);
+        
+		List<Prestamo> prestamos = prestamoRepositoryMock.obtenerTodosLosPrestamosDeUnUsuario(usuarioId);
+        verify(prestamoRepositoryMock, times(1)).obtenerTodosLosPrestamosDeUnUsuario(usuarioId);
+        
+        assertNotNull(prestamos);
+        
+	}
+	
+
+}
