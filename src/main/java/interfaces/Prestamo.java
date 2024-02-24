@@ -3,21 +3,26 @@
  */
 package interfaces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author zoser
  *
  */
 public abstract class Prestamo {
 	
-	private double capital;
-	private double interes;
-	private int frecuenciaDePagoEnMeses; 
-	private int plazoDeAmortizacionEnMeses; 
-	private Usuario usuario;
+	protected double capital;
+	protected double interes;
+	protected int frecuenciaDePagoEnMeses; 
+	protected int plazoDeAmortizacionEnMeses; 
+	protected double cuotaMensual;
+	protected List<RegistroAmortizacion> cuadroDeAmortizacion = new ArrayList<RegistroAmortizacion>();
+	protected Usuario usuario;
+
 	
-	public Prestamo() {
-		
-	}
+	public Prestamo() {}
+	
 	
 	public Prestamo(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, Usuario usuario) {
 		this.capital = capital;
@@ -43,6 +48,14 @@ public abstract class Prestamo {
 		return this.plazoDeAmortizacionEnMeses;
 	}
 	
+	public double getCuotaMensual() {
+		return this.cuotaMensual;
+	}
+	
+	public List<RegistroAmortizacion> getCuadroDeAmortizacion(){
+		return this.cuadroDeAmortizacion;
+	}
+	
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -66,4 +79,8 @@ public abstract class Prestamo {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	
+    public abstract void calcularCuadroAmortizacion();
+    public abstract void calcularCuotaMensual();
 }
