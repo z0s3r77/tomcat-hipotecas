@@ -11,12 +11,12 @@ public class RegistroAmortizacion {
 	public RegistroAmortizacion(){}
 	
 	public RegistroAmortizacion(int numeroDePago, double cantidadPendiente, double cantidadAmortizada, double intereses, double cuota){
-		
-		this.numeroDePago = numeroDePago;
-		this.cantidadPendiente = cantidadPendiente;
-		this.cantidadAmortizada = cantidadAmortizada;
-		this.intereses = intereses;
-		this.cuota = cuota;
+
+        this.numeroDePago = numeroDePago;
+        this.cantidadPendiente = Math.floor(cantidadPendiente * 100.0) / 100.0; // Redondear hacia arriba al euro más cercano
+        this.cantidadAmortizada = Math.floor(cantidadAmortizada * 100.0) / 100.0; // Redondear hacia arriba al euro más cercano
+        this.intereses = Math.floor(intereses * 100.0) / 100.0; // Redondear hacia arriba al euro más cercano
+        this.cuota = cuota;
 	}
 	
     public int getNumeroDePago() {
@@ -57,5 +57,16 @@ public class RegistroAmortizacion {
 
     public void setCuota(double cuota) {
         this.cuota = cuota;
+    }
+
+    @Override
+    public String toString() {
+        return "RegistroAmortizacion{" +
+                "numeroDePago=" + numeroDePago +
+                ", cantidadPendiente=" + cantidadPendiente +
+                ", cantidadAmortizada=" + cantidadAmortizada +
+                ", intereses=" + intereses +
+                ", cuota=" + cuota +
+                '}';
     }
 }

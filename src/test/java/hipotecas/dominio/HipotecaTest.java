@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import prestamos.dominio.Hipoteca;
 import prestamos.dominio.Prestamo;
 import prestamos.dominio.RegistroAmortizacion;
-import usuarios.dominio.Usuario;
+import usuarios.dominio.modelos.Usuario;
 
 class HipotecaTest {
 	

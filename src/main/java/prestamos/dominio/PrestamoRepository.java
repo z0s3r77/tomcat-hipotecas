@@ -6,7 +6,7 @@ public interface PrestamoRepository {
 
 	void guardarPrestamo(Prestamo prestamo);
 	void eliminarPrestamo(Prestamo prestamo);
-	List<Prestamo> obtenerTodosLosPrestamosDeUnUsuario(int usuarioId);
+	List<Prestamo> obtenerTodosLosPrestamosDeUnUsuario(String usuarioEmail);
 
 	
 }

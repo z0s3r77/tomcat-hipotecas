@@ -53,13 +53,13 @@ public class PrestamoRepositoryTest {
 	@Test
 	void testObtenerTodosLosPrestamosDeUnUsuario() {
 		
-		int usuarioId = 123; 
+		String usuarioEmail = "email"; 
 		List<Prestamo> prestamosDeUnUsuario = new ArrayList<Prestamo>();
     
-		when(prestamoRepositoryMock.obtenerTodosLosPrestamosDeUnUsuario(usuarioId)).thenReturn(prestamosDeUnUsuario);
+		when(prestamoRepositoryMock.obtenerTodosLosPrestamosDeUnUsuario(usuarioEmail)).thenReturn(prestamosDeUnUsuario);
         
-		List<Prestamo> prestamos = prestamoRepositoryMock.obtenerTodosLosPrestamosDeUnUsuario(usuarioId);
-        verify(prestamoRepositoryMock, times(1)).obtenerTodosLosPrestamosDeUnUsuario(usuarioId);
+		List<Prestamo> prestamos = prestamoRepositoryMock.obtenerTodosLosPrestamosDeUnUsuario(usuarioEmail);
+        verify(prestamoRepositoryMock, times(1)).obtenerTodosLosPrestamosDeUnUsuario(usuarioEmail);
         
         assertNotNull(prestamos);
         

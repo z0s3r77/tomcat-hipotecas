@@ -3,7 +3,9 @@
  */
 package prestamos.dominio;
 
-import usuarios.dominio.Usuario;
+import usuarios.dominio.modelos.Usuario;
+
+import java.text.DecimalFormat;
 
 /**
  * @author zoser
@@ -45,10 +47,9 @@ public class Hipoteca extends Prestamo {
 
 	@Override
 	public void calcularCuotaMensual() {
-	    double tasaInteresMensual = interes / 100 / 12;
-	    double factor = Math.pow(1 + tasaInteresMensual, -plazoDeAmortizacionEnMeses);
-	    this.cuotaMensual = capital * tasaInteresMensual / (1 - factor);
+		double tasaInteresMensual = interes / 100 / 12;
+		double factor = Math.pow(1 + tasaInteresMensual, -plazoDeAmortizacionEnMeses);
+		this.cuotaMensual = Math.round(capital * tasaInteresMensual / (1 - factor) * 100.0) / 100.0;
 	}
-
 
 }

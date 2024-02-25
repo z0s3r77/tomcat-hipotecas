@@ -1,4 +1,4 @@
-package usuarios.dominio;
+package usuarios.dominio.modelos;
 
 public class UsuarioNoRegistrado implements Usuario  {
 

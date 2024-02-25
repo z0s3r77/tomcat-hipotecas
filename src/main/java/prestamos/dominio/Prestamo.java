@@ -6,7 +6,7 @@ package prestamos.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
-import usuarios.dominio.Usuario;
+import usuarios.dominio.modelos.Usuario;
 
 /**
  * @author zoser
@@ -19,6 +19,7 @@ public abstract class Prestamo {
 	protected int frecuenciaDePagoEnMeses; 
 	protected int plazoDeAmortizacionEnMeses; 
 	protected double cuotaMensual;
+	protected String tipoPrestamo;
 	protected List<RegistroAmortizacion> cuadroDeAmortizacion = new ArrayList<RegistroAmortizacion>();
 	protected Usuario usuario;
 
@@ -62,6 +63,11 @@ public abstract class Prestamo {
 		return this.usuario;
 	}
 	
+	public String getTipoPrestamo() {
+		return tipoPrestamo;
+	}
+
+	
 	public void setCapital(double capital) {
 		this.capital = capital;
 	}
@@ -82,7 +88,19 @@ public abstract class Prestamo {
 		this.usuario = usuario;
 	}
 	
+
+	public void setTipoPrestamo(String tipoPrestamo) {
+		this.tipoPrestamo = tipoPrestamo;
+	}
 	
     public abstract void calcularCuadroAmortizacion();
     public abstract void calcularCuotaMensual();
+    
+	@Override
+	public String toString() {
+		return "Prestamo [capital=" + capital + ", interes=" + interes + ", frecuenciaDePagoEnMeses="
+				+ frecuenciaDePagoEnMeses + ", plazoDeAmortizacionEnMeses=" + plazoDeAmortizacionEnMeses
+				+ ", tipoPrestamo=" + tipoPrestamo + "]";
+	}
+
 }
