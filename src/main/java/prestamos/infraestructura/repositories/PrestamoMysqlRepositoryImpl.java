@@ -9,13 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import infraestructuracomun.H2DatabaseConnector;
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
 import prestamos.infraestructura.entities.PrestamoEntity;
 import usuarios.dominio.modelos.Usuario;
+import usuarios.dominio.modelos.UsuarioRegistrado;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
+import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
 /**
@@ -35,11 +38,18 @@ public class PrestamoMysqlRepositoryImpl {
 	}
 
 
-	public void guardarPrestamo(PrestamoEntity prestamo) {
+	public PrestamoEntity guardarPrestamo(PrestamoEntity prestamo) {
+
+
+		PrestamoEntity prestamoEntity = null;
+
 
 		try {
+
 			String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario_id) "
+
 					+ "VALUES (?, ?, ?, ?, ?, (SELECT id FROM usuarios WHERE email = ?))";
+
 
 			PreparedStatement pstmt = con.prepareStatement(insertPrestamoSQL);
 
@@ -47,17 +57,47 @@ public class PrestamoMysqlRepositoryImpl {
 			pstmt.setDouble(2, prestamo.getInteres());
 			pstmt.setInt(3, prestamo.getFrecuenciaDePagoEnMeses());
 			pstmt.setInt(4, prestamo.getPlazoDeAmortizacionEnMeses());
-			pstmt.setString(5, prestamo.getClass().toString());
-			pstmt.setString(6, ( prestamo.getUsuario()).getEmail());
+			pstmt.setString(5, prestamo.getTipoDePrestamo());
+			pstmt.setString(6, prestamo.getUsuario().getEmail());
 
-			pstmt.executeUpdate();
+			int affectedRows = pstmt.executeUpdate();
+
+
+			if (affectedRows > 0) {
+
+				ResultSet generatedKeys = pstmt.getGeneratedKeys();
+				System.out.println(generatedKeys);
+
+				if (generatedKeys.next()) {
+
+					int usuarioId = generatedKeys.getInt(1);
+
+
+					prestamoEntity = new PrestamoEntity();
+					prestamoEntity.setId(usuarioId);
+					prestamoEntity.setCapital(prestamo.getCapital());
+					prestamoEntity.setInteres(prestamo.getInteres());
+					prestamoEntity.setFrecuenciaDePagoEnMeses(prestamo.getFrecuenciaDePagoEnMeses());
+					prestamoEntity.setPlazoDeAmortizacionEnMeses(prestamo.getPlazoDeAmortizacionEnMeses());
+					prestamoEntity.setTipoDePrestamo(prestamo.getClass().toString());
+
+					UsuarioRegistrado usuarioRegistrado = (UsuarioRegistrado) this.usuarioRepositoryPort.findByEmail(prestamo.getUsuario().getEmail()).orElse(null);
+					UsuarioRegistradoEntity usuarioRegistradoEntity = UsuarioRegistradoEntity.fromDomainModel(usuarioRegistrado);
+
+					prestamoEntity.setUsuario(usuarioRegistradoEntity);
+				}
+			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+
+
+			System.out.println("Error al guardar el prestamo: " + e.getMessage());
+
 		}
 
-	}
+		return prestamoEntity;
 
+	}
 	public boolean eliminarPrestamo(PrestamoEntity prestamo) {
 
 		String eliminarPrestamoSQL = "DELETE FROM prestamos WHERE " + "capital = ? AND " + "interes = ? AND "
@@ -70,15 +110,19 @@ public class PrestamoMysqlRepositoryImpl {
 			eliminarPrestamoStmt.setDouble(2, prestamo.getInteres());
 			eliminarPrestamoStmt.setInt(3, prestamo.getFrecuenciaDePagoEnMeses());
 			eliminarPrestamoStmt.setInt(4, prestamo.getPlazoDeAmortizacionEnMeses());
-			eliminarPrestamoStmt.setString(5, prestamo.getClass().toString()); // tipoDePrestamo
+			eliminarPrestamoStmt.setString(5, prestamo.getTipoDePrestamo()); // tipoDePrestamo
 			eliminarPrestamoStmt.setString(6, ( prestamo.getUsuario()).getEmail());
 
 			int filasAfectadas = eliminarPrestamoStmt.executeUpdate();
 
 			if (filasAfectadas > 0) {
 				System.out.println("Se eliminó el préstamo con éxito.");
+				return true;
+
 			} else {
 				System.out.println("No se encontró un préstamo con los atributos proporcionados.");
+				return true;
+
 			}
 
 		} catch (SQLException e) {

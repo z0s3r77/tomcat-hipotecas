@@ -57,7 +57,21 @@ public class MainApplication {
         usuariosEnBd.stream().map(Usuario::toString).forEach(System.out::println);
 
         System.out.println("");
-        System.out.println("");  
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("---------- Creamos  dos usuarios  más en H2 ------------------ ");
+
+        UsuarioRegistrado pabloChacon = new UsuarioRegistrado("pablo@gmail.com", "pablo chacon", "secretosDePablo", null);
+        UsuarioRegistrado sebastianEstacio = new UsuarioRegistrado("sebastian@gmail.com", "Sebastián Estacio", "secretosDeSebas", null);
+
+        usuarioService.createUsuario(pabloChacon);
+        usuarioService.createUsuario(sebastianEstacio);
+        usuariosEnBd = usuarioService.getAllUsuario();
+        usuariosEnBd.stream().map(Usuario::toString).forEach(System.out::println);
+
+        System.out.println("");
+        System.out.println("");
         System.out.println("---------- Obtenemos los prestamos de Juan -----------------");
         System.out.println("");
         System.out.println("");

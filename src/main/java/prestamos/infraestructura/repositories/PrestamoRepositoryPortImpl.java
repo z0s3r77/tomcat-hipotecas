@@ -32,10 +32,14 @@ private  static PrestamoRepositoryPortImpl instaciaSingleton;
 
     @Override
     public Prestamo save(Prestamo prestamo) {
-        PrestamoEntity prestamoEntity = PrestamoEntity.fromDomainModel(prestamo);
-        this.prestamoMysqlRepositoryImpl.guardarPrestamo(prestamoEntity);
 
-        return prestamoEntity.toDomainModel(prestamo);
+        String prestamoClass = prestamo.getClass().toString();
+        prestamo.setTipoPrestamo(prestamoClass);
+
+        PrestamoEntity prestamoEntity = PrestamoEntity.fromDomainModel(prestamo);
+        PrestamoEntity prestamoSaved = this.prestamoMysqlRepositoryImpl.guardarPrestamo(prestamoEntity);
+
+        return prestamoSaved.toDomainModel(prestamo);
     }
 
     @Override

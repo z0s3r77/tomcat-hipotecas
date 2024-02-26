@@ -54,29 +54,29 @@ public class H2DatabaseConnector {
 	                + "    nombre VARCHAR(255) NOT NULL,\n" + "    contraseña VARCHAR(255) NOT NULL\n" + ");";
 	        stmt.execute(createTableUsuariosSQL);
 
-	        // Crear la tabla de préstamos
-	        String createTablePrestamosSQL = "CREATE TABLE IF NOT EXISTS prestamos ("
-	                + "id INT PRIMARY KEY AUTO_INCREMENT," 
-	                + "capital DOUBLE," 
-	                + "interes DOUBLE,"
-	                + "frecuenciaDePagoEnMeses INT," 
-	                + "plazoDeAmortizacionEnMeses INT," 
-	                + "tipoDePrestamo VARCHAR(255),"
-	                + "usuario_id INT,"
-	                + "FOREIGN KEY (usuario_id) REFERENCES usuarios(id)" 
-	                + ")";
-	        stmt.execute(createTablePrestamosSQL);
 
 	        // Insertar datos iniciales de usuario 1
 			String insertDataUsuarioSQL1 = "INSERT INTO usuarios (nombre, email, contraseña) VALUES "
 					+ "('Juan Pérez', 'usuario1@example.com', 'contraseña123')";
 			stmt.execute(insertDataUsuarioSQL1);
 
+			// Crear la tabla de préstamos
+			String createTablePrestamosSQL = "CREATE TABLE IF NOT EXISTS prestamos ("
+					+ "id INT  AUTO_INCREMENT PRIMARY KEY,"
+					+ "capital DOUBLE,"
+					+ "interes DOUBLE,"
+					+ "frecuenciaDePagoEnMeses INT,"
+					+ "plazoDeAmortizacionEnMeses INT,"
+					+ "tipoDePrestamo VARCHAR(255),"
+					+ "usuario_id INT,"
+					+ "FOREIGN KEY (usuario_id) REFERENCES usuarios(id)"
+					+ ")";
+			stmt.execute(createTablePrestamosSQL);
 
 
 	        // Insertar un préstamo para Juan Pérez
 	        String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario_id) VALUES "
-	                + "(120000, 4.5, 1, 12, 'Hipoteca', 1 )";
+	                + "(120000.0, 4.5, 1, 1, 'Hipoteca', 1 )";
 	        stmt.execute(insertPrestamoSQL);
 	    }
 	}

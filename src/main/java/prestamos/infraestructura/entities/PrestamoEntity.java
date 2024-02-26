@@ -18,6 +18,8 @@ public class PrestamoEntity {
     private String tipoDePrestamo;
     private UsuarioRegistradoEntity usuarioRegistradoEntity;
 
+    public PrestamoEntity(){}
+
     public PrestamoEntity(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoDePrestamo, UsuarioRegistradoEntity usuarioRegistradoEntity) {
         this.id = id;
         this.capital = capital;
