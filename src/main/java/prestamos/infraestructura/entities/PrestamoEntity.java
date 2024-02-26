@@ -1,13 +1,38 @@
+/**
+ * Entidad que representa un préstamo en el contexto de persistencia.
+ *
+ * <p>
+ * Esta clase mapea la información de un préstamo desde la capa de dominio al formato adecuado para su almacenamiento
+ * en la capa de infraestructura de persistencia, como una base de datos. También proporciona métodos para convertir
+ * entre el modelo de dominio y la representación en la capa de infraestructura.
+ * </p>
+ *
+ * @see Prestamo
+ * @see UsuarioRegistradoEntity
+ *
+ */
 package prestamos.infraestructura.entities;
 
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
-import usuarios.dominio.modelos.Usuario;
 import usuarios.dominio.modelos.UsuarioRegistrado;
 import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
 
 import java.util.Objects;
 
+/**
+ * Entidad que representa un préstamo en el contexto de persistencia.
+ *
+ * <p>
+ * Esta clase mapea la información de un préstamo desde la capa de dominio al formato adecuado para su almacenamiento
+ * en la capa de infraestructura de persistencia, como una base de datos. También proporciona métodos para convertir
+ * entre el modelo de dominio y la representación en la capa de infraestructura.
+ * </p>
+ *
+ * @see Prestamo
+ * @see UsuarioRegistradoEntity
+ *
+ */
 public class PrestamoEntity {
 
     private int id;
@@ -30,6 +55,12 @@ public class PrestamoEntity {
         this.usuarioRegistradoEntity = usuarioRegistradoEntity;
     }
 
+    /**
+     * Convierte un objeto de dominio {@link Prestamo} a una entidad {@link PrestamoEntity}.
+     *
+     * @param prestamo El objeto de dominio {@link Prestamo} a convertir.
+     * @return La entidad {@link PrestamoEntity} creada a partir del objeto de dominio.
+     */
     public static PrestamoEntity fromDomainModel(Prestamo prestamo){
 
         UsuarioRegistradoEntity usuarioRegistrado = UsuarioRegistradoEntity.fromDomainModel((UsuarioRegistrado) prestamo.getUsuario());
@@ -37,6 +68,13 @@ public class PrestamoEntity {
 
     }
 
+
+    /**
+     * Convierte la entidad {@link PrestamoEntity} a un objeto de dominio {@link Prestamo}.
+     *
+     * @param prestamo La instancia de {@link Prestamo} que se actualizará con los valores de la entidad.
+     * @return El objeto de dominio {@link Prestamo} actualizado.
+     */
     public Prestamo toDomainModel(Prestamo prestamo){
         if (prestamo instanceof Hipoteca) {
             return new Hipoteca(this.id, this.capital, this.interes, this.frecuenciaDePagoEnMeses, this.plazoDeAmortizacionEnMeses, this.tipoDePrestamo, this.usuarioRegistradoEntity.toDomainModel());

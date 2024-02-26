@@ -1,3 +1,20 @@
+/**
+ * Implementación concreta del puerto de repositorio de préstamos ({@link PrestamoRepositoryPort}) que utiliza
+ * persistencia en una base de datos MySQL mediante {@link PrestamoMysqlRepositoryImpl}.
+ *
+ * <p>
+ * Esta implementación proporciona métodos para guardar, eliminar y obtener préstamos desde una base de datos MySQL.
+ * Utiliza el patrón Singleton para garantizar una única instancia de la clase.
+ * </p>
+ *
+ * <p>
+ * Se espera que esta clase sea utilizada en la capa de aplicación para interactuar con el repositorio de préstamos.
+ * </p>
+ *
+ * @see PrestamoRepositoryPort
+ * @see PrestamoMysqlRepositoryImpl
+ *
+ */
 package prestamos.infraestructura.repositories;
 
 import prestamos.dominio.modelos.Prestamo;
@@ -7,16 +24,43 @@ import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
 import java.util.List;
 
+/**
+ * Implementación concreta del puerto de repositorio de préstamos ({@link PrestamoRepositoryPort}) que utiliza
+ * persistencia en una base de datos MySQL mediante {@link PrestamoMysqlRepositoryImpl}.
+ *
+ * <p>
+ * Esta implementación proporciona métodos para guardar, eliminar y obtener préstamos desde una base de datos MySQL.
+ * Utiliza el patrón Singleton para garantizar una única instancia de la clase.
+ * </p>
+ *
+ * <p>
+ * Se espera que esta clase sea utilizada en la capa de aplicación para interactuar con el repositorio de préstamos.
+ * </p>
+ *
+ * @see PrestamoRepositoryPort
+ * @see PrestamoMysqlRepositoryImpl
+ *
+ */
 public class PrestamoRepositoryPortImpl implements PrestamoRepositoryPort {
 
-private  static PrestamoRepositoryPortImpl instaciaSingleton;
+    private  static PrestamoRepositoryPortImpl instaciaSingleton;
     private final PrestamoMysqlRepositoryImpl prestamoMysqlRepositoryImpl;
 
+    /**
+     * Constructor privado para aplicar el patrón Singleton.
+     *
+     * @param prestamoMysqlRepositoryImpl La implementación concreta de {@link PrestamoMysqlRepositoryImpl} a utilizar.
+     */
     public PrestamoRepositoryPortImpl(PrestamoMysqlRepositoryImpl prestamoMysqlRepositoryImpl) {
 
         this.prestamoMysqlRepositoryImpl = prestamoMysqlRepositoryImpl;
     }
 
+    /**
+     * Método para obtener la única instancia de la clase utilizando el patrón Singleton.
+     *
+     * @return La instancia única de {@link PrestamoRepositoryPortImpl}.
+     */
     public static PrestamoRepositoryPortImpl getInstance(){
         if (instaciaSingleton == null){
             synchronized (PrestamoRepositoryPortImpl.class){
@@ -29,7 +73,12 @@ private  static PrestamoRepositoryPortImpl instaciaSingleton;
     }
 
 
-
+    /**
+     * Guarda un préstamo en la base de datos MySQL.
+     *
+     * @param prestamo El préstamo ({@link Prestamo}) que se desea guardar.
+     * @return El préstamo guardado después de la persistencia.
+     */
     @Override
     public Prestamo save(Prestamo prestamo) {
 
@@ -42,6 +91,12 @@ private  static PrestamoRepositoryPortImpl instaciaSingleton;
         return prestamoSaved.toDomainModel(prestamo);
     }
 
+    /**
+     * Elimina un préstamo de la base de datos MySQL.
+     *
+     * @param prestamo El préstamo ({@link Prestamo}) que se desea eliminar.
+     * @return `true` si la eliminación fue exitosa, `false` si no se pudo eliminar.
+     */
     @Override
     public boolean deletePrestamo(Prestamo prestamo) {
         PrestamoEntity prestamoEntity = PrestamoEntity.fromDomainModel(prestamo);
@@ -49,6 +104,12 @@ private  static PrestamoRepositoryPortImpl instaciaSingleton;
 
     }
 
+    /**
+     * Obtiene todos los préstamos asociados a un usuario desde la base de datos MySQL.
+     *
+     * @param usuarioEmail El correo electrónico del usuario para el cual se desean obtener los préstamos.
+     * @return Lista de préstamos asociados al usuario.
+     */
     @Override
     public List<Prestamo> getAllPrestamosfromUsuario(String usuarioEmail) {
         return this.prestamoMysqlRepositoryImpl.obtenerTodosLosPrestamosDeUnUsuario(usuarioEmail);

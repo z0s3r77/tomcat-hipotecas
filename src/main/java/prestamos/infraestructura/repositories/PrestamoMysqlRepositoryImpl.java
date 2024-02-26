@@ -1,12 +1,25 @@
 /**
- * 
+ * Implementación concreta de un repositorio de préstamos para el almacenamiento en una base de datos MySQL.
+ *
+ * <p>
+ * Esta clase proporciona métodos para la persistencia y recuperación de objetos {@link PrestamoEntity} en una base de
+ * datos MySQL. La persistencia incluye la creación, eliminación y recuperación de préstamos asociados a un usuario.
+ * </p>
+ *
+ * <p>
+ * Se espera que esta clase sea utilizada en conjunto con un {@link UsuarioRepositoryPort} para gestionar la
+ * persistencia de usuarios asociados a los préstamos.
+ * </p>
+ *
+ * @see PrestamoEntity
+ * @see UsuarioRepositoryPort
+ *
  */
 package prestamos.infraestructura.repositories;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import infraestructuracomun.H2DatabaseConnector;
 import prestamos.dominio.modelos.Hipoteca;
@@ -19,7 +32,20 @@ import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
 /**
- * @author zoser
+ * Implementación concreta de un repositorio de préstamos para el almacenamiento en una base de datos MySQL.
+ *
+ * <p>
+ * Esta clase proporciona métodos para la persistencia y recuperación de objetos {@link PrestamoEntity} en una base de
+ * datos MySQL. La persistencia incluye la creación, eliminación y recuperación de préstamos asociados a un usuario.
+ * </p>
+ *
+ * <p>
+ * Se espera que esta clase sea utilizada en conjunto con un {@link UsuarioRepositoryPort} para gestionar la
+ * persistencia de usuarios asociados a los préstamos.
+ * </p>
+ *
+ * @see PrestamoEntity
+ * @see UsuarioRepositoryPort
  *
  */
 public class PrestamoMysqlRepositoryImpl {
@@ -31,20 +57,22 @@ public class PrestamoMysqlRepositoryImpl {
 	public PrestamoMysqlRepositoryImpl(UsuarioRepositoryImpl usuarioRepositoryPort) {
 
 		this.usuarioRepositoryPort = usuarioRepositoryPort;
-
 	}
 
 
+	/**
+	 * Guarda un objeto {@link PrestamoEntity} en la base de datos MySQL.
+	 *
+	 * @param prestamo La entidad {@link PrestamoEntity} que se desea guardar.
+	 * @return La entidad {@link PrestamoEntity} guardada en la base de datos.
+	 */
 	public PrestamoEntity guardarPrestamo(PrestamoEntity prestamo) {
 
-
 		PrestamoEntity prestamoEntity = null;
-
 
 		try {
 
 			String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario_id) "
-
 					+ "VALUES (?, ?, ?, ?, ?, (SELECT id FROM usuarios WHERE email = ?))";
 
 
@@ -68,7 +96,6 @@ public class PrestamoMysqlRepositoryImpl {
 
 					int usuarioId = generatedKeys.getInt(1);
 
-
 					prestamoEntity = new PrestamoEntity();
 					prestamoEntity.setId(usuarioId);
 					prestamoEntity.setCapital(prestamo.getCapital());
@@ -86,14 +113,18 @@ public class PrestamoMysqlRepositoryImpl {
 
 		} catch (SQLException e) {
 
-
 			System.out.println("Error al guardar el prestamo: " + e.getMessage());
-
 		}
 
 		return prestamoEntity;
-
 	}
+
+	/**
+	 * Elimina un préstamo de la base de datos MySQL.
+	 *
+	 * @param prestamo La entidad {@link PrestamoEntity} que se desea eliminar.
+	 * @return `true` si la eliminación fue exitosa, `false` si no se pudo eliminar.
+	 */
 	public boolean eliminarPrestamo(PrestamoEntity prestamo) {
 
 		String eliminarPrestamoSQL = "DELETE FROM prestamos WHERE " + "capital = ? AND " + "interes = ? AND "
@@ -128,19 +159,23 @@ public class PrestamoMysqlRepositoryImpl {
 		return true;
 	}
 
+
+	/**
+	 * Obtiene todos los préstamos asociados a un usuario desde la base de datos MySQL.
+	 *
+	 * @param usuarioEmail El correo electrónico del usuario para el cual se desean obtener los préstamos.
+	 * @return Lista de préstamos asociados al usuario.
+	 */
 	public List<Prestamo> obtenerTodosLosPrestamosDeUnUsuario(String usuarioEmail) {
 		
 		Usuario usuario = usuarioRepositoryPort.findByEmail(usuarioEmail).orElseThrow();
-		
 	    List<Prestamo> prestamos = new ArrayList<>();
-	    
-		
+
 	    String obtenerPrestamosSQL = "SELECT * FROM prestamos WHERE usuario_id = (SELECT id FROM usuarios WHERE email = ?)";
 	    
 	    try (PreparedStatement obtenerPrestamosStmt = con.prepareStatement(obtenerPrestamosSQL)) {
 	        obtenerPrestamosStmt.setString(1, usuarioEmail);
-	        
-	        
+
 	        try (ResultSet resultSet = obtenerPrestamosStmt.executeQuery()) {
 	            while (resultSet.next()) {
 	                Prestamo prestamo = new Hipoteca();
@@ -149,21 +184,15 @@ public class PrestamoMysqlRepositoryImpl {
 	                prestamo.setFrecuenciaDePagoEnMeses(resultSet.getInt("frecuenciaDePagoEnMeses"));
 	                prestamo.setPlazoDeAmortizacionEnMeses(resultSet.getInt("plazoDeAmortizacionEnMeses"));
 	                prestamo.setTipoPrestamo(resultSet.getString("tipoDePrestamo"));
-
-	                // Aquí debes cargar el usuario asociado al préstamo utilizando la subquery
 	                prestamo.setUsuario(usuario);
-
 	                prestamos.add(prestamo);
 	            }
 	        }
-	        
-	        
 
 	    } catch (SQLException e) {
 	        e.printStackTrace(); // Manejar la excepción adecuadamente en tu aplicación
 	    }
 
-	    
 	    return prestamos;
 	}
 
