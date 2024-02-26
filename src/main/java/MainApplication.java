@@ -4,6 +4,7 @@ import prestamos.dominio.Hipoteca;
 import prestamos.dominio.Prestamo;
 import prestamos.dominio.PrestamoRepository;
 import prestamos.infraestructura.PrestamoMysqlRepositoryImpl;
+import prestamos.infraestructura.PrestamoRepositoryImpl;
 import usuarios.aplicacion.services.UsuarioService;
 import usuarios.dominio.modelos.Usuario;
 import usuarios.dominio.modelos.UsuarioRegistrado;
@@ -20,7 +21,7 @@ public class MainApplication {
     	
     	
         UsuarioRepositoryPort usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
-        PrestamoRepository prestamoRepository = new PrestamoMysqlRepositoryImpl(usuarioRepositoryPort);
+        PrestamoRepository prestamoRepository = PrestamoRepositoryImpl.getInstance();
         
         
         UsuarioService usuarioService = new UsuarioService();
