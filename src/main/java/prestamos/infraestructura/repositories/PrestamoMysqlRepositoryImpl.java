@@ -1,7 +1,7 @@
 /**
  * 
  */
-package prestamos.infraestructura;
+package prestamos.infraestructura.repositories;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import infraestructuracomun.H2DatabaseConnector;
-import prestamos.dominio.Hipoteca;
-import prestamos.dominio.Prestamo;
-import prestamos.dominio.PrestamoRepository;
+import prestamos.dominio.modelos.Hipoteca;
+import prestamos.dominio.modelos.Prestamo;
+import prestamos.dominio.puerto.PrestamoRepository;
 import usuarios.dominio.modelos.Usuario;
 import usuarios.dominio.modelos.UsuarioRegistrado;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
@@ -26,13 +26,14 @@ import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 public class PrestamoMysqlRepositoryImpl implements PrestamoRepository {
 
 	static Connection con = H2DatabaseConnector.getConnection();
-	
+
 	private final UsuarioRepositoryPort usuarioRepositoryPort;
 
-	public PrestamoMysqlRepositoryImpl(){
-		this.usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
-	}
+	public PrestamoMysqlRepositoryImpl(UsuarioRepositoryImpl usuarioRepositoryPort) {
 
+		this.usuarioRepositoryPort = usuarioRepositoryPort;
+
+	}
 
 	@Override
 	public void guardarPrestamo(Prestamo prestamo) {

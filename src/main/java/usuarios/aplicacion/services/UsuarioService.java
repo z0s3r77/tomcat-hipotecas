@@ -28,7 +28,9 @@ public class UsuarioService
         this.deleteUsuarioUseCase = new DeleteUsuarioUseCaseImpl();
         this.retriveUsuarioUseCase = new RetriveUsuarioUseCaseImpl();
         this.updateUsuarioUseCase = new UpdateUsuarioUseCaseImpl();
-    }	
+    }
+
+
 
 	@Override
 	public Usuario createUsuario(Usuario usuario) {

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package prestamos.dominio;
+package prestamos.dominio.modelos;
 
 import java.util.ArrayList;
 import java.util.List;

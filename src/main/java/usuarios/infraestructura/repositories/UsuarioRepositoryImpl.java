@@ -14,9 +14,10 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	private static UsuarioRepositoryImpl instanciaSingleton;
 	private final UsuarioRegistradoEntityMysqlRepositoryImpl usuarioMysqlRepositoryImpl;
 
-	private UsuarioRepositoryImpl() {
 
-		this.usuarioMysqlRepositoryImpl = new UsuarioRegistradoEntityMysqlRepositoryImpl();
+	public UsuarioRepositoryImpl(UsuarioRegistradoEntityMysqlRepositoryImpl usuarioMysqlRepositoryImpl) {
+
+		this.usuarioMysqlRepositoryImpl = usuarioMysqlRepositoryImpl;
 
 	}
 
@@ -26,7 +27,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 		if (instanciaSingleton == null) {
 			synchronized (UsuarioRepositoryImpl.class) {
 				if (instanciaSingleton == null) {
-					instanciaSingleton = new UsuarioRepositoryImpl();
+					instanciaSingleton = new UsuarioRepositoryImpl(new UsuarioRegistradoEntityMysqlRepositoryImpl());
 				}
 			}
 		}

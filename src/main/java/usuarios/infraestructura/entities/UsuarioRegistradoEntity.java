@@ -2,7 +2,7 @@ package usuarios.infraestructura.entities;
 
 import java.util.List;
 
-import prestamos.dominio.Prestamo;
+import prestamos.dominio.modelos.Prestamo;
 import usuarios.dominio.modelos.UsuarioRegistrado;
 
 public class UsuarioRegistradoEntity {

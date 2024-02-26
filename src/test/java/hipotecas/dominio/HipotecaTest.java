@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
-import prestamos.dominio.Hipoteca;
-import prestamos.dominio.Prestamo;
-import prestamos.dominio.RegistroAmortizacion;
+import prestamos.dominio.modelos.Hipoteca;
+import prestamos.dominio.modelos.Prestamo;
+import prestamos.dominio.modelos.RegistroAmortizacion;
 import usuarios.dominio.modelos.Usuario;
 
 class HipotecaTest {

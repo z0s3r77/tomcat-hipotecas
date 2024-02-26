@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
-import prestamos.dominio.RegistroAmortizacion;
+import prestamos.dominio.modelos.RegistroAmortizacion;
 
 class RegistroAmortizacionTest {
 

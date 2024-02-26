@@ -1,4 +1,6 @@
-package prestamos.dominio;
+package prestamos.dominio.puerto;
+
+import prestamos.dominio.modelos.Prestamo;
 
 import java.util.List;
 

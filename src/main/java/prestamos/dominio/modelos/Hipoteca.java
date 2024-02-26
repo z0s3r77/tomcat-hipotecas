@@ -1,11 +1,9 @@
 /**
  * 
  */
-package prestamos.dominio;
+package prestamos.dominio.modelos;
 
 import usuarios.dominio.modelos.Usuario;
-
-import java.text.DecimalFormat;
 
 /**
  * @author zoser

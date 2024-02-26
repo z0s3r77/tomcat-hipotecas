@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import prestamos.dominio.Hipoteca;
-import prestamos.dominio.Prestamo;
-import prestamos.dominio.PrestamoRepository;
+import prestamos.dominio.modelos.Hipoteca;
+import prestamos.dominio.modelos.Prestamo;
+import prestamos.dominio.puerto.PrestamoRepository;
 
 
 public class PrestamoRepositoryTest {

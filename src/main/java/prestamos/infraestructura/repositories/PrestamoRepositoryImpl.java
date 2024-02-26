@@ -1,31 +1,36 @@
-package prestamos.infraestructura;
+package prestamos.infraestructura.repositories;
 
-import prestamos.dominio.Prestamo;
-import prestamos.dominio.PrestamoRepository;
+import prestamos.dominio.modelos.Prestamo;
+import prestamos.dominio.puerto.PrestamoRepository;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
 import java.util.List;
 
 public class PrestamoRepositoryImpl  implements PrestamoRepository {
 
-    private static PrestamoRepositoryImpl instanciaSingleton;
+private  static PrestamoRepositoryImpl instaciaSingleton;
     private final PrestamoMysqlRepositoryImpl prestamoMysqlRepositoryImpl;
 
+
+
+    public PrestamoRepositoryImpl(PrestamoMysqlRepositoryImpl prestamoMysqlRepositoryImpl) {
+
+        this.prestamoMysqlRepositoryImpl = prestamoMysqlRepositoryImpl;
+
+
+    }
+
     public static PrestamoRepositoryImpl getInstance(){
-        if (instanciaSingleton == null){
-            synchronized (UsuarioRepositoryImpl.class){
-                if (instanciaSingleton == null){
-                    instanciaSingleton = new PrestamoRepositoryImpl();
+        if (instaciaSingleton == null){
+            synchronized (PrestamoRepositoryImpl.class){
+                if (instaciaSingleton == null ){
+                    instaciaSingleton = new PrestamoRepositoryImpl(new PrestamoMysqlRepositoryImpl(UsuarioRepositoryImpl.getInstance()));
                 }
             }
         }
-        return instanciaSingleton;
+        return instaciaSingleton;
     }
 
-    public PrestamoRepositoryImpl(){
-
-        this.prestamoMysqlRepositoryImpl = new PrestamoMysqlRepositoryImpl();
-    }
 
 
     @Override

@@ -1,10 +1,11 @@
 import java.util.List;
 
-import prestamos.dominio.Hipoteca;
-import prestamos.dominio.Prestamo;
-import prestamos.dominio.PrestamoRepository;
-import prestamos.infraestructura.PrestamoMysqlRepositoryImpl;
-import prestamos.infraestructura.PrestamoRepositoryImpl;
+import infraestructuracomun.ApplicationContext;
+import infraestructuracomun.ApplicationContextImpl;
+import prestamos.dominio.modelos.Hipoteca;
+import prestamos.dominio.modelos.Prestamo;
+import prestamos.dominio.puerto.PrestamoRepository;
+import prestamos.infraestructura.repositories.PrestamoRepositoryImpl;
 import usuarios.aplicacion.services.UsuarioService;
 import usuarios.dominio.modelos.Usuario;
 import usuarios.dominio.modelos.UsuarioRegistrado;
@@ -18,18 +19,30 @@ public class MainApplication {
 
 	// Esta apliación solo y exclusivamente debería acceder a la capa de aplicación y si un caso dominio
     public static void main(String[] args) {
-    	
-    	
-        UsuarioRepositoryPort usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
+
+        ApplicationContext context = new ApplicationContextImpl();
+
+        //Este tiene a el y mysql,  le falta a Mysql prestamoRepository
+        UsuarioRepositoryPort usuarioRepository = UsuarioRepositoryImpl.getInstance();
+        context.addBean(UsuarioRepositoryPort.class, usuarioRepository);
+
+        // Este tiene impl y Mysql, le falta
         PrestamoRepository prestamoRepository = PrestamoRepositoryImpl.getInstance();
-        
+        context.addBean(PrestamoRepository.class, prestamoRepository);
+
+        //Inicializamos el Mysql Repository
+        UsuarioRegistradoEntityMysqlRepositoryImpl usuarioEntityRepository = new UsuarioRegistradoEntityMysqlRepositoryImpl((PrestamoRepositoryImpl) prestamoRepository);
+
+
+
+
         
         UsuarioService usuarioService = new UsuarioService();
         
         System.out.println("---------- Usuario Juan cargado en la base de datos ------------- ");
         
         UsuarioRegistrado juanPerez = (UsuarioRegistrado) usuarioService.getUsuarioByEmail("usuario1@example.com").orElseThrow();
-        System.out.println(juanPerez.toString());
+        System.out.println(juanPerez);
         
         System.out.println("");
         System.out.println("");   
@@ -99,8 +112,8 @@ public class MainApplication {
         System.out.println("");
         System.out.println("---------- Cargamos a Máximo con su  hipoteca --------------------");
 
-      // usuariosEnBd = usuarioService.getAllUsuario();
-       // usuariosEnBd.stream().map(Usuario::toString).forEach(System.out::println);
+       usuariosEnBd = usuarioService.getAllUsuario();
+        usuariosEnBd.stream().map(Usuario::toString).forEach(System.out::println);
 
 
     }

@@ -1,4 +1,4 @@
-package prestamos.dominio;
+package prestamos.dominio.modelos;
 
 public class RegistroAmortizacion {
 	
