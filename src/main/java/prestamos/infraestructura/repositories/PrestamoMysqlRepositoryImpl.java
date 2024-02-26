@@ -3,10 +3,7 @@
  */
 package prestamos.infraestructura.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,8 +48,7 @@ public class PrestamoMysqlRepositoryImpl {
 					+ "VALUES (?, ?, ?, ?, ?, (SELECT id FROM usuarios WHERE email = ?))";
 
 
-			PreparedStatement pstmt = con.prepareStatement(insertPrestamoSQL);
-
+			PreparedStatement pstmt = con.prepareStatement(insertPrestamoSQL, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setDouble(1, prestamo.getCapital());
 			pstmt.setDouble(2, prestamo.getInteres());
 			pstmt.setInt(3, prestamo.getFrecuenciaDePagoEnMeses());
