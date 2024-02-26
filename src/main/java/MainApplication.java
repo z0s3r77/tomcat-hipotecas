@@ -19,7 +19,7 @@ public class MainApplication {
     public static void main(String[] args) {
     	
     	
-        UsuarioRepositoryPort usuarioRepositoryPort = new UsuarioRepositoryImpl(new UsuarioRegistradoEntityMysqlRepositoryImpl());
+        UsuarioRepositoryPort usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
         PrestamoRepository prestamoRepository = new PrestamoMysqlRepositoryImpl(usuarioRepositoryPort);
         
         

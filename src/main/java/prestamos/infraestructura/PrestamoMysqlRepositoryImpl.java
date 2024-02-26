@@ -30,10 +30,10 @@ public class PrestamoMysqlRepositoryImpl implements PrestamoRepository {
 	private final UsuarioRepositoryPort usuarioRepositoryPort;
 
 	public PrestamoMysqlRepositoryImpl(){
-		this.usuarioRepositoryPort = new UsuarioRepositoryImpl();
+		this.usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
 	}
 	public PrestamoMysqlRepositoryImpl(UsuarioRepositoryPort usuarioRepositoryPort) {
-		this.usuarioRepositoryPort = new UsuarioRepositoryImpl();
+		this.usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
 	}
 
 	@Override

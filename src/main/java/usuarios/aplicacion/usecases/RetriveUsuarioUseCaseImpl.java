@@ -13,7 +13,7 @@ public class RetriveUsuarioUseCaseImpl implements RetriveUsuarioUseCase {
 	private final UsuarioRepositoryPort usuarioRepositoryPort;
 
 	public RetriveUsuarioUseCaseImpl() {
-		this.usuarioRepositoryPort = new UsuarioRepositoryImpl();
+		this.usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
 	}
 	
 	public RetriveUsuarioUseCaseImpl(UsuarioRepositoryPort usuarioRepositoryPort) {

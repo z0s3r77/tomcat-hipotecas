@@ -11,7 +11,7 @@ public class DeleteUsuarioUseCaseImpl implements DeleteUsuarioUseCase {
 
 
 	public DeleteUsuarioUseCaseImpl() {
-		this.usuarioRepositoryPort = new UsuarioRepositoryImpl();
+		this.usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
 	}
 	
 	public DeleteUsuarioUseCaseImpl(UsuarioRepositoryPort usuarioRepositoryPort) {

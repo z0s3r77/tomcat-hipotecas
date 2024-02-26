@@ -11,7 +11,7 @@ public class CreateUsuarioUseCaseImpl implements CreateUsuarioUseCase {
 	private final UsuarioRepositoryPort  usuarioRepositoryPort;
 	
 	public CreateUsuarioUseCaseImpl() {
-		this.usuarioRepositoryPort = new UsuarioRepositoryImpl();
+		this.usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
 	}
 	
 	public CreateUsuarioUseCaseImpl(UsuarioRepositoryPort usuarioRepositoryPort) {

@@ -10,19 +10,29 @@ import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
 
 public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
-	
+
+	private static UsuarioRepositoryImpl instanciaSingleton;
 	private final UsuarioRegistradoEntityMysqlRepositoryImpl usuarioMysqlRepositoryImpl;
 
+	private UsuarioRepositoryImpl() {
 
-	public UsuarioRepositoryImpl() {
 		this.usuarioMysqlRepositoryImpl = new UsuarioRegistradoEntityMysqlRepositoryImpl();
+
 	}
-	
-	public UsuarioRepositoryImpl(UsuarioRegistradoEntityMysqlRepositoryImpl usuarioMysqlRepositoryImpl) {
-	
-		this.usuarioMysqlRepositoryImpl = usuarioMysqlRepositoryImpl;
+
+
+	public static UsuarioRepositoryImpl getInstance() {
+
+		if (instanciaSingleton == null) {
+			synchronized (UsuarioRepositoryImpl.class) {
+				if (instanciaSingleton == null) {
+					instanciaSingleton = new UsuarioRepositoryImpl();
+				}
+			}
+		}
+		return instanciaSingleton;
 	}
-	
+
 
 	@Override
 	public Usuario save(Usuario usuario) {

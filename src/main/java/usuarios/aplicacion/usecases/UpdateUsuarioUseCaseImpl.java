@@ -13,7 +13,7 @@ public class UpdateUsuarioUseCaseImpl implements UpdateUsuarioUseCase {
 		
 	
 	public UpdateUsuarioUseCaseImpl() {
-		this.usuarioRepositoryPort = new UsuarioRepositoryImpl();
+		this.usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
 	}
 
 	public UpdateUsuarioUseCaseImpl(UsuarioRepositoryPort usuarioRepositoryPort) {
