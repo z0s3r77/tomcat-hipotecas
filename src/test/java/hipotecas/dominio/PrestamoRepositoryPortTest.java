@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
-import prestamos.dominio.puerto.PrestamoRepositoryPort;
+import prestamos.dominio.puerto.out.PrestamoRepositoryPort;
 
 
 public class PrestamoRepositoryPortTest {

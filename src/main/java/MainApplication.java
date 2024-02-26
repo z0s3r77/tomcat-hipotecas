@@ -2,9 +2,10 @@ import java.util.List;
 
 import infraestructuracomun.ApplicationContext;
 import infraestructuracomun.ApplicationContextImpl;
+import prestamos.aplicacion.service.PrestamoService;
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
-import prestamos.dominio.puerto.PrestamoRepositoryPort;
+import prestamos.dominio.puerto.out.PrestamoRepositoryPort;
 import prestamos.infraestructura.repositories.PrestamoRepositoryPortImpl;
 import usuarios.aplicacion.services.UsuarioService;
 import usuarios.dominio.modelos.Usuario;
@@ -20,23 +21,21 @@ public class MainApplication {
 	// Esta apliación solo y exclusivamente debería acceder a la capa de aplicación y si un caso dominio
     public static void main(String[] args) {
 
-        ApplicationContext context = new ApplicationContextImpl();
+        //ApplicationContext context = new ApplicationContextImpl();
 
         //Este tiene a el y mysql,  le falta a Mysql prestamoRepository
-        UsuarioRepositoryPort usuarioRepository = UsuarioRepositoryImpl.getInstance();
-        context.addBean(UsuarioRepositoryPort.class, usuarioRepository);
+        //UsuarioRepositoryPort usuarioRepository = UsuarioRepositoryImpl.getInstance();
+        //context.addBean(UsuarioRepositoryPort.class, usuarioRepository);
 
         // Este tiene impl y Mysql, le falta
-        PrestamoRepositoryPort prestamoRepositoryPort = PrestamoRepositoryPortImpl.getInstance();
-        context.addBean(PrestamoRepositoryPort.class, prestamoRepositoryPort);
+        //PrestamoRepositoryPort prestamoRepositoryPort = PrestamoRepositoryPortImpl.getInstance();
+       // context.addBean(PrestamoRepositoryPort.class, prestamoRepositoryPort);
 
         //Inicializamos el Mysql Repository
-        UsuarioRegistradoEntityMysqlRepositoryImpl usuarioEntityRepository = new UsuarioRegistradoEntityMysqlRepositoryImpl((PrestamoRepositoryPortImpl) prestamoRepositoryPort);
+        // UsuarioRegistradoEntityMysqlRepositoryImpl usuarioEntityRepository = new UsuarioRegistradoEntityMysqlRepositoryImpl((PrestamoRepositoryPortImpl) prestamoRepositoryPort);
 
 
-
-
-        
+        PrestamoService prestamoService = new PrestamoService();
         UsuarioService usuarioService = new UsuarioService();
         
         System.out.println("---------- Usuario Juan cargado en la base de datos ------------- ");
@@ -64,7 +63,7 @@ public class MainApplication {
         System.out.println("");
 
        
-        List<Prestamo> prestamosDeJuan = prestamoRepositoryPort.getAllPrestamosfromUsuario(juanPerez.getEmail());
+        List<Prestamo> prestamosDeJuan = prestamoService.getPrestamosFromUsuario(juanPerez.getEmail());
         juanPerez.setPrestamos(prestamosDeJuan);
         juanPerez.getPrestamos().stream().map(Prestamo::toString).forEach(System.out::println);
 
@@ -103,8 +102,8 @@ public class MainApplication {
         System.out.println("---------- Máximo va al banco y pide una Hipoteca --------------------");
        // double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos, Usuario usuario
         Hipoteca hipotecaDeMáximo = new Hipoteca(200000,4.5,1,120, maximoHernandez);
-        prestamoRepositoryPort.save(hipotecaDeMáximo);
-        List<Prestamo> prestamosDeMaximo = prestamoRepositoryPort.getAllPrestamosfromUsuario( maximoHernandez.getEmail());
+        prestamoService.createPrestamo(hipotecaDeMáximo);
+        List<Prestamo> prestamosDeMaximo = prestamoService.getPrestamosFromUsuario( maximoHernandez.getEmail());
         maximoHernandez.setPrestamos(prestamosDeMaximo);
         maximoHernandez.getPrestamos().stream().map(Prestamo::toString).forEach(System.out::println);
         System.out.println("");
@@ -112,7 +111,7 @@ public class MainApplication {
         System.out.println("");
         System.out.println("---------- Cargamos a Máximo con su  hipoteca --------------------");
 
-       usuariosEnBd = usuarioService.getAllUsuario();
+        usuariosEnBd = usuarioService.getAllUsuario();
         usuariosEnBd.stream().map(Usuario::toString).forEach(System.out::println);
 
 

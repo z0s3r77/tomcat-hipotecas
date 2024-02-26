@@ -1,9 +1,8 @@
 package prestamos.infraestructura.repositories;
 
 import prestamos.dominio.modelos.Prestamo;
-import prestamos.dominio.puerto.PrestamoRepositoryPort;
+import prestamos.dominio.puerto.out.PrestamoRepositoryPort;
 import prestamos.infraestructura.entities.PrestamoEntity;
-import usuarios.dominio.modelos.Usuario;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
 import java.util.List;

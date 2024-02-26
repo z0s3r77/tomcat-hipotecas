@@ -1,4 +1,4 @@
-package prestamos.dominio.puerto;
+package prestamos.dominio.puerto.out;
 
 import prestamos.dominio.modelos.Prestamo;
 
