@@ -13,9 +13,8 @@ import java.util.List;
 import infraestructuracomun.H2DatabaseConnector;
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
-import prestamos.dominio.puerto.PrestamoRepository;
+import prestamos.infraestructura.entities.PrestamoEntity;
 import usuarios.dominio.modelos.Usuario;
-import usuarios.dominio.modelos.UsuarioRegistrado;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
@@ -23,7 +22,7 @@ import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
  * @author zoser
  *
  */
-public class PrestamoMysqlRepositoryImpl implements PrestamoRepository {
+public class PrestamoMysqlRepositoryImpl {
 
 	static Connection con = H2DatabaseConnector.getConnection();
 
@@ -35,8 +34,8 @@ public class PrestamoMysqlRepositoryImpl implements PrestamoRepository {
 
 	}
 
-	@Override
-	public void guardarPrestamo(Prestamo prestamo) {
+
+	public void guardarPrestamo(PrestamoEntity prestamo) {
 
 		try {
 			String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario_id) "
@@ -49,7 +48,7 @@ public class PrestamoMysqlRepositoryImpl implements PrestamoRepository {
 			pstmt.setInt(3, prestamo.getFrecuenciaDePagoEnMeses());
 			pstmt.setInt(4, prestamo.getPlazoDeAmortizacionEnMeses());
 			pstmt.setString(5, prestamo.getClass().toString());
-			pstmt.setString(6, ((UsuarioRegistrado) prestamo.getUsuario()).getEmail());
+			pstmt.setString(6, ( prestamo.getUsuario()).getEmail());
 
 			pstmt.executeUpdate();
 
@@ -59,8 +58,7 @@ public class PrestamoMysqlRepositoryImpl implements PrestamoRepository {
 
 	}
 
-	@Override
-	public void eliminarPrestamo(Prestamo prestamo) {
+	public boolean eliminarPrestamo(PrestamoEntity prestamo) {
 
 		String eliminarPrestamoSQL = "DELETE FROM prestamos WHERE " + "capital = ? AND " + "interes = ? AND "
 				+ "frecuenciaDePagoEnMeses = ? AND " + "plazoDeAmortizacionEnMeses = ? AND " + "tipoDePrestamo = ? AND "
@@ -73,7 +71,7 @@ public class PrestamoMysqlRepositoryImpl implements PrestamoRepository {
 			eliminarPrestamoStmt.setInt(3, prestamo.getFrecuenciaDePagoEnMeses());
 			eliminarPrestamoStmt.setInt(4, prestamo.getPlazoDeAmortizacionEnMeses());
 			eliminarPrestamoStmt.setString(5, prestamo.getClass().toString()); // tipoDePrestamo
-			eliminarPrestamoStmt.setString(6, ((UsuarioRegistrado) prestamo.getUsuario()).getEmail());
+			eliminarPrestamoStmt.setString(6, ( prestamo.getUsuario()).getEmail());
 
 			int filasAfectadas = eliminarPrestamoStmt.executeUpdate();
 
@@ -87,9 +85,9 @@ public class PrestamoMysqlRepositoryImpl implements PrestamoRepository {
 			e.printStackTrace(); // Manejar la excepción adecuadamente en tu aplicación
 		}
 
+		return true;
 	}
 
-	@Override
 	public List<Prestamo> obtenerTodosLosPrestamosDeUnUsuario(String usuarioEmail) {
 		
 		Usuario usuario = usuarioRepositoryPort.findByEmail(usuarioEmail).orElseThrow();

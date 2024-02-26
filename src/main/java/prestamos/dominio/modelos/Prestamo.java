@@ -13,7 +13,8 @@ import usuarios.dominio.modelos.Usuario;
  *
  */
 public abstract class Prestamo {
-	
+
+	protected int id;
 	protected double capital;
 	protected double interes;
 	protected int frecuenciaDePagoEnMeses; 
@@ -25,8 +26,17 @@ public abstract class Prestamo {
 
 	
 	public Prestamo() {}
-	
-	
+
+	public Prestamo(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoPrestamo, Usuario usuario) {
+		this.id = id;
+		this.capital = capital;
+		this.interes = interes;
+		this.frecuenciaDePagoEnMeses = frecuenciaDePagoEnMeses;
+		this.plazoDeAmortizacionEnMeses = plazoDeAmortizacionEnMeses;
+		this.tipoPrestamo = tipoPrestamo;
+		this.usuario = usuario;
+	}
+
 	public Prestamo(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, Usuario usuario) {
 		this.capital = capital;
 		this.interes = interes;
@@ -34,7 +44,23 @@ public abstract class Prestamo {
 		this.plazoDeAmortizacionEnMeses = plazoDeAmortizacionEnMeses;
 		this.usuario = usuario;
 	}
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setCuotaMensual(double cuotaMensual) {
+		this.cuotaMensual = cuotaMensual;
+	}
+
+	public void setCuadroDeAmortizacion(List<RegistroAmortizacion> cuadroDeAmortizacion) {
+		this.cuadroDeAmortizacion = cuadroDeAmortizacion;
+	}
+
 	public double getCapital() {
 		return this.capital;
 	}

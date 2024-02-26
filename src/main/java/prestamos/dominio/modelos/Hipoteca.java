@@ -20,6 +20,10 @@ public class Hipoteca extends Prestamo {
 		super(capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnAnnos, usuario);
 	}
 
+	public Hipoteca(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoDePrestamo, Usuario usuario) {
+		super(id, capital,interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario);
+	}
+
 	@Override
 	public void calcularCuadroAmortizacion() {
 		

@@ -10,17 +10,17 @@ import java.util.List;
 import java.util.Optional;
 
 import infraestructuracomun.H2DatabaseConnector;
-import prestamos.infraestructura.repositories.PrestamoRepositoryImpl;
+import prestamos.infraestructura.repositories.PrestamoRepositoryPortImpl;
 import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
 
 public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 	static Connection con = H2DatabaseConnector.getConnection();
 
-	private PrestamoRepositoryImpl prestamoRepository ;
+	private PrestamoRepositoryPortImpl prestamoRepository ;
 
-	public UsuarioRegistradoEntityMysqlRepositoryImpl(PrestamoRepositoryImpl prestamoRepository){
-		this.prestamoRepository = PrestamoRepositoryImpl.getInstance();
+	public UsuarioRegistradoEntityMysqlRepositoryImpl(PrestamoRepositoryPortImpl prestamoRepository){
+		this.prestamoRepository = PrestamoRepositoryPortImpl.getInstance();
 	}
 
 	public UsuarioRegistradoEntityMysqlRepositoryImpl(){}
@@ -117,9 +117,9 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 	public void comprobarPrestamosDelUsuarioRegistrado(List<UsuarioRegistradoEntity> usuarioRegistradoEntities){
 		usuarioRegistradoEntities.forEach(usuarioRegistradoEntity -> {
 			if (this.prestamoRepository == null){
-				this.prestamoRepository = PrestamoRepositoryImpl.getInstance();
+				this.prestamoRepository = PrestamoRepositoryPortImpl.getInstance();
 			}
-			usuarioRegistradoEntity.setPrestamos(this.prestamoRepository.obtenerTodosLosPrestamosDeUnUsuario(usuarioRegistradoEntity.getEmail()));
+			usuarioRegistradoEntity.setPrestamos(this.prestamoRepository.getAllPrestamosfromUsuario(usuarioRegistradoEntity.getEmail()));
 		});
 	}
 

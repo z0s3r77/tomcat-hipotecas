@@ -4,8 +4,8 @@ import infraestructuracomun.ApplicationContext;
 import infraestructuracomun.ApplicationContextImpl;
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
-import prestamos.dominio.puerto.PrestamoRepository;
-import prestamos.infraestructura.repositories.PrestamoRepositoryImpl;
+import prestamos.dominio.puerto.PrestamoRepositoryPort;
+import prestamos.infraestructura.repositories.PrestamoRepositoryPortImpl;
 import usuarios.aplicacion.services.UsuarioService;
 import usuarios.dominio.modelos.Usuario;
 import usuarios.dominio.modelos.UsuarioRegistrado;
@@ -27,11 +27,11 @@ public class MainApplication {
         context.addBean(UsuarioRepositoryPort.class, usuarioRepository);
 
         // Este tiene impl y Mysql, le falta
-        PrestamoRepository prestamoRepository = PrestamoRepositoryImpl.getInstance();
-        context.addBean(PrestamoRepository.class, prestamoRepository);
+        PrestamoRepositoryPort prestamoRepositoryPort = PrestamoRepositoryPortImpl.getInstance();
+        context.addBean(PrestamoRepositoryPort.class, prestamoRepositoryPort);
 
         //Inicializamos el Mysql Repository
-        UsuarioRegistradoEntityMysqlRepositoryImpl usuarioEntityRepository = new UsuarioRegistradoEntityMysqlRepositoryImpl((PrestamoRepositoryImpl) prestamoRepository);
+        UsuarioRegistradoEntityMysqlRepositoryImpl usuarioEntityRepository = new UsuarioRegistradoEntityMysqlRepositoryImpl((PrestamoRepositoryPortImpl) prestamoRepositoryPort);
 
 
 
@@ -64,7 +64,7 @@ public class MainApplication {
         System.out.println("");
 
        
-        List<Prestamo> prestamosDeJuan = prestamoRepository.obtenerTodosLosPrestamosDeUnUsuario(juanPerez.getEmail());
+        List<Prestamo> prestamosDeJuan = prestamoRepositoryPort.getAllPrestamosfromUsuario(juanPerez.getEmail());
         juanPerez.setPrestamos(prestamosDeJuan);
         juanPerez.getPrestamos().stream().map(Prestamo::toString).forEach(System.out::println);
 
@@ -103,8 +103,8 @@ public class MainApplication {
         System.out.println("---------- Máximo va al banco y pide una Hipoteca --------------------");
        // double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos, Usuario usuario
         Hipoteca hipotecaDeMáximo = new Hipoteca(200000,4.5,1,120, maximoHernandez);
-        prestamoRepository.guardarPrestamo(hipotecaDeMáximo);
-        List<Prestamo> prestamosDeMaximo = prestamoRepository.obtenerTodosLosPrestamosDeUnUsuario( maximoHernandez.getEmail());
+        prestamoRepositoryPort.save(hipotecaDeMáximo);
+        List<Prestamo> prestamosDeMaximo = prestamoRepositoryPort.getAllPrestamosfromUsuario( maximoHernandez.getEmail());
         maximoHernandez.setPrestamos(prestamosDeMaximo);
         maximoHernandez.getPrestamos().stream().map(Prestamo::toString).forEach(System.out::println);
         System.out.println("");

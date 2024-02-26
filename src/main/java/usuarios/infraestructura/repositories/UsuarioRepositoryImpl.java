@@ -40,9 +40,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 
 		UsuarioRegistrado usuarioRegistrado = (UsuarioRegistrado) usuario;
 		UsuarioRegistradoEntity usuarioRegistradoEntity = UsuarioRegistradoEntity.fromDomainModel(usuarioRegistrado);
-		System.out.println(usuario.toString());
 		UsuarioRegistradoEntity usuarioSaved =  usuarioMysqlRepositoryImpl.save(usuarioRegistradoEntity);
-		System.out.println(usuarioSaved.toString());
 
 		return usuarioSaved.toDomainModel();
 	}
