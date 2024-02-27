@@ -27,7 +27,6 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 		try {
 		    String insertUsuarioSQL = "INSERT INTO usuarios (nombre, email, contraseña) VALUES (?, ?, ?)";
 
-		    // Indicar que se generen claves para la columna 'id'
 		    PreparedStatement pstmt = con.prepareStatement(insertUsuarioSQL, Statement.RETURN_GENERATED_KEYS);
 
 		    pstmt.setString(1, usuario.getNombre());
@@ -82,6 +81,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 	}
 
 	public List<UsuarioRegistradoEntity> findAll() {
+
 		List<UsuarioRegistradoEntity> usuarios = new ArrayList<>();
 
 		try {
@@ -108,8 +108,8 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 	}
 
 
-
 	public Optional<UsuarioRegistradoEntity> update(UsuarioRegistradoEntity usuario) {
+
 		try {
 			String updateUsuarioSQL = "UPDATE usuarios SET email=?, nombre=?, contraseña=? WHERE id=?";
 			PreparedStatement pstmt = con.prepareStatement(updateUsuarioSQL);
@@ -190,5 +190,4 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 		return Optional.empty();
 	}
-	
 }

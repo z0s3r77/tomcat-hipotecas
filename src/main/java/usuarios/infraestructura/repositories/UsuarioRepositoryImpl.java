@@ -77,7 +77,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	@Override
 	public boolean deleteById(int id) {
 
-		if (usuarioMysqlRepositoryImpl.existsById((int) id)) {
+		if (usuarioMysqlRepositoryImpl.existsById(id)) {
 			usuarioMysqlRepositoryImpl.deleteById(id);
 			return true;
 		}
