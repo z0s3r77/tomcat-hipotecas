@@ -1,18 +1,12 @@
 import java.util.List;
 
-import infraestructuracomun.ApplicationContext;
-import infraestructuracomun.ApplicationContextImpl;
+
 import prestamos.aplicacion.service.PrestamoService;
-import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
-import prestamos.dominio.puerto.out.PrestamoRepositoryPort;
-import prestamos.infraestructura.repositories.PrestamoRepositoryPortImpl;
 import usuarios.aplicacion.services.UsuarioService;
 import usuarios.dominio.modelos.Usuario;
 import usuarios.dominio.modelos.UsuarioRegistrado;
-import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
-import usuarios.infraestructura.repositories.UsuarioRegistradoEntityMysqlRepositoryImpl;
-import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
+
 
 
 public class MainApplication {
@@ -22,9 +16,32 @@ public class MainApplication {
     public static void main(String[] args) {
 
 
+        // Cargamos los servicios de la aplicación.
         PrestamoService prestamoService = new PrestamoService();
         UsuarioService usuarioService = new UsuarioService();
-        
+
+
+        System.out.println("------------------- obtenemos a juan -----------------------");
+        // Cargamos un usuario
+        List<Usuario> usuarios = usuarioService.getAllUsuario();
+        usuarios.forEach(usuario -> System.out.println(usuario.toString()));
+        UsuarioRegistrado juanPerez = (UsuarioRegistrado) usuarios.get(0);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("------------------- obtenemos los prestamos de  juan -----------------------");
+
+        //Obtenemos los prestamos del usuario
+        List<Prestamo> prestamosDeJuan = prestamoService.getPrestamosFromUsuario(juanPerez.getId());
+        prestamosDeJuan.forEach(prestamo -> System.out.println(prestamosDeJuan));
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("------------------- Seteamos los prestamos de  juan -----------------------");
+        juanPerez.setPrestamos(prestamosDeJuan);
+        juanPerez.getPrestamos().forEach(System.out::println);
+        System.out.println(juanPerez);
+
+
 
 
     }

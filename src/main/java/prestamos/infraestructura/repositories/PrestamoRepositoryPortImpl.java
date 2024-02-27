@@ -20,7 +20,6 @@ package prestamos.infraestructura.repositories;
 import prestamos.dominio.modelos.Prestamo;
 import prestamos.dominio.puerto.out.PrestamoRepositoryPort;
 import prestamos.infraestructura.entities.PrestamoEntity;
-import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
 import java.util.List;
 
@@ -65,7 +64,7 @@ public class PrestamoRepositoryPortImpl implements PrestamoRepositoryPort {
         if (instaciaSingleton == null){
             synchronized (PrestamoRepositoryPortImpl.class){
                 if (instaciaSingleton == null ){
-                    instaciaSingleton = new PrestamoRepositoryPortImpl(new PrestamoMysqlRepositoryImpl(UsuarioRepositoryImpl.getInstance()));
+                    instaciaSingleton = new PrestamoRepositoryPortImpl(new PrestamoMysqlRepositoryImpl());
                 }
             }
         }

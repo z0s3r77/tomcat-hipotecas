@@ -10,18 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 import infraestructuracomun.H2DatabaseConnector;
-import prestamos.infraestructura.repositories.PrestamoRepositoryPortImpl;
 import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
 
 public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 	static Connection con = H2DatabaseConnector.getConnection();
 
-	private PrestamoRepositoryPortImpl prestamoRepository ;
-
-	public UsuarioRegistradoEntityMysqlRepositoryImpl(PrestamoRepositoryPortImpl prestamoRepository){
-		this.prestamoRepository = PrestamoRepositoryPortImpl.getInstance();
-	}
 
 	public UsuarioRegistradoEntityMysqlRepositoryImpl(){}
 
@@ -97,12 +91,12 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
+
 				UsuarioRegistradoEntity usuario = new UsuarioRegistradoEntity();
 				usuario.setId(rs.getInt("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNombre(rs.getString("nombre"));
 				usuario.setContraseña(rs.getString("contraseña"));
-
 				usuarios.add(usuario);
 			}
 
@@ -110,18 +104,9 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 			e.printStackTrace();
 		}
 
-		comprobarPrestamosDelUsuarioRegistrado(usuarios);
 		return usuarios;
 	}
 
-	public void comprobarPrestamosDelUsuarioRegistrado(List<UsuarioRegistradoEntity> usuarioRegistradoEntities){
-		usuarioRegistradoEntities.forEach(usuarioRegistradoEntity -> {
-			if (this.prestamoRepository == null){
-				this.prestamoRepository = PrestamoRepositoryPortImpl.getInstance();
-			}
-			usuarioRegistradoEntity.setPrestamos(this.prestamoRepository.getAllPrestamosfromUsuario(usuarioRegistradoEntity.getId()));
-		});
-	}
 
 
 	public Optional<UsuarioRegistradoEntity> update(UsuarioRegistradoEntity usuario) {

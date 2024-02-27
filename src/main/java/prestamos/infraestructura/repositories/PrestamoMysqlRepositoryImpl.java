@@ -26,7 +26,6 @@ import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
 import prestamos.infraestructura.entities.PrestamoEntity;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
-import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
 /**
  * Implementación concreta de un repositorio de préstamos para el almacenamiento en una base de datos MySQL.
@@ -49,13 +48,7 @@ public class PrestamoMysqlRepositoryImpl {
 
 	static Connection con = H2DatabaseConnector.getConnection();
 
-	private final UsuarioRepositoryPort usuarioRepositoryPort;
-
-	public PrestamoMysqlRepositoryImpl(UsuarioRepositoryImpl usuarioRepositoryPort) {
-
-		this.usuarioRepositoryPort = usuarioRepositoryPort;
-	}
-
+	public PrestamoMysqlRepositoryImpl() {}
 
 	/**
 	 * Guarda un objeto {@link PrestamoEntity} en la base de datos MySQL.
@@ -163,7 +156,7 @@ public class PrestamoMysqlRepositoryImpl {
 		
 	    List<Prestamo> prestamos = new ArrayList<>();
 
-	    String obtenerPrestamosSQL = "SELECT * FROM prestamos WHERE usuario_id = (SELECT id FROM usuarios WHERE email = ?)";
+	    String obtenerPrestamosSQL = "SELECT * FROM prestamos WHERE usuario_id = ?";
 	    
 	    try (PreparedStatement obtenerPrestamosStmt = con.prepareStatement(obtenerPrestamosSQL)) {
 	        obtenerPrestamosStmt.setInt(1, usuarioId);

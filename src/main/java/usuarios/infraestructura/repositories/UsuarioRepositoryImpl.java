@@ -18,7 +18,6 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	public UsuarioRepositoryImpl(UsuarioRegistradoEntityMysqlRepositoryImpl usuarioMysqlRepositoryImpl) {
 
 		this.usuarioMysqlRepositoryImpl = usuarioMysqlRepositoryImpl;
-
 	}
 
 
