@@ -107,11 +107,11 @@ public class PrestamoRepositoryPortImpl implements PrestamoRepositoryPort {
     /**
      * Obtiene todos los préstamos asociados a un usuario desde la base de datos MySQL.
      *
-     * @param usuarioEmail El correo electrónico del usuario para el cual se desean obtener los préstamos.
+     * @param usuarioId El correo electrónico del usuario para el cual se desean obtener los préstamos.
      * @return Lista de préstamos asociados al usuario.
      */
     @Override
-    public List<Prestamo> getAllPrestamosfromUsuario(String usuarioEmail) {
-        return this.prestamoMysqlRepositoryImpl.obtenerTodosLosPrestamosDeUnUsuario(usuarioEmail);
+    public List<Prestamo> getAllPrestamosfromUsuario(int usuarioId) {
+        return this.prestamoMysqlRepositoryImpl.obtenerTodosLosPrestamosDeUnUsuario(usuarioId);
     }
 }

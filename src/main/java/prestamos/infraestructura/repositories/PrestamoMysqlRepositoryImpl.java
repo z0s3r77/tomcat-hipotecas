@@ -25,10 +25,7 @@ import infraestructuracomun.H2DatabaseConnector;
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
 import prestamos.infraestructura.entities.PrestamoEntity;
-import usuarios.dominio.modelos.Usuario;
-import usuarios.dominio.modelos.UsuarioRegistrado;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
-import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
 /**
@@ -82,7 +79,7 @@ public class PrestamoMysqlRepositoryImpl {
 			pstmt.setInt(3, prestamo.getFrecuenciaDePagoEnMeses());
 			pstmt.setInt(4, prestamo.getPlazoDeAmortizacionEnMeses());
 			pstmt.setString(5, prestamo.getTipoDePrestamo());
-			pstmt.setString(6, prestamo.getUsuario().getEmail());
+			pstmt.setInt(6, prestamo.getUsuario());
 
 			int affectedRows = pstmt.executeUpdate();
 
@@ -103,11 +100,7 @@ public class PrestamoMysqlRepositoryImpl {
 					prestamoEntity.setFrecuenciaDePagoEnMeses(prestamo.getFrecuenciaDePagoEnMeses());
 					prestamoEntity.setPlazoDeAmortizacionEnMeses(prestamo.getPlazoDeAmortizacionEnMeses());
 					prestamoEntity.setTipoDePrestamo(prestamo.getClass().toString());
-
-					UsuarioRegistrado usuarioRegistrado = (UsuarioRegistrado) this.usuarioRepositoryPort.findByEmail(prestamo.getUsuario().getEmail()).orElse(null);
-					UsuarioRegistradoEntity usuarioRegistradoEntity = UsuarioRegistradoEntity.fromDomainModel(usuarioRegistrado);
-
-					prestamoEntity.setUsuario(usuarioRegistradoEntity);
+					prestamoEntity.setId(prestamo.getUsuario());
 				}
 			}
 
@@ -138,7 +131,7 @@ public class PrestamoMysqlRepositoryImpl {
 			eliminarPrestamoStmt.setInt(3, prestamo.getFrecuenciaDePagoEnMeses());
 			eliminarPrestamoStmt.setInt(4, prestamo.getPlazoDeAmortizacionEnMeses());
 			eliminarPrestamoStmt.setString(5, prestamo.getTipoDePrestamo()); // tipoDePrestamo
-			eliminarPrestamoStmt.setString(6, ( prestamo.getUsuario()).getEmail());
+			eliminarPrestamoStmt.setInt(6, ( prestamo.getUsuario()));
 
 			int filasAfectadas = eliminarPrestamoStmt.executeUpdate();
 
@@ -163,18 +156,17 @@ public class PrestamoMysqlRepositoryImpl {
 	/**
 	 * Obtiene todos los préstamos asociados a un usuario desde la base de datos MySQL.
 	 *
-	 * @param usuarioEmail El correo electrónico del usuario para el cual se desean obtener los préstamos.
+	 * @param usuarioId El correo electrónico del usuario para el cual se desean obtener los préstamos.
 	 * @return Lista de préstamos asociados al usuario.
 	 */
-	public List<Prestamo> obtenerTodosLosPrestamosDeUnUsuario(String usuarioEmail) {
+	public List<Prestamo> obtenerTodosLosPrestamosDeUnUsuario(int usuarioId) {
 		
-		Usuario usuario = usuarioRepositoryPort.findByEmail(usuarioEmail).orElseThrow();
 	    List<Prestamo> prestamos = new ArrayList<>();
 
 	    String obtenerPrestamosSQL = "SELECT * FROM prestamos WHERE usuario_id = (SELECT id FROM usuarios WHERE email = ?)";
 	    
 	    try (PreparedStatement obtenerPrestamosStmt = con.prepareStatement(obtenerPrestamosSQL)) {
-	        obtenerPrestamosStmt.setString(1, usuarioEmail);
+	        obtenerPrestamosStmt.setInt(1, usuarioId);
 
 	        try (ResultSet resultSet = obtenerPrestamosStmt.executeQuery()) {
 	            while (resultSet.next()) {
@@ -184,7 +176,7 @@ public class PrestamoMysqlRepositoryImpl {
 	                prestamo.setFrecuenciaDePagoEnMeses(resultSet.getInt("frecuenciaDePagoEnMeses"));
 	                prestamo.setPlazoDeAmortizacionEnMeses(resultSet.getInt("plazoDeAmortizacionEnMeses"));
 	                prestamo.setTipoPrestamo(resultSet.getString("tipoDePrestamo"));
-	                prestamo.setUsuario(usuario);
+	                prestamo.setUsuarioId(resultSet.getInt("usuario_id"));
 	                prestamos.add(prestamo);
 	            }
 	        }

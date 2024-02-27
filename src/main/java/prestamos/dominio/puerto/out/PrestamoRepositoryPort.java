@@ -52,6 +52,6 @@ public interface PrestamoRepositoryPort {
 	 * @param usuarioEmail El correo electrónico del usuario para el cual se desean obtener los préstamos.
 	 * @return Lista de préstamos asociados al usuario.
 	 */
-	List<Prestamo> getAllPrestamosfromUsuario(String usuarioEmail);
+	List<Prestamo> getAllPrestamosfromUsuario(int usuarioId);
 
 }

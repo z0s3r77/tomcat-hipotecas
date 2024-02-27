@@ -53,13 +53,13 @@ public class PrestamoRepositoryPortTest {
 	@Test
 	void testObtenerTodosLosPrestamosDeUnUsuario() {
 		
-		String usuarioEmail = "email"; 
+		int usuarioId = 0;
 		List<Prestamo> prestamosDeUnUsuario = new ArrayList<Prestamo>();
     
-		when(prestamoRepositoryPortMock.getAllPrestamosfromUsuario(usuarioEmail)).thenReturn(prestamosDeUnUsuario);
+		when(prestamoRepositoryPortMock.getAllPrestamosfromUsuario(usuarioId)).thenReturn(prestamosDeUnUsuario);
         
-		List<Prestamo> prestamos = prestamoRepositoryPortMock.getAllPrestamosfromUsuario(usuarioEmail);
-        verify(prestamoRepositoryPortMock, times(1)).getAllPrestamosfromUsuario(usuarioEmail);
+		List<Prestamo> prestamos = prestamoRepositoryPortMock.getAllPrestamosfromUsuario(usuarioId);
+        verify(prestamoRepositoryPortMock, times(1)).getAllPrestamosfromUsuario(usuarioId);
         
         assertNotNull(prestamos);
         

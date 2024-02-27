@@ -16,7 +16,7 @@ public class RetrivePrestamoUseCaseImpl implements RetrivePrestamosUseCase {
     }
 
     @Override
-    public List<Prestamo> getPrestamosFromUsuario(String usuarioEmail) {
-        return prestamoRepositoryPort.getAllPrestamosfromUsuario(usuarioEmail);
+    public List<Prestamo> getPrestamosFromUsuario(int usuarioId) {
+        return prestamoRepositoryPort.getAllPrestamosfromUsuario(usuarioId);
     }
 }

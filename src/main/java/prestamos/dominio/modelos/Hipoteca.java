@@ -32,10 +32,10 @@ public class Hipoteca extends Prestamo {
 	 * @param interes                     La tasa de interés del préstamo.
 	 * @param frecuenciaDePagoEnMeses     La frecuencia de pago del préstamo en meses.
 	 * @param plazoDeAmortizacionEnAnnos  El plazo de amortización del préstamo en años.
-	 * @param usuario                     El usuario asociado al préstamo.
+	 * @param usuarioId                     El usuario asociado al préstamo.
 	 */
-	public Hipoteca(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos, Usuario usuario) {
-		super(capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnAnnos, usuario);
+	public Hipoteca(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos, int usuarioId) {
+		super(capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnAnnos, usuarioId);
 	}
 
 	/**
@@ -47,10 +47,10 @@ public class Hipoteca extends Prestamo {
 	 * @param frecuenciaDePagoEnMeses      La frecuencia de pago del préstamo en meses.
 	 * @param plazoDeAmortizacionEnMeses   El plazo de amortización del préstamo en meses.
 	 * @param tipoDePrestamo               El tipo de préstamo.
-	 * @param usuario                      El usuario asociado al préstamo.
+	 * @param usuarioId                      El usuario asociado al préstamo.
 	 */
-	public Hipoteca(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoDePrestamo, Usuario usuario) {
-		super(id, capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario);
+	public Hipoteca(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoDePrestamo, int usuarioId) {
+		super(id, capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuarioId);
 	}
 
 	/**

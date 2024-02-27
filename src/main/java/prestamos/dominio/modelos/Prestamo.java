@@ -9,8 +9,6 @@ package prestamos.dominio.modelos;
 import java.util.ArrayList;
 import java.util.List;
 
-import usuarios.dominio.modelos.Usuario;
-
 /**
  * Clase abstracta que representa un préstamo en la capa de dominio del sistema.
  * Contiene atributos y métodos comunes para todos los tipos de préstamos.
@@ -27,7 +25,7 @@ public abstract class Prestamo {
 	protected double cuotaMensual;
 	protected String tipoPrestamo;
 	protected List<RegistroAmortizacion> cuadroDeAmortizacion = new ArrayList<RegistroAmortizacion>();
-	protected Usuario usuario;
+	protected int usuarioId;
 
 	/**
 	 * Constructor por defecto de la clase abstracta Prestamo.
@@ -43,16 +41,16 @@ public abstract class Prestamo {
 	 * @param frecuenciaDePagoEnMeses      La frecuencia de pago del préstamo en meses.
 	 * @param plazoDeAmortizacionEnMeses   El plazo de amortización del préstamo en meses.
 	 * @param tipoPrestamo                 El tipo de préstamo.
-	 * @param usuario                      El usuario asociado al préstamo.
+	 * @param usuarioId                      El usuario asociado al préstamo.
 	 */
-	public Prestamo(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoPrestamo, Usuario usuario) {
+	public Prestamo(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoPrestamo, int usuarioId) {
 		this.id = id;
 		this.capital = capital;
 		this.interes = interes;
 		this.frecuenciaDePagoEnMeses = frecuenciaDePagoEnMeses;
 		this.plazoDeAmortizacionEnMeses = plazoDeAmortizacionEnMeses;
 		this.tipoPrestamo = tipoPrestamo;
-		this.usuario = usuario;
+		this.usuarioId = usuarioId;
 	}
 
 	/**
@@ -62,14 +60,14 @@ public abstract class Prestamo {
 	 * @param interes                      La tasa de interés del préstamo.
 	 * @param frecuenciaDePagoEnMeses      La frecuencia de pago del préstamo en meses.
 	 * @param plazoDeAmortizacionEnMeses   El plazo de amortización del préstamo en meses.
-	 * @param usuario                      El usuario asociado al préstamo.
+	 * @param usuarioId                      El usuario asociado al préstamo.
 	 */
-	public Prestamo(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, Usuario usuario) {
+	public Prestamo(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, int usuarioId) {
 		this.capital = capital;
 		this.interes = interes;
 		this.frecuenciaDePagoEnMeses = frecuenciaDePagoEnMeses;
 		this.plazoDeAmortizacionEnMeses = plazoDeAmortizacionEnMeses;
-		this.usuario = usuario;
+		this.usuarioId = usuarioId;
 	}
 
 	/**
@@ -167,8 +165,8 @@ public abstract class Prestamo {
 	 *
 	 * @return El usuario asociado al préstamo.
 	 */
-	public Usuario getUsuario() {
-		return this.usuario;
+	public int getUsuarioId() {
+		return this.usuarioId;
 	}
 
 	/**
@@ -219,10 +217,10 @@ public abstract class Prestamo {
 	/**
 	 * Establece el usuario asociado al préstamo.
 	 *
-	 * @param usuario El usuario asociado al préstamo.
+	 * @param usuarioId El usuario asociado al préstamo.
 	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarioId(int usuarioId) {
+		this.usuarioId = usuarioId;
 	}
 
 	/**

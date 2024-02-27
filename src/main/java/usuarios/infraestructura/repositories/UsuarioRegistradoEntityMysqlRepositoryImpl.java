@@ -119,7 +119,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 			if (this.prestamoRepository == null){
 				this.prestamoRepository = PrestamoRepositoryPortImpl.getInstance();
 			}
-			usuarioRegistradoEntity.setPrestamos(this.prestamoRepository.getAllPrestamosfromUsuario(usuarioRegistradoEntity.getEmail()));
+			usuarioRegistradoEntity.setPrestamos(this.prestamoRepository.getAllPrestamosfromUsuario(usuarioRegistradoEntity.getId()));
 		});
 	}
 

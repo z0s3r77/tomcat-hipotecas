@@ -38,6 +38,6 @@ public interface RetrivePrestamosUseCase {
      * @param usuarioEmail El correo electrónico del usuario para el cual se desean obtener los préstamos.
      * @return Lista de préstamos asociados al usuario.
      */
-    List<Prestamo> getPrestamosFromUsuario(String usuarioEmail);
+    List<Prestamo> getPrestamosFromUsuario(int usuarioId);
 
 }

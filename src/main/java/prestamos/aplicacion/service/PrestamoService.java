@@ -34,7 +34,7 @@ public class PrestamoService implements CreatePrestamoUseCase, DeletePrestamoUse
     }
 
     @Override
-    public List<Prestamo> getPrestamosFromUsuario(String usuarioEmail) {
-        return this.retrivePrestamosUseCase.getPrestamosFromUsuario(usuarioEmail);
+    public List<Prestamo> getPrestamosFromUsuario(int usuarioId) {
+        return this.retrivePrestamosUseCase.getPrestamosFromUsuario(usuarioId);
     }
 }

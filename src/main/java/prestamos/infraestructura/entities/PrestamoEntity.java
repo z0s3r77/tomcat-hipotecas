@@ -41,18 +41,18 @@ public class PrestamoEntity {
     private int frecuenciaDePagoEnMeses;
     private int plazoDeAmortizacionEnMeses;
     private String tipoDePrestamo;
-    private UsuarioRegistradoEntity usuarioRegistradoEntity;
+    private int usuarioId;
 
     public PrestamoEntity(){}
 
-    public PrestamoEntity(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoDePrestamo, UsuarioRegistradoEntity usuarioRegistradoEntity) {
+    public PrestamoEntity(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoDePrestamo, int usuarioId) {
         this.id = id;
         this.capital = capital;
         this.interes = interes;
         this.frecuenciaDePagoEnMeses = frecuenciaDePagoEnMeses;
         this.plazoDeAmortizacionEnMeses = plazoDeAmortizacionEnMeses;
         this.tipoDePrestamo = tipoDePrestamo;
-        this.usuarioRegistradoEntity = usuarioRegistradoEntity;
+        this.usuarioId = usuarioId;
     }
 
     /**
@@ -63,8 +63,7 @@ public class PrestamoEntity {
      */
     public static PrestamoEntity fromDomainModel(Prestamo prestamo){
 
-        UsuarioRegistradoEntity usuarioRegistrado = UsuarioRegistradoEntity.fromDomainModel((UsuarioRegistrado) prestamo.getUsuario());
-        return new PrestamoEntity(prestamo.getId(), prestamo.getCapital(), prestamo.getInteres(), prestamo.getFrecuenciaDePagoEnMeses(), prestamo.getFrecuenciaDePagoEnMeses(), prestamo.getTipoPrestamo(),  usuarioRegistrado);
+        return new PrestamoEntity(prestamo.getId(), prestamo.getCapital(), prestamo.getInteres(), prestamo.getFrecuenciaDePagoEnMeses(), prestamo.getFrecuenciaDePagoEnMeses(), prestamo.getTipoPrestamo(),  prestamo.getUsuarioId());
 
     }
 
@@ -77,7 +76,7 @@ public class PrestamoEntity {
      */
     public Prestamo toDomainModel(Prestamo prestamo){
         if (prestamo instanceof Hipoteca) {
-            return new Hipoteca(this.id, this.capital, this.interes, this.frecuenciaDePagoEnMeses, this.plazoDeAmortizacionEnMeses, this.tipoDePrestamo, this.usuarioRegistradoEntity.toDomainModel());
+            return new Hipoteca(this.id, this.capital, this.interes, this.frecuenciaDePagoEnMeses, this.plazoDeAmortizacionEnMeses, this.tipoDePrestamo, this.usuarioId);
         }
         return new Hipoteca();
     }
@@ -130,12 +129,12 @@ public class PrestamoEntity {
         this.tipoDePrestamo = tipoDePrestamo;
     }
 
-    public UsuarioRegistradoEntity getUsuario() {
-        return usuarioRegistradoEntity;
+    public int getUsuario() {
+        return usuarioId;
     }
 
-    public void setUsuario(UsuarioRegistradoEntity usuarioRegistradoEntity) {
-        this.usuarioRegistradoEntity = usuarioRegistradoEntity;
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     @Override
@@ -160,7 +159,7 @@ public class PrestamoEntity {
                 ", frecuenciaDePagoEnMeses=" + frecuenciaDePagoEnMeses +
                 ", plazoDeAmortizacionEnMeses=" + plazoDeAmortizacionEnMeses +
                 ", tipoDePrestamo='" + tipoDePrestamo + '\'' +
-                ", usuarioRegistradoEntity=" + usuarioRegistradoEntity +
+                ", usuarioRegistradoId=" + usuarioId +
                 '}';
     }
 }
