@@ -7,7 +7,7 @@ import usuarios.aplicacion.usecases.CreateUsuarioUseCaseImpl;
 import usuarios.aplicacion.usecases.DeleteUsuarioUseCaseImpl;
 import usuarios.aplicacion.usecases.RetriveUsuarioUseCaseImpl;
 import usuarios.aplicacion.usecases.UpdateUsuarioUseCaseImpl;
-import usuarios.dominio.modelos.UsuarioComportamiento;
+import usuarios.dominio.modelos.Usuario;
 import usuarios.dominio.puertos.in.CreateUsuarioUseCase;
 import usuarios.dominio.puertos.in.DeleteUsuarioUseCase;
 import usuarios.dominio.puertos.in.RetriveUsuarioUseCase;
@@ -33,25 +33,25 @@ public class UsuarioService
 
 
 	@Override
-	public UsuarioComportamiento createUsuario(UsuarioComportamiento usuario) {
+	public Usuario createUsuario(Usuario usuario) {
 		
 		return createUsuarioUseCase.createUsuario(usuario);
 	}
 
 	@Override
-	public Optional<UsuarioComportamiento> updatesUsuario(Long id, UsuarioComportamiento usuarioActualizado) {
+	public Optional<Usuario> updatesUsuario(Long id, Usuario usuarioActualizado) {
 		
 		return updateUsuarioUseCase.updatesUsuario(id, usuarioActualizado);
 	}
 
 	@Override
-	public Optional<UsuarioComportamiento> getUsuarioById(int id) {
+	public Optional<Usuario> getUsuarioById(int id) {
 
 		return retriveUsuarioUseCase.getUsuarioById(id);
 	}
 
 	@Override
-	public List<UsuarioComportamiento> getAllUsuario() {
+	public List<Usuario> getAllUsuario() {
 
 		return retriveUsuarioUseCase.getAllUsuario();
 	}
@@ -62,7 +62,7 @@ public class UsuarioService
 	}
 
 	@Override
-	public Optional<UsuarioComportamiento> getUsuarioByEmail(String email) {
+	public Optional<Usuario> getUsuarioByEmail(String email) {
 		return retriveUsuarioUseCase.getUsuarioByEmail(email);
 	}
 

@@ -23,7 +23,7 @@ public class MainApplication {
 
         System.out.println("------------------- obtenemos a juan -----------------------");
         // Cargamos un usuario
-        List<UsuarioComportamiento> usuarios = usuarioService.getAllUsuario();
+        List<Usuario> usuarios = usuarioService.getAllUsuario();
         usuarios.forEach(usuario -> System.out.println(usuario.toString()));
         Usuario juanPerez = (Usuario) usuarios.get(0);
         System.out.println("");

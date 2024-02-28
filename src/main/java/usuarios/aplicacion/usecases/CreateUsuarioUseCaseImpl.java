@@ -1,5 +1,6 @@
 package usuarios.aplicacion.usecases;
 
+import usuarios.dominio.modelos.Usuario;
 import usuarios.dominio.modelos.UsuarioComportamiento;
 import usuarios.dominio.puertos.in.CreateUsuarioUseCase;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
@@ -20,7 +21,7 @@ public class CreateUsuarioUseCaseImpl implements CreateUsuarioUseCase {
 	
 	
 	@Override
-	public UsuarioComportamiento createUsuario(UsuarioComportamiento usuario) {
+	public Usuario createUsuario(Usuario usuario) {
 		System.out.println(usuario.toString());
 		return usuarioRepositoryPort.save(usuario);
 	}

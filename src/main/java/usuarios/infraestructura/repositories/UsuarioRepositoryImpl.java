@@ -35,7 +35,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 
 
 	@Override
-	public UsuarioComportamiento save(UsuarioComportamiento usuario) {
+	public Usuario save(Usuario usuario) {
 
 		Usuario usuarioRegistrado = (Usuario) usuario;
 		UsuarioRegistradoEntity usuarioRegistradoEntity = UsuarioRegistradoEntity.fromDomainModel(usuarioRegistrado);
@@ -45,13 +45,13 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	}
 
 	@Override
-	public Optional<UsuarioComportamiento> findById(int id) {
+	public Optional<Usuario> findById(int id) {
 
 		return usuarioMysqlRepositoryImpl.findById(id).map(UsuarioRegistradoEntity::toDomainModel);
 	}
 
 	@Override
-	public List<UsuarioComportamiento> findAll() {
+	public List<Usuario> findAll() {
 
 		return usuarioMysqlRepositoryImpl.findAll().stream()
 				.map(UsuarioRegistradoEntity::toDomainModel)
@@ -59,7 +59,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	}
 
 	@Override
-	public Optional<UsuarioComportamiento> update(UsuarioComportamiento usuario) {
+	public Optional<Usuario> update(Usuario usuario) {
 
 		Usuario usuarioRegistrado = (Usuario) usuario;
 
@@ -87,7 +87,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 
 
 	@Override
-	public Optional<UsuarioComportamiento> findByEmail(String email) {
+	public Optional<Usuario> findByEmail(String email) {
 		
 		return usuarioMysqlRepositoryImpl.findByEmail(email).map(UsuarioRegistradoEntity::toDomainModel);
 
