@@ -10,10 +10,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import prestamos.dominio.modelos.Prestamo;
+import usuarios.dominio.modelos.UsuarioComportamiento;
 import usuarios.dominio.modelos.Usuario;
-import usuarios.dominio.modelos.UsuarioRegistrado;
 
-class UsuarioRegistradoTest {
+class VisitanteInterfazRegistradoTest {
 
 
 	final String ip = "IP";
@@ -23,32 +23,32 @@ class UsuarioRegistradoTest {
 
 	@Test
 	void testUsuarioRegistradoEmptyConstructor() {
-		UsuarioRegistrado usuario = new UsuarioRegistrado();
+		Usuario usuario = new Usuario();
 		assertNotNull(usuario);
 	}
 
 	@Test
 	void testUsuariRegistradoEsUnUsuario() {
-		UsuarioRegistrado usuario = new UsuarioRegistrado();
-		assertTrue(usuario instanceof Usuario);
+		Usuario usuario = new Usuario();
+		assertTrue(usuario instanceof UsuarioComportamiento);
 	}
 	
 	@Test
 	void testUsuarioRegistradoIpConstructor() {
-		UsuarioRegistrado usuario = new UsuarioRegistrado(ip);
+		Usuario usuario = new Usuario(ip);
 		assertNotNull(usuario);
 	}
 
 	@Test
 	void testUsuarioRegistradoConstructor() {
-		UsuarioRegistrado usuario = new UsuarioRegistrado(email, nombre, prestamos);
+		Usuario usuario = new Usuario(email, nombre, prestamos);
 		assertNotNull(usuario);
 	}
 
 	@Test
 	void testUsuarioRegistradoGettersSetters() {
 
-		UsuarioRegistrado usuario = new UsuarioRegistrado();
+		Usuario usuario = new Usuario();
 
 		usuario.setEmail(email);
 		usuario.setNombre(nombre);

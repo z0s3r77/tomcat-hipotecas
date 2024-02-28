@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import usuarios.dominio.modelos.UsuarioComportamiento;
 import usuarios.dominio.modelos.Usuario;
-import usuarios.dominio.modelos.UsuarioRegistrado;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
 
@@ -35,9 +35,9 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 
 
 	@Override
-	public Usuario save(Usuario usuario) {
+	public UsuarioComportamiento save(UsuarioComportamiento usuario) {
 
-		UsuarioRegistrado usuarioRegistrado = (UsuarioRegistrado) usuario;
+		Usuario usuarioRegistrado = (Usuario) usuario;
 		UsuarioRegistradoEntity usuarioRegistradoEntity = UsuarioRegistradoEntity.fromDomainModel(usuarioRegistrado);
 		UsuarioRegistradoEntity usuarioSaved =  usuarioMysqlRepositoryImpl.save(usuarioRegistradoEntity);
 
@@ -45,13 +45,13 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	}
 
 	@Override
-	public Optional<Usuario> findById(int id) {
+	public Optional<UsuarioComportamiento> findById(int id) {
 
 		return usuarioMysqlRepositoryImpl.findById(id).map(UsuarioRegistradoEntity::toDomainModel);
 	}
 
 	@Override
-	public List<Usuario> findAll() {
+	public List<UsuarioComportamiento> findAll() {
 
 		return usuarioMysqlRepositoryImpl.findAll().stream()
 				.map(UsuarioRegistradoEntity::toDomainModel)
@@ -59,9 +59,9 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	}
 
 	@Override
-	public Optional<Usuario> update(Usuario usuario) {
+	public Optional<UsuarioComportamiento> update(UsuarioComportamiento usuario) {
 
-		UsuarioRegistrado usuarioRegistrado = (UsuarioRegistrado) usuario;
+		Usuario usuarioRegistrado = (Usuario) usuario;
 
 		if(usuarioMysqlRepositoryImpl.existsById(usuarioRegistrado.getId())) {
 			
@@ -87,7 +87,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 
 
 	@Override
-	public Optional<Usuario> findByEmail(String email) {
+	public Optional<UsuarioComportamiento> findByEmail(String email) {
 		
 		return usuarioMysqlRepositoryImpl.findByEmail(email).map(UsuarioRegistradoEntity::toDomainModel);
 

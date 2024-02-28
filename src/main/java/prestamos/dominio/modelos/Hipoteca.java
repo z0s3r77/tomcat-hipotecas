@@ -7,8 +7,6 @@
  */
 package prestamos.dominio.modelos;
 
-import usuarios.dominio.modelos.Usuario;
-
 /**
  * Clase que representa una hipoteca, que es un tipo específico de préstamo, en la capa de dominio del sistema.
  * Extiende la clase abstracta Prestamo.

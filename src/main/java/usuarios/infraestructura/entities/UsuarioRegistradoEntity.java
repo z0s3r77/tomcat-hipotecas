@@ -3,7 +3,7 @@ package usuarios.infraestructura.entities;
 import java.util.List;
 
 import prestamos.dominio.modelos.Prestamo;
-import usuarios.dominio.modelos.UsuarioRegistrado;
+import usuarios.dominio.modelos.Usuario;
 
 public class UsuarioRegistradoEntity {
 
@@ -27,15 +27,15 @@ public class UsuarioRegistradoEntity {
 	}
 
 
-	public static UsuarioRegistradoEntity fromDomainModel(UsuarioRegistrado usuarioRegistrado) {
+	public static UsuarioRegistradoEntity fromDomainModel(Usuario usuario) {
 
-		return new UsuarioRegistradoEntity(usuarioRegistrado.getId(), usuarioRegistrado.getContraseña(),
-				usuarioRegistrado.getEmail(), usuarioRegistrado.getNombre(), usuarioRegistrado.getPrestamos());
+		return new UsuarioRegistradoEntity(usuario.getId(), usuario.getContraseña(),
+				usuario.getEmail(), usuario.getNombre(), usuario.getPrestamos());
 
 	}
 	
-	public UsuarioRegistrado toDomainModel() {
-		return new UsuarioRegistrado(this.id, this.email, this.nombre, this.contraseña, this.prestamos);
+	public Usuario toDomainModel() {
+		return new Usuario(this.id, this.email, this.nombre, this.contraseña, this.prestamos);
 	}
 	
 

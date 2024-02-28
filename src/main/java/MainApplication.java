@@ -4,8 +4,8 @@ import java.util.List;
 import prestamos.aplicacion.service.PrestamoService;
 import prestamos.dominio.modelos.Prestamo;
 import usuarios.aplicacion.services.UsuarioService;
+import usuarios.dominio.modelos.UsuarioComportamiento;
 import usuarios.dominio.modelos.Usuario;
-import usuarios.dominio.modelos.UsuarioRegistrado;
 
 
 
@@ -23,9 +23,9 @@ public class MainApplication {
 
         System.out.println("------------------- obtenemos a juan -----------------------");
         // Cargamos un usuario
-        List<Usuario> usuarios = usuarioService.getAllUsuario();
+        List<UsuarioComportamiento> usuarios = usuarioService.getAllUsuario();
         usuarios.forEach(usuario -> System.out.println(usuario.toString()));
-        UsuarioRegistrado juanPerez = (UsuarioRegistrado) usuarios.get(0);
+        Usuario juanPerez = (Usuario) usuarios.get(0);
         System.out.println("");
         System.out.println("");
         System.out.println("------------------- obtenemos los prestamos de  juan -----------------------");

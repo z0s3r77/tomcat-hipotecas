@@ -3,7 +3,7 @@ package usuarios.aplicacion.usecases;
 import java.util.List;
 import java.util.Optional;
 
-import usuarios.dominio.modelos.Usuario;
+import usuarios.dominio.modelos.UsuarioComportamiento;
 import usuarios.dominio.puertos.in.RetriveUsuarioUseCase;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
@@ -21,18 +21,18 @@ public class RetriveUsuarioUseCaseImpl implements RetriveUsuarioUseCase {
 	}
 
 	@Override
-	public Optional<Usuario> getUsuarioById(int id) {
+	public Optional<UsuarioComportamiento> getUsuarioById(int id) {
 		
 		return usuarioRepositoryPort.findById(id);
 	}
 
 	@Override
-	public List<Usuario> getAllUsuario() {
+	public List<UsuarioComportamiento> getAllUsuario() {
 		return usuarioRepositoryPort.findAll();
 	}
 
 	@Override
-	public Optional<Usuario> getUsuarioByEmail(String email) {
+	public Optional<UsuarioComportamiento> getUsuarioByEmail(String email) {
 		return usuarioRepositoryPort.findByEmail(email);
 	}
 

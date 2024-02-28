@@ -15,7 +15,6 @@ package prestamos.infraestructura.entities;
 
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
-import usuarios.dominio.modelos.UsuarioRegistrado;
 import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
 
 import java.util.Objects;

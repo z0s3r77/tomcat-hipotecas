@@ -1,9 +1,9 @@
 package usuarios.dominio.puertos.in;
 
-import usuarios.dominio.modelos.Usuario;
+import usuarios.dominio.modelos.UsuarioComportamiento;
 
 public interface CreateUsuarioUseCase {
 
-	Usuario createUsuario(Usuario usuario);
+	UsuarioComportamiento createUsuario(UsuarioComportamiento usuario);
 	
 }

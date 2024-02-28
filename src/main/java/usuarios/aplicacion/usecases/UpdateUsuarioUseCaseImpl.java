@@ -2,7 +2,7 @@ package usuarios.aplicacion.usecases;
 
 import java.util.Optional;
 
-import usuarios.dominio.modelos.Usuario;
+import usuarios.dominio.modelos.UsuarioComportamiento;
 import usuarios.dominio.puertos.in.UpdateUsuarioUseCase;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
@@ -22,7 +22,7 @@ public class UpdateUsuarioUseCaseImpl implements UpdateUsuarioUseCase {
 
 
 	@Override
-	public Optional<Usuario> updatesUsuario(Long id, Usuario usuarioActualizado) {
+	public Optional<UsuarioComportamiento> updatesUsuario(Long id, UsuarioComportamiento usuarioActualizado) {
 		
 		return usuarioRepositoryPort.update(usuarioActualizado);
 	}

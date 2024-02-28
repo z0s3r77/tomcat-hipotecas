@@ -1,12 +1,12 @@
 package usuarios.dominio.modelos;
 
-public class UsuarioNoRegistrado implements Usuario  {
+public class Visitante implements UsuarioComportamiento {
 
 	private String ip;
 	
-	public UsuarioNoRegistrado() {}
+	public Visitante() {}
 	
-	public UsuarioNoRegistrado(String ip) {
+	public Visitante(String ip) {
 		this.ip = ip;
 	}
 	
