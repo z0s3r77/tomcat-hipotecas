@@ -10,19 +10,18 @@ import java.util.List;
 import java.util.Optional;
 
 import infraestructuracomun.H2DatabaseConnector;
-import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
+import usuarios.infraestructura.entities.UsuarioEntity;
 
 public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 	static Connection con = H2DatabaseConnector.getConnection();
-
-
 	public UsuarioRegistradoEntityMysqlRepositoryImpl(){}
 
+	//TODO pensar si está  clase puede ser Generalizada para todos los repositorios
 
-    public UsuarioRegistradoEntity save(UsuarioRegistradoEntity usuario) {
+    public UsuarioEntity save(UsuarioEntity usuario) {
 
-		UsuarioRegistradoEntity usuarioGuardado = null;
+		UsuarioEntity usuarioGuardado = null;
 
 		try {
 		    String insertUsuarioSQL = "INSERT INTO usuarios (nombre, email, contraseña) VALUES (?, ?, ?)";
@@ -42,7 +41,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 		            int usuarioId = generatedKeys.getInt(1);
 
 		            // Crear el objeto Usuario con el ID generado
-		            usuarioGuardado = new UsuarioRegistradoEntity();
+		            usuarioGuardado = new UsuarioEntity();
 		            usuarioGuardado.setId(usuarioId);
 		            usuarioGuardado.setEmail(usuario.getEmail());
 		            usuarioGuardado.setNombre(usuario.getNombre());
@@ -57,7 +56,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 	}
 
-	public Optional<UsuarioRegistradoEntity> findById(int id) {
+	public Optional<UsuarioEntity> findById(int id) {
 		try {
 			String selectUsuarioSQL = "SELECT * FROM usuarios WHERE id = ?";
 			PreparedStatement pstmt = con.prepareStatement(selectUsuarioSQL);
@@ -66,7 +65,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				UsuarioRegistradoEntity usuario = new UsuarioRegistradoEntity();
+				UsuarioEntity usuario = new UsuarioEntity();
 				usuario.setId(rs.getInt("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNombre(rs.getString("nombre"));
@@ -80,9 +79,9 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 		return Optional.empty();
 	}
 
-	public List<UsuarioRegistradoEntity> findAll() {
+	public List<UsuarioEntity> findAll() {
 
-		List<UsuarioRegistradoEntity> usuarios = new ArrayList<>();
+		List<UsuarioEntity> usuarios = new ArrayList<>();
 
 		try {
 			String selectAllUsuariosSQL = "SELECT * FROM usuarios";
@@ -92,7 +91,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 			while (rs.next()) {
 
-				UsuarioRegistradoEntity usuario = new UsuarioRegistradoEntity();
+				UsuarioEntity usuario = new UsuarioEntity();
 				usuario.setId(rs.getInt("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNombre(rs.getString("nombre"));
@@ -108,7 +107,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 	}
 
 
-	public Optional<UsuarioRegistradoEntity> update(UsuarioRegistradoEntity usuario) {
+	public Optional<UsuarioEntity> update(UsuarioEntity usuario) {
 
 		try {
 			String updateUsuarioSQL = "UPDATE usuarios SET email=?, nombre=?, contraseña=? WHERE id=?";
@@ -168,7 +167,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
         return false;
     }
     
-    public Optional<UsuarioRegistradoEntity> findByEmail(String email) {
+    public Optional<UsuarioEntity> findByEmail(String email) {
 		try {
 			String selectUsuarioSQL = "SELECT * FROM usuarios WHERE email = ?";
 			PreparedStatement pstmt = con.prepareStatement(selectUsuarioSQL);
@@ -177,7 +176,31 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				UsuarioRegistradoEntity usuario = new UsuarioRegistradoEntity();
+				UsuarioEntity usuario = new UsuarioEntity();
+				usuario.setId(rs.getInt("id"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setNombre(rs.getString("nombre"));
+				usuario.setContraseña(rs.getString("contraseña"));
+				return Optional.of(usuario);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return Optional.empty();
+	}
+
+	public Optional<UsuarioEntity> findByEmailAndPassword(String email, String password) {
+		try {
+			String selectUsuarioSQL = "SELECT * FROM usuarios WHERE email = ? AND contraseña = ?";
+			PreparedStatement pstmt = con.prepareStatement(selectUsuarioSQL);
+			pstmt.setString(1, email);
+			pstmt.setString(2, password);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				UsuarioEntity usuario = new UsuarioEntity();
 				usuario.setId(rs.getInt("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNombre(rs.getString("nombre"));

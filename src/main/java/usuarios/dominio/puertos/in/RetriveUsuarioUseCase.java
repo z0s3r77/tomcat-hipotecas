@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import usuarios.dominio.modelos.Usuario;
-import usuarios.dominio.modelos.UsuarioComportamiento;
 
 public interface RetriveUsuarioUseCase {
 	
@@ -12,5 +11,5 @@ public interface RetriveUsuarioUseCase {
 	List<Usuario> getAllUsuario();
 	Optional<Usuario> getUsuarioByEmail(String email);
 
-
+	Optional<Usuario> getUsuarioByEmailAndPassword(String email, String password);
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import prestamos.dominio.modelos.Prestamo;
 import usuarios.dominio.modelos.Usuario;
 
-public class UsuarioRegistradoEntity {
+public class UsuarioEntity {
 
 	private int id;
 	private String contraseña;
@@ -15,10 +15,10 @@ public class UsuarioRegistradoEntity {
 
 	
 
-	public UsuarioRegistradoEntity() {
+	public UsuarioEntity() {
 	}
 	
-	public UsuarioRegistradoEntity(int id, String contraseña, String email, String nombre, List<Prestamo> prestamos) {
+	public UsuarioEntity(int id, String contraseña, String email, String nombre, List<Prestamo> prestamos) {
 		this.id = id;
 		this.contraseña = contraseña;
 		this.email = email;
@@ -27,9 +27,9 @@ public class UsuarioRegistradoEntity {
 	}
 
 
-	public static UsuarioRegistradoEntity fromDomainModel(Usuario usuario) {
+	public static UsuarioEntity fromDomainModel(Usuario usuario) {
 
-		return new UsuarioRegistradoEntity(usuario.getId(), usuario.getContraseña(),
+		return new UsuarioEntity(usuario.getId(), usuario.getContraseña(),
 				usuario.getEmail(), usuario.getNombre(), usuario.getPrestamos());
 
 	}

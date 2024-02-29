@@ -13,4 +13,5 @@ public interface UsuarioRepositoryPort {
 	Optional<Usuario> update(Usuario usuario);
 	boolean deleteById(int id);
 	Optional<Usuario> findByEmail(String email);
+	Optional<Usuario> findByEmailAndPassword(String email, String password);
 }

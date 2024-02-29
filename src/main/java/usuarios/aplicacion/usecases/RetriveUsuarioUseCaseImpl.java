@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import usuarios.dominio.modelos.Usuario;
-import usuarios.dominio.modelos.UsuarioComportamiento;
 import usuarios.dominio.puertos.in.RetriveUsuarioUseCase;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
@@ -35,6 +34,12 @@ public class RetriveUsuarioUseCaseImpl implements RetriveUsuarioUseCase {
 	@Override
 	public Optional<Usuario> getUsuarioByEmail(String email) {
 		return usuarioRepositoryPort.findByEmail(email);
+	}
+
+
+	@Override
+	public Optional<Usuario> getUsuarioByEmailAndPassword(String email, String password) {
+		return Optional.empty();
 	}
 
 }

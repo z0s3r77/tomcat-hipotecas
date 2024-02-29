@@ -4,10 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import usuarios.dominio.modelos.UsuarioComportamiento;
 import usuarios.dominio.modelos.Usuario;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
-import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
+import usuarios.infraestructura.entities.UsuarioEntity;
 
 public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 
@@ -38,8 +37,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	public Usuario save(Usuario usuario) {
 
 		Usuario usuarioRegistrado = (Usuario) usuario;
-		UsuarioRegistradoEntity usuarioRegistradoEntity = UsuarioRegistradoEntity.fromDomainModel(usuarioRegistrado);
-		UsuarioRegistradoEntity usuarioSaved =  usuarioMysqlRepositoryImpl.save(usuarioRegistradoEntity);
+		UsuarioEntity usuarioEntity = UsuarioEntity.fromDomainModel(usuarioRegistrado);
+		UsuarioEntity usuarioSaved =  usuarioMysqlRepositoryImpl.save(usuarioEntity);
 
 		return usuarioSaved.toDomainModel();
 	}
@@ -47,14 +46,14 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	@Override
 	public Optional<Usuario> findById(int id) {
 
-		return usuarioMysqlRepositoryImpl.findById(id).map(UsuarioRegistradoEntity::toDomainModel);
+		return usuarioMysqlRepositoryImpl.findById(id).map(UsuarioEntity::toDomainModel);
 	}
 
 	@Override
 	public List<Usuario> findAll() {
 
 		return usuarioMysqlRepositoryImpl.findAll().stream()
-				.map(UsuarioRegistradoEntity::toDomainModel)
+				.map(UsuarioEntity::toDomainModel)
 				.collect(Collectors.toList());
 	}
 
@@ -65,8 +64,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 
 		if(usuarioMysqlRepositoryImpl.existsById(usuarioRegistrado.getId())) {
 			
-			UsuarioRegistradoEntity usuarioRegistradoEntity = UsuarioRegistradoEntity.fromDomainModel(usuarioRegistrado);
-			UsuarioRegistradoEntity usuarioUpdated =  usuarioMysqlRepositoryImpl.save(usuarioRegistradoEntity);
+			UsuarioEntity usuarioEntity = UsuarioEntity.fromDomainModel(usuarioRegistrado);
+			UsuarioEntity usuarioUpdated =  usuarioMysqlRepositoryImpl.save(usuarioEntity);
 			return Optional.of(usuarioUpdated.toDomainModel());
 			
 		}
@@ -89,11 +88,14 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	@Override
 	public Optional<Usuario> findByEmail(String email) {
 		
-		return usuarioMysqlRepositoryImpl.findByEmail(email).map(UsuarioRegistradoEntity::toDomainModel);
-
+		return usuarioMysqlRepositoryImpl.findByEmail(email).map(UsuarioEntity::toDomainModel);
 	}
 
 
+	@Override
+	public Optional<Usuario> findByEmailAndPassword(String email, String password) {
 
-
+		Usuario usuario = usuarioMysqlRepositoryImpl.findByEmailAndPassword(email, password).map(UsuarioEntity::toDomainModel).orElse(null);
+		return Optional.ofNullable(usuario);
+	}
 }

@@ -4,7 +4,6 @@ import java.util.List;
 import prestamos.aplicacion.service.PrestamoService;
 import prestamos.dominio.modelos.Prestamo;
 import usuarios.aplicacion.services.UsuarioService;
-import usuarios.dominio.modelos.UsuarioComportamiento;
 import usuarios.dominio.modelos.Usuario;
 
 

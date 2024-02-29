@@ -15,7 +15,7 @@ package prestamos.infraestructura.entities;
 
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
-import usuarios.infraestructura.entities.UsuarioRegistradoEntity;
+import usuarios.infraestructura.entities.UsuarioEntity;
 
 import java.util.Objects;
 
@@ -29,7 +29,7 @@ import java.util.Objects;
  * </p>
  *
  * @see Prestamo
- * @see UsuarioRegistradoEntity
+ * @see UsuarioEntity
  *
  */
 public class PrestamoEntity {
