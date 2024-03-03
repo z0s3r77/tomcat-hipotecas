@@ -12,13 +12,26 @@ import java.util.Optional;
 import infraestructuracomun.H2DatabaseConnector;
 import usuarios.infraestructura.entities.UsuarioEntity;
 
+/**
+ * Implementación del repositorio de usuarios registrados para MySQL.
+ * Esta clase proporciona la implementación de las operaciones de base de datos para la entidad Usuario.
+ */
 public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 	static Connection con = H2DatabaseConnector.getConnection();
+
+	/**
+	 * Constructor del repositorio de usuarios registrados.
+	 */
 	public UsuarioRegistradoEntityMysqlRepositoryImpl(){}
 
 	//TODO pensar si está  clase puede ser Generalizada para todos los repositorios
 
+	/**
+	 * Método para guardar un usuario en la base de datos.
+	 * @param usuario Usuario a guardar.
+	 * @return Usuario guardado con el ID generado.
+	 */
     public UsuarioEntity save(UsuarioEntity usuario) {
 
 		UsuarioEntity usuarioGuardado = null;
@@ -53,9 +66,13 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 		}
 
 		return usuarioGuardado;
-
 	}
 
+	/**
+	 * Método para encontrar un usuario por su identificador.
+	 * @param id Identificador del usuario.
+	 * @return Usuario encontrado, si existe.
+	 */
 	public Optional<UsuarioEntity> findById(int id) {
 		try {
 			String selectUsuarioSQL = "SELECT * FROM usuarios WHERE id = ?";
@@ -79,6 +96,10 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 		return Optional.empty();
 	}
 
+	/**
+	 * Método para encontrar todos los usuarios.
+	 * @return Lista de todos los usuarios.
+	 */
 	public List<UsuarioEntity> findAll() {
 
 		List<UsuarioEntity> usuarios = new ArrayList<>();
@@ -106,7 +127,11 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 		return usuarios;
 	}
 
-
+	/**
+	 * Método para actualizar un usuario.
+	 * @param usuario Usuario a actualizar.
+	 * @return Usuario actualizado, si existe.
+	 */
 	public Optional<UsuarioEntity> update(UsuarioEntity usuario) {
 
 		try {
@@ -130,6 +155,11 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 		return Optional.empty();
 	}
 
+	/**
+	 * Método para eliminar un usuario por su identificador.
+	 * @param id Identificador del usuario.
+	 * @return Verdadero si el usuario fue eliminado exitosamente, falso en caso contrario.
+	 */
 	public boolean deleteById(int id) {
 		try {
 			String deleteUsuarioSQL = "DELETE FROM usuarios WHERE id=?";
@@ -146,7 +176,12 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 		return false;
 	}
-	
+
+	/**
+	 * Método para verificar si existe un usuario por su identificador.
+	 * @param id Identificador del usuario.
+	 * @return Verdadero si el usuario existe, falso en caso contrario.
+	 */
     public boolean existsById(int id) {
         try {
             String countUsuariosSQL = "SELECT COUNT(*) FROM usuarios WHERE id=?";
@@ -166,36 +201,17 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
         return false;
     }
-    
+
+	/**
+	 * Método para encontrar un usuario por su correo electrónico.
+	 * @param email Correo electrónico del usuario.
+	 * @return Usuario encontrado, si existe.
+	 */
     public Optional<UsuarioEntity> findByEmail(String email) {
 		try {
 			String selectUsuarioSQL = "SELECT * FROM usuarios WHERE email = ?";
 			PreparedStatement pstmt = con.prepareStatement(selectUsuarioSQL);
 			pstmt.setString(1, email);
-
-			ResultSet rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				UsuarioEntity usuario = new UsuarioEntity();
-				usuario.setId(rs.getInt("id"));
-				usuario.setEmail(rs.getString("email"));
-				usuario.setNombre(rs.getString("nombre"));
-				usuario.setContraseña(rs.getString("contraseña"));
-				return Optional.of(usuario);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return Optional.empty();
-	}
-
-	public Optional<UsuarioEntity> findByEmailAndPassword(String email, String password) {
-		try {
-			String selectUsuarioSQL = "SELECT * FROM usuarios WHERE email = ? AND contraseña = ?";
-			PreparedStatement pstmt = con.prepareStatement(selectUsuarioSQL);
-			pstmt.setString(1, email);
-			pstmt.setString(2, password);
 
 			ResultSet rs = pstmt.executeQuery();
 

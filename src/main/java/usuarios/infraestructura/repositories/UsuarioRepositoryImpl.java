@@ -8,18 +8,30 @@ import usuarios.dominio.modelos.Usuario;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.entities.UsuarioEntity;
 
+/**
+ * Implementación del repositorio de usuarios.
+ * Esta clase proporciona la implementación de las operaciones de repositorio para la entidad Usuario.
+ */
 public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 
 	private static UsuarioRepositoryImpl instanciaSingleton;
 	private final UsuarioRegistradoEntityMysqlRepositoryImpl usuarioMysqlRepositoryImpl;
 
 
+	/**
+	 * Constructor del repositorio de usuarios.
+	 * @param usuarioMysqlRepositoryImpl Implementación del repositorio de usuarios registrados para MySQL.
+	 */
 	public UsuarioRepositoryImpl(UsuarioRegistradoEntityMysqlRepositoryImpl usuarioMysqlRepositoryImpl) {
 
 		this.usuarioMysqlRepositoryImpl = usuarioMysqlRepositoryImpl;
 	}
 
 
+	/**
+	 * Método para obtener la instancia singleton del repositorio de usuarios.
+	 * @return Instancia singleton del repositorio de usuarios.
+	 */
 	public static UsuarioRepositoryImpl getInstance() {
 
 		if (instanciaSingleton == null) {
@@ -92,10 +104,4 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	}
 
 
-	@Override
-	public Optional<Usuario> findByEmailAndPassword(String email, String password) {
-
-		Usuario usuario = usuarioMysqlRepositoryImpl.findByEmailAndPassword(email, password).map(UsuarioEntity::toDomainModel).orElse(null);
-		return Optional.ofNullable(usuario);
-	}
 }

@@ -13,6 +13,10 @@ import usuarios.dominio.puertos.in.DeleteUsuarioUseCase;
 import usuarios.dominio.puertos.in.RetriveUsuarioUseCase;
 import usuarios.dominio.puertos.in.UpdateUsuarioUseCase;
 
+/**
+ * Servicio de usuario que implementa los casos de uso de creación, eliminación, recuperación y actualización de un usuario.
+ * Este servicio encapsula la lógica de negocio y delega las operaciones de persistencia a los casos de uso concretos.
+ */
 public class UsuarioService
 		implements CreateUsuarioUseCase, DeleteUsuarioUseCase, RetriveUsuarioUseCase, UpdateUsuarioUseCase {
 
@@ -21,9 +25,12 @@ public class UsuarioService
 	private final RetriveUsuarioUseCase retriveUsuarioUseCase;
 	private final UpdateUsuarioUseCase updateUsuarioUseCase;
 
-
+	/**
+	 * Constructor del servicio de usuario.
+	 * Inicializa las implementaciones concretas de los casos de uso.
+	 */
     public UsuarioService() {
-        // Inicializa manualmente las implementaciones concretas
+
         this.createUsuarioUseCase = new CreateUsuarioUseCaseImpl();
         this.deleteUsuarioUseCase = new DeleteUsuarioUseCaseImpl();
         this.retriveUsuarioUseCase = new RetriveUsuarioUseCaseImpl();
@@ -58,17 +65,20 @@ public class UsuarioService
 
 	@Override
 	public boolean deleteUsuario(int id) {
+
 		return deleteUsuarioUseCase.deleteUsuario(id);
 	}
 
 	@Override
 	public Optional<Usuario> getUsuarioByEmail(String email) {
+
 		return retriveUsuarioUseCase.getUsuarioByEmail(email);
 	}
 
 
 	@Override
 	public Optional<Usuario> getUsuarioByEmailAndPassword(String email, String password) {
+
 		return retriveUsuarioUseCase.getUsuarioByEmailAndPassword(email, password);
 	}
 
