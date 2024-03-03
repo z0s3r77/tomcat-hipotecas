@@ -100,7 +100,7 @@ public class Usuario implements UsuarioComportamiento {
 
 	@Override
 	public String toString() {
-		return "UsuarioRegistrado [ip=" + ip + ", id=" + id + ", contraseña=" + contraseña + ", email=" + email
+		return "Usuario [ip=" + ip + ", id=" + id + ", contraseña=" + contraseña + ", email=" + email
 				+ ", nombre=" + nombre + ", prestamos=" + prestamos + "]";
 	}
 	
