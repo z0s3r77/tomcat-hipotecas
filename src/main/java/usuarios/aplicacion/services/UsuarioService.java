@@ -75,11 +75,4 @@ public class UsuarioService
 		return retriveUsuarioUseCase.getUsuarioByEmail(email);
 	}
 
-
-	@Override
-	public Optional<Usuario> getUsuarioByEmailAndPassword(String email, String password) {
-
-		return retriveUsuarioUseCase.getUsuarioByEmailAndPassword(email, password);
-	}
-
 }

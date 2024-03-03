@@ -8,7 +8,6 @@ public class AuthService implements LoginUsuarioUseCase {
     private final LoginUsuarioUseCase loginUsuarioUseCase;
 
     public AuthService() {
-        // Inicializa manualmente las implementaciones concretas
         this.loginUsuarioUseCase = new LoginUsuarioUseCaseImpl();
     }
 

@@ -32,11 +32,4 @@ public interface RetriveUsuarioUseCase {
 	 */
 	Optional<Usuario> getUsuarioByEmail(String email);
 
-	/**
-	 * Método para obtener un usuario por su correo electrónico y contraseña.
-	 * @param email Correo electrónico del usuario a ser recuperado.
-	 * @param password Contraseña del usuario a ser recuperado.
-	 * @return Usuario recuperado, si existe.
-	 */
-	Optional<Usuario> getUsuarioByEmailAndPassword(String email, String password);
 }
