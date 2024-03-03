@@ -1,9 +1,9 @@
 package usuarios.aplicacion.usecases;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import usuarios.dominio.modelos.Usuario;
-import usuarios.dominio.modelos.UsuarioComportamiento;
 import usuarios.dominio.puertos.in.UpdateUsuarioUseCase;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
@@ -11,21 +11,22 @@ import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 public class UpdateUsuarioUseCaseImpl implements UpdateUsuarioUseCase {
 	
 	private final UsuarioRepositoryPort usuarioRepositoryPort;
-		
-	
+	private static final Logger LOGGER = Logger.getLogger(UpdateUsuarioUseCaseImpl.class.getName());
+
 	public UpdateUsuarioUseCaseImpl() {
 		this.usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
-	}
-
-	public UpdateUsuarioUseCaseImpl(UsuarioRepositoryPort usuarioRepositoryPort) {
-		this.usuarioRepositoryPort = usuarioRepositoryPort;
 	}
 
 
 	@Override
 	public Optional<Usuario> updatesUsuario(Long id, Usuario usuarioActualizado) {
-		
-		return usuarioRepositoryPort.update(usuarioActualizado);
-	}
 
+		Optional<Usuario> updatedUsuario = usuarioRepositoryPort.update(usuarioActualizado);
+		if (updatedUsuario.isPresent()) {
+			LOGGER.info("Usuario updated with id: " + id);
+		} else {
+			LOGGER.warning("Failed to update usuario with id: " + id);
+		}
+		return updatedUsuario;
+	}
 }

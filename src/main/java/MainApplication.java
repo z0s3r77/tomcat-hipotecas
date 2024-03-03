@@ -1,6 +1,7 @@
 import java.util.List;
 
 
+import auth.aplicacion.services.AuthService;
 import prestamos.aplicacion.service.PrestamoService;
 import prestamos.dominio.modelos.Prestamo;
 import usuarios.aplicacion.services.UsuarioService;
@@ -18,13 +19,15 @@ public class MainApplication {
         // Cargamos los servicios de la aplicación.
         PrestamoService prestamoService = new PrestamoService();
         UsuarioService usuarioService = new UsuarioService();
+        AuthService authService = new AuthService();
 
+        // Autenticamos un usuario
+        authService.authenticateUsuario("usuario1@example.com", "contraseña123");
 
-        System.out.println("------------------- obtenemos a juan -----------------------");
         // Cargamos un usuario
         List<Usuario> usuarios = usuarioService.getAllUsuario();
         usuarios.forEach(usuario -> System.out.println(usuario.toString()));
-        Usuario juanPerez = (Usuario) usuarios.get(0);
+        Usuario juanPerez =  usuarios.get(0);
         System.out.println("");
         System.out.println("");
         System.out.println("------------------- obtenemos los prestamos de  juan -----------------------");

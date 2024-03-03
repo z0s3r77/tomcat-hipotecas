@@ -5,24 +5,24 @@ import usuarios.dominio.puertos.in.CreateUsuarioUseCase;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
-public class CreateUsuarioUseCaseImpl implements CreateUsuarioUseCase {
+import java.util.logging.Logger;
 
+public class CreateUsuarioUseCaseImpl implements CreateUsuarioUseCase {
 	
 	private final UsuarioRepositoryPort  usuarioRepositoryPort;
-	
+	private static final Logger LOGGER = Logger.getLogger(CreateUsuarioUseCaseImpl.class.getName());
+
+
 	public CreateUsuarioUseCaseImpl() {
+
 		this.usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
 	}
-	
-	public CreateUsuarioUseCaseImpl(UsuarioRepositoryPort usuarioRepositoryPort) {
-		this.usuarioRepositoryPort = usuarioRepositoryPort;
-	}
-	
-	
+
 	@Override
 	public Usuario createUsuario(Usuario usuario) {
-		System.out.println(usuario.toString());
-		return usuarioRepositoryPort.save(usuario);
+		Usuario savedUsuario = usuarioRepositoryPort.save(usuario);
+		LOGGER.info("Usuario created with id: " + savedUsuario.getId());
+		return savedUsuario;
 	}
 	
 
