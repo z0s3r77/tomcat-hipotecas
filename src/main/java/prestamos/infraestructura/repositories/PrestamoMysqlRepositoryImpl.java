@@ -1,20 +1,3 @@
-/**
- * Implementación concreta de un repositorio de préstamos para el almacenamiento en una base de datos MySQL.
- *
- * <p>
- * Esta clase proporciona métodos para la persistencia y recuperación de objetos {@link PrestamoEntity} en una base de
- * datos MySQL. La persistencia incluye la creación, eliminación y recuperación de préstamos asociados a un usuario.
- * </p>
- *
- * <p>
- * Se espera que esta clase sea utilizada en conjunto con un {@link UsuarioRepositoryPort} para gestionar la
- * persistencia de usuarios asociados a los préstamos.
- * </p>
- *
- * @see PrestamoEntity
- * @see UsuarioRepositoryPort
- *
- */
 package prestamos.infraestructura.repositories;
 
 import java.sql.*;
@@ -30,15 +13,15 @@ import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 /**
  * Implementación concreta de un repositorio de préstamos para el almacenamiento en una base de datos MySQL.
  *
- * <p>
+ *
  * Esta clase proporciona métodos para la persistencia y recuperación de objetos {@link PrestamoEntity} en una base de
  * datos MySQL. La persistencia incluye la creación, eliminación y recuperación de préstamos asociados a un usuario.
- * </p>
  *
- * <p>
+ *
+ *
  * Se espera que esta clase sea utilizada en conjunto con un {@link UsuarioRepositoryPort} para gestionar la
  * persistencia de usuarios asociados a los préstamos.
- * </p>
+ *
  *
  * @see PrestamoEntity
  * @see UsuarioRepositoryPort

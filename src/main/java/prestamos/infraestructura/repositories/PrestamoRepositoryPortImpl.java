@@ -1,20 +1,3 @@
-/**
- * Implementación concreta del puerto de repositorio de préstamos ({@link PrestamoRepositoryPort}) que utiliza
- * persistencia en una base de datos MySQL mediante {@link PrestamoMysqlRepositoryImpl}.
- *
- * <p>
- * Esta implementación proporciona métodos para guardar, eliminar y obtener préstamos desde una base de datos MySQL.
- * Utiliza el patrón Singleton para garantizar una única instancia de la clase.
- * </p>
- *
- * <p>
- * Se espera que esta clase sea utilizada en la capa de aplicación para interactuar con el repositorio de préstamos.
- * </p>
- *
- * @see PrestamoRepositoryPort
- * @see PrestamoMysqlRepositoryImpl
- *
- */
 package prestamos.infraestructura.repositories;
 
 import prestamos.dominio.modelos.Prestamo;
@@ -27,14 +10,14 @@ import java.util.List;
  * Implementación concreta del puerto de repositorio de préstamos ({@link PrestamoRepositoryPort}) que utiliza
  * persistencia en una base de datos MySQL mediante {@link PrestamoMysqlRepositoryImpl}.
  *
- * <p>
+ *
  * Esta implementación proporciona métodos para guardar, eliminar y obtener préstamos desde una base de datos MySQL.
  * Utiliza el patrón Singleton para garantizar una única instancia de la clase.
- * </p>
  *
- * <p>
+ *
+ *
  * Se espera que esta clase sea utilizada en la capa de aplicación para interactuar con el repositorio de préstamos.
- * </p>
+ *
  *
  * @see PrestamoRepositoryPort
  * @see PrestamoMysqlRepositoryImpl

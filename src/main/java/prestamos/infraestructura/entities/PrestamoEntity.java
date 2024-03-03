@@ -1,16 +1,3 @@
-/**
- * Entidad que representa un préstamo en el contexto de persistencia.
- *
- * <p>
- * Esta clase mapea la información de un préstamo desde la capa de dominio al formato adecuado para su almacenamiento
- * en la capa de infraestructura de persistencia, como una base de datos. También proporciona métodos para convertir
- * entre el modelo de dominio y la representación en la capa de infraestructura.
- * </p>
- *
- * @see Prestamo
- * @see UsuarioRegistradoEntity
- *
- */
 package prestamos.infraestructura.entities;
 
 import prestamos.dominio.modelos.Hipoteca;
@@ -22,11 +9,11 @@ import java.util.Objects;
 /**
  * Entidad que representa un préstamo en el contexto de persistencia.
  *
- * <p>
+ *
  * Esta clase mapea la información de un préstamo desde la capa de dominio al formato adecuado para su almacenamiento
  * en la capa de infraestructura de persistencia, como una base de datos. También proporciona métodos para convertir
  * entre el modelo de dominio y la representación en la capa de infraestructura.
- * </p>
+ *
  *
  * @see Prestamo
  * @see UsuarioEntity

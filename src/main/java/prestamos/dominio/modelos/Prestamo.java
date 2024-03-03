@@ -1,9 +1,3 @@
-/**
- * Clase abstracta que representa un préstamo en la capa de dominio del sistema.
- * Contiene atributos y métodos comunes para todos los tipos de préstamos.
- *
- * @author zoser
- */
 package prestamos.dominio.modelos;
 
 import java.util.ArrayList;

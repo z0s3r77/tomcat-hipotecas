@@ -1,16 +1,3 @@
-/**
- * Interfaz para el caso de uso de eliminación de préstamos en la capa de aplicación.
- *
- * <p>
- * En el contexto de arquitectura hexagonal, esta interfaz representa el puerto de entrada que será implementado
- * por un adaptador en la capa de aplicación de la aplicación. La implementación concreta de esta interfaz se
- * encargará de interactuar con la capa de dominio para llevar a cabo la lógica de eliminación de préstamos.
- * </p>
- *
- * @see Prestamo
- * @see DeletePrestamoUseCaseImpl
- *
- */
 package prestamos.dominio.puerto.in;
 
 import prestamos.dominio.modelos.Prestamo;
@@ -18,11 +5,9 @@ import prestamos.dominio.modelos.Prestamo;
 /**
  * Interfaz para el caso de uso de eliminación de préstamos en la capa de aplicación.
  *
- * <p>
  * En el contexto de arquitectura hexagonal, esta interfaz representa el puerto de entrada que será implementado
  * por un adaptador en la capa de infraestructura de la aplicación. La implementación concreta de esta interfaz se
  * encargará de interactuar con la capa de dominio para llevar a cabo la lógica de eliminación de préstamos.
- * </p>
  *
  * @see Prestamo
  * @see DeletePrestamoUseCaseImpl

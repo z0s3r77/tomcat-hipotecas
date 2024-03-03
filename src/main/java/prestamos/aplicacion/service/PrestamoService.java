@@ -10,13 +10,27 @@ import prestamos.dominio.puerto.in.RetrivePrestamosUseCase;
 
 import java.util.List;
 
-
+/**
+ * Servicio para la gestión de préstamos.
+ *
+ * Esta clase implementa las interfaces CreatePrestamoUseCase, DeletePrestamoUseCase y RetrivePrestamosUseCase,
+ * y delega la ejecución de las operaciones a las implementaciones correspondientes de estos casos de uso.
+ *
+ * @see CreatePrestamoUseCase
+ * @see DeletePrestamoUseCase
+ * @see RetrivePrestamosUseCase
+ */
 public class PrestamoService implements CreatePrestamoUseCase, DeletePrestamoUseCase, RetrivePrestamosUseCase {
 
     private final CreatePrestamoUseCase createPrestamoUseCase;
     private final DeletePrestamoUseCase deletePrestamoUseCase;
     private final RetrivePrestamosUseCase retrivePrestamosUseCase;
 
+    /**
+     * Constructor del servicio de préstamos.
+     *
+     * Inicializa las implementaciones de los casos de uso de creación, eliminación y recuperación de préstamos.
+     */
     public PrestamoService(){
         this.createPrestamoUseCase = new CreatePrestamoUseCaseImpl();
         this.deletePrestamoUseCase = new DeletePrestamoUseCaseImpl();

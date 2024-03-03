@@ -1,15 +1,3 @@
-/**
- * Puerto de salida para la gestión de préstamos en el dominio del sistema.
- *
- * <p>
- * Este puerto proporciona métodos para la persistencia y recuperación de objetos {@link Prestamo}. Las implementaciones
- * concretas de este puerto se encuentran en la capa de infraestructura y son responsables de interactuar con el
- * almacenamiento de datos, como una base de datos, para llevar a cabo operaciones relacionadas con préstamos.
- * </p>
- *
- * @see Prestamo
- * @since [Fecha de creación]
- */
 package prestamos.dominio.puerto.out;
 
 import prestamos.dominio.modelos.Prestamo;
@@ -19,11 +7,9 @@ import java.util.List;
 /**
  * Puerto de salida para la gestión de préstamos en el dominio del sistema.
  *
- * <p>
  * Este puerto proporciona métodos para la persistencia y recuperación de objetos {@link Prestamo}. Las implementaciones
  * concretas de este puerto se encuentran en la capa de infraestructura y son responsables de interactuar con el
  * almacenamiento de datos, como una base de datos, para llevar a cabo operaciones relacionadas con préstamos.
- * </p>
  *
  * @see Prestamo
  * @since [Fecha de creación]
