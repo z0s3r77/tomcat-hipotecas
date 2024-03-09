@@ -21,6 +21,6 @@ public interface DeletePrestamoUseCase {
      * @param prestamo El objeto {@link Prestamo} que se desea eliminar.
      * @return `true` si la eliminación fue exitosa, `false` si no se pudo eliminar.
      */
-    boolean deletePrestamo(Prestamo prestamo);
+    boolean deletePrestamo(int prestamoId);
 
 }

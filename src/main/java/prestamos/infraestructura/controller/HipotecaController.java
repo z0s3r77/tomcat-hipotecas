@@ -46,11 +46,33 @@ public class HipotecaController extends HttpServlet {
 				System.out.println(req.getParameter("usuarioId") + " Action");
 				saveHipoteca(req, resp);
 				break;
+			case "Borrar hipoteca":
+				System.out.println(req.getParameter("usuarioId") + " Action");
+				deleteHipoteca(req, resp);
+				break;
 			default:
 				resp.sendRedirect("error.jsp");
 
 		}
 	}
+	
+	private void deleteHipoteca(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		
+		int prestamoId = Integer.parseInt(req.getParameter("prestamoId")) ;
+
+		boolean resultado = this.prestamoService.deletePrestamo(prestamoId);
+		
+		if (resultado) {
+			System.out.println("Borrar prestamo "+ prestamoId);
+			req.getRequestDispatcher("user-hipotecas.jsp").forward(req, resp);
+		
+		}else {
+			resp.sendRedirect("error.jsp");
+		}
+		
+	}
+	
+	
 
 	private void saveHipoteca(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

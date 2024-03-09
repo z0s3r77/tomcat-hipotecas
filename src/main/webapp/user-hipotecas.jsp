@@ -5,7 +5,7 @@
 
 <%
 
-	PrestamoService prestamoService = PrestamoService.getInstance();
+	PrestamoService prestamoService = new PrestamoService();
 	
     String user = (String) request.getSession().getAttribute("usuario");
     int userId = (int) request.getSession().getAttribute("usuarioId");
@@ -23,7 +23,10 @@
     <% if (prestamos != null) { %>
         <ul>
             <% for (Prestamo prestamo : prestamos) { %>
-                <li><%= prestamo.toString() %></li><a href=""></a>
+                <li><%= prestamo.toString() %></li><form action="HipotecaController" method="post">
+						<input type="hidden" name="prestamoId" value="<%=prestamo.getId()%>">
+						<input type="submit" name="action" value="Borrar hipoteca">
+					</form>
             <% } %>
         </ul>
     <%

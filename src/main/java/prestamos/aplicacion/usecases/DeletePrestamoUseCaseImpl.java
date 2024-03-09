@@ -1,6 +1,5 @@
 package prestamos.aplicacion.usecases;
 
-import prestamos.dominio.modelos.Prestamo;
 import prestamos.dominio.puerto.in.DeletePrestamoUseCase;
 import prestamos.dominio.puerto.out.PrestamoRepositoryPort;
 import prestamos.infraestructura.repositories.PrestamoRepositoryPortImpl;
@@ -17,12 +16,12 @@ public class DeletePrestamoUseCaseImpl implements DeletePrestamoUseCase {
         this.prestamoRepositoryPort = PrestamoRepositoryPortImpl.getInstance();
     }
     @Override
-    public boolean deletePrestamo(Prestamo prestamo) {
-        boolean isDeleted = this.prestamoRepositoryPort.deletePrestamo(prestamo);
+    public boolean deletePrestamo(int prestamoId) {
+        boolean isDeleted = this.prestamoRepositoryPort.deletePrestamo(prestamoId);
         if (isDeleted) {
-            LOGGER.info("Prestamo deleted with id: " + prestamo.getId());
+            LOGGER.info("Prestamo deleted with id: " + prestamoId);
         } else {
-            LOGGER.warning("Failed to delete prestamo with id: " + prestamo.getId());
+            LOGGER.warning("Failed to delete prestamo with id: " + prestamoId);
         }
         return isDeleted;
     }

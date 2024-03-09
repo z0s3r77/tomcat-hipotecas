@@ -80,9 +80,8 @@ public class PrestamoRepositoryPortImpl implements PrestamoRepositoryPort {
      * @return `true` si la eliminación fue exitosa, `false` si no se pudo eliminar.
      */
     @Override
-    public boolean deletePrestamo(Prestamo prestamo) {
-        PrestamoEntity prestamoEntity = PrestamoEntity.fromDomainModel(prestamo);
-        return this.prestamoMysqlRepositoryImpl.eliminarPrestamo(prestamoEntity);
+    public boolean deletePrestamo(int prestamoId) {
+        return this.prestamoMysqlRepositoryImpl.eliminarPrestamo(prestamoId);
 
     }
 

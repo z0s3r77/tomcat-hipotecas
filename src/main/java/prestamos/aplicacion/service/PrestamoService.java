@@ -61,8 +61,8 @@ public class PrestamoService implements CreatePrestamoUseCase, DeletePrestamoUse
     }
 
     @Override
-    public boolean deletePrestamo(Prestamo prestamo) {
-        return this.deletePrestamoUseCase.deletePrestamo(prestamo);
+    public boolean deletePrestamo(int prestamoId) {
+        return this.deletePrestamoUseCase.deletePrestamo(prestamoId);
     }
 
     @Override

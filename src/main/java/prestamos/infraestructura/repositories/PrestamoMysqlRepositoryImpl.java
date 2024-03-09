@@ -99,23 +99,16 @@ public class PrestamoMysqlRepositoryImpl {
 	 * @param prestamo La entidad {@link PrestamoEntity} que se desea eliminar.
 	 * @return `true` si la eliminación fue exitosa, `false` si no se pudo eliminar.
 	 */
-	public boolean eliminarPrestamo(PrestamoEntity prestamo) {
+	public boolean eliminarPrestamo(int prestamoId) {
 
 		checkCon();
 
 		
-		String eliminarPrestamoSQL = "DELETE FROM prestamos WHERE " + "capital = ? AND " + "interes = ? AND "
-				+ "frecuenciaDePagoEnMeses = ? AND " + "plazoDeAmortizacionEnMeses = ? AND " + "tipoDePrestamo = ? AND "
-				+ "usuario_id = (SELECT id FROM usuarios WHERE email = ?)";
+		String eliminarPrestamoSQL = "DELETE FROM prestamos WHERE " + "id = ? ";
 
 		try (PreparedStatement eliminarPrestamoStmt = con.prepareStatement(eliminarPrestamoSQL)) {
 
-			eliminarPrestamoStmt.setDouble(1, prestamo.getCapital());
-			eliminarPrestamoStmt.setDouble(2, prestamo.getInteres());
-			eliminarPrestamoStmt.setInt(3, prestamo.getFrecuenciaDePagoEnMeses());
-			eliminarPrestamoStmt.setInt(4, prestamo.getPlazoDeAmortizacionEnMeses());
-			eliminarPrestamoStmt.setString(5, prestamo.getTipoDePrestamo()); // tipoDePrestamo
-			eliminarPrestamoStmt.setInt(6, ( prestamo.getUsuario()));
+			eliminarPrestamoStmt.setInt(1, prestamoId);
 
 			int filasAfectadas = eliminarPrestamoStmt.executeUpdate();
 
