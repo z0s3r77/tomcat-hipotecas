@@ -5,7 +5,7 @@
 
 <%
 
-	PrestamoService prestamoService = new PrestamoService();
+	PrestamoService prestamoService = PrestamoService.getInstance();
 	
     String user = (String) request.getSession().getAttribute("usuario");
     int userId = (int) request.getSession().getAttribute("usuarioId");

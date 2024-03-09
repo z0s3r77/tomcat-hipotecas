@@ -30,7 +30,7 @@ public class H2DatabaseConnector {
 			// Usuario y contraseña pueden ser vacíos para una base de datos en memoria
 			this.conn = DriverManager.getConnection(connectionUrl, "", "");
 
-			cargarDatosIniciales();
+			// cargarDatosIniciales();
 
 			boolean valid = conn.isValid(50000);
 			System.out.println(valid ? "TEST OK" : "TEST FAIL");

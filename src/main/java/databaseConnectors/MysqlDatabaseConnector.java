@@ -30,6 +30,9 @@ public class MysqlDatabaseConnector {
     }
 
     private void cargarDatosIniciales() throws SQLException {
+    	
+    	System.out.println("Cargando datos inciales");
+    	
         try (Statement stmt = conn.createStatement()) {
             // Crear la tabla de usuarios
             String createTableUsuariosSQL = "CREATE TABLE IF NOT EXISTS usuarios (\n"
@@ -90,7 +93,7 @@ public class MysqlDatabaseConnector {
         	
             this.conn = pool.getConnection();
 
-           // cargarDatosIniciales();
+             // cargarDatosIniciales();
 
             boolean valid = conn.isValid(50000);
             System.out.println(valid ? "TEST OK" : "TEST FAIL");

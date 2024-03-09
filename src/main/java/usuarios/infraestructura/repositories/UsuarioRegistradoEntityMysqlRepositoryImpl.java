@@ -19,7 +19,7 @@ import usuarios.infraestructura.entities.UsuarioEntity;
  */
 public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
-	static Connection con = H2DatabaseConnector.getConnection();
+	static Connection con = MysqlDatabaseConnector.getConnection();
 
 	/**
 	 * Constructor del repositorio de usuarios registrados.

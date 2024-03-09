@@ -84,6 +84,7 @@ public class HipotecaController extends HttpServlet {
 		plazoDeAmortizacionEnAnnos = plazoDeAmortizacionEnAnnos * 12;
 
 		if (req.getSession().getAttribute("usuarioId") == null) {
+			System.out.println("error controlador al guardar hipoteca");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		}
 
