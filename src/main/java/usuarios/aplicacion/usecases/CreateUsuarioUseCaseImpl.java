@@ -21,7 +21,25 @@ public class CreateUsuarioUseCaseImpl implements CreateUsuarioUseCase {
 	@Override
 	public Usuario createUsuario(Usuario usuario) {
 		Usuario savedUsuario = usuarioRepositoryPort.save(usuario);
-		LOGGER.info("Usuario created with id: " + savedUsuario.getId());
+		if (savedUsuario == null) {
+			LOGGER.warning("Error creating Usuario " + usuario);
+		}else {
+			LOGGER.info("Usuario created with id: " + savedUsuario.getId());
+		}
+		return savedUsuario;
+	}
+
+	@Override
+	public Usuario createUsuario(String correo, String usuario, String password) {
+		
+		Usuario newUsuario = new Usuario(correo, usuario, password, null);
+		Usuario savedUsuario = usuarioRepositoryPort.save(newUsuario);
+		if (savedUsuario == null) {
+			LOGGER.warning("Error creating Usuario " + usuario);
+		}else {
+			LOGGER.info("Usuario created with id: " + savedUsuario.getId());
+		}
+		
 		return savedUsuario;
 	}
 	

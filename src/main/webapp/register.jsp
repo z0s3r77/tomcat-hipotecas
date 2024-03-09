@@ -9,7 +9,7 @@
     	<input type="text" name="correo" placeholder="correo">
         <input type="text" name="usuario" placeholder="usuario">
         <input type="text" name="contraseña" placeholder="contraseña">
-        <button type="submit" name="action" value="login">Login</button>
+        <button type="submit" name="action" value="Registrarse">Login</button>
     </form>
     
     <a href="index-hipotecas.jsp">Inicio</a>

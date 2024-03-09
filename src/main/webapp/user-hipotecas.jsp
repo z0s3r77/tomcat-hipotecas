@@ -10,6 +10,7 @@
     String user = (String) request.getSession().getAttribute("usuario");
     int userId = (int) request.getSession().getAttribute("usuarioId");
        
+    System.out.println(user + "  " + userId);
     List<Prestamo> prestamos = prestamoService.getPrestamosFromUsuario(userId);
 %>
 

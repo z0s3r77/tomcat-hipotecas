@@ -84,4 +84,10 @@ public class UsuarioService
 		return retriveUsuarioUseCase.getUsuarioByEmail(email);
 	}
 
+
+	@Override
+	public Usuario createUsuario(String correo, String usuario, String password) {
+		return createUsuarioUseCase.createUsuario(correo, usuario, password);
+	}
+
 }

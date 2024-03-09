@@ -2,7 +2,9 @@ package auth.aplicacion.usecases;
 
 import auth.dominio.puertos.in.LoginUsuarioUseCase;
 import usuarios.aplicacion.services.UsuarioService;
+import usuarios.dominio.modelos.Usuario;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 public class LoginUsuarioUseCaseImpl implements LoginUsuarioUseCase {
@@ -16,17 +18,32 @@ public class LoginUsuarioUseCaseImpl implements LoginUsuarioUseCase {
     }
 
     @Override
-    public boolean authenticateUsuario(String email, String password) {
+    public Usuario authenticateUsuario(String email, String password) {
 
-        boolean isAuthenticated = this.usuarioService.getUsuarioByEmail(email).isPresent()
-                && this.usuarioService.getUsuarioByEmail(email).get().getContraseña().equals(password);
-
-        if (isAuthenticated) {
-            LOGGER.info("Login successful for user: " + email);
-        } else {
-            LOGGER.warning("Login failed for user: " + email);
+        Optional<Usuario> usuario = this.usuarioService.getUsuarioByEmail(email);
+        		
+        if (usuario.isPresent()) {
+        	if (usuario.get().getContraseña().equals(password)) {
+                LOGGER.info("Login successful for user: " + email);
+                return usuario.get();
+        	}
         }
+        
+        LOGGER.warning("Login failed for user: " + email);
 
-        return isAuthenticated;
+       
+        return null;
     }
+
+	@Override
+	public boolean registerUsuario(String email, String usuario, String password) {
+		
+		var newUsuario = this.usuarioService.createUsuario(email,usuario, password);
+	
+		if(newUsuario == null) {
+			return false;
+		}
+		
+		return true;
+	}
 }

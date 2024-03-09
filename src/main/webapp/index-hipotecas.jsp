@@ -52,7 +52,7 @@ if (request.getSession() != null && user != null) {
 	if (usuarioLogueado.equals("Anónimo")) {
 	%>
 	<a href="login.jsp">Login</a>
-
+	<a href="register.jsp">Registrarse</a>
 	<%
 	} else {
 	%>
