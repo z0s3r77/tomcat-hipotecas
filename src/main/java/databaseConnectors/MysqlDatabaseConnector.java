@@ -5,13 +5,26 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.management.RuntimeErrorException;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import jakarta.servlet.ServletException;
+
 public class MysqlDatabaseConnector {
 
+	private DataSource pool;
     private Connection conn;
 
     public static Connection getConnection() {
         if (instance.conn == null) {
-            return instance.startConnection();
+            try {
+				return instance.startConnection();
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
         return instance.conn;
     }
@@ -53,16 +66,29 @@ public class MysqlDatabaseConnector {
 
 
 
-    private Connection startConnection() {
+    private Connection startConnection() throws NamingException {
         try {
-            var connectionUrl = "jdbc:mysql://localhost:3306/administracion";
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                System.out.println("Error al registrar el driver de MySQL: " + ex);
-            }
+        	
+        	        	
+        	try {
+        		// Un objeto InitialContext nos permite ejecutar operaciones con
+        		// nombres.
+        		InitialContext contexto = new InitialContext();
+        		// Utilizamos el objeto InitialContext para acceder al pool de
+        		// conexiones.
+        		pool = (DataSource) contexto.lookup("java:comp/env/jdbc/mysql_administracion");
 
-            this.conn = DriverManager.getConnection(connectionUrl, "z0s3r77", "supersecret");
+        		if (pool == null) {
+        			System.out.print("Error al acceder al pool");
+        		}
+        		
+        		} catch (NamingException e) {
+        		System.out.println("Error al acceder al contexto");
+        		e.printStackTrace();
+        		}
+        	
+        	
+            this.conn = pool.getConnection();
 
            // cargarDatosIniciales();
 

@@ -62,3 +62,6 @@
 <%
     }
 %>
+
+    <a href="index-hipotecas.jsp">Calcular otra hipoteca</a>
+

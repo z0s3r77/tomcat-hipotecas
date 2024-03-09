@@ -30,7 +30,7 @@ import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
  */
 public class PrestamoMysqlRepositoryImpl {
 
-	static Connection con = H2DatabaseConnector.getConnection();
+	static Connection con = MysqlDatabaseConnector.getConnection();
 
 	public PrestamoMysqlRepositoryImpl() {}
 
@@ -42,14 +42,20 @@ public class PrestamoMysqlRepositoryImpl {
 	 */
 	public PrestamoEntity guardarPrestamo(PrestamoEntity prestamo) {
 
+		checkCon();
+
+		
 		PrestamoEntity prestamoEntity = null;
 
 		try {
+
+			System.out.println("DDeeeeeeeeeeep");
 
 			String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario_id) "
 					+ "VALUES (?, ?, ?, ?, ?, (SELECT id FROM usuarios WHERE email = ?))";
 
 
+			checkCon();
 			PreparedStatement pstmt = con.prepareStatement(insertPrestamoSQL, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setDouble(1, prestamo.getCapital());
 			pstmt.setDouble(2, prestamo.getInteres());
@@ -97,6 +103,9 @@ public class PrestamoMysqlRepositoryImpl {
 	 */
 	public boolean eliminarPrestamo(PrestamoEntity prestamo) {
 
+		checkCon();
+
+		
 		String eliminarPrestamoSQL = "DELETE FROM prestamos WHERE " + "capital = ? AND " + "interes = ? AND "
 				+ "frecuenciaDePagoEnMeses = ? AND " + "plazoDeAmortizacionEnMeses = ? AND " + "tipoDePrestamo = ? AND "
 				+ "usuario_id = (SELECT id FROM usuarios WHERE email = ?)";
@@ -138,6 +147,8 @@ public class PrestamoMysqlRepositoryImpl {
 	 */
 	public List<Prestamo> obtenerTodosLosPrestamosDeUnUsuario(int usuarioId) {
 		
+		checkCon();
+		
 	    List<Prestamo> prestamos = new ArrayList<>();
 
 	    String obtenerPrestamosSQL = "SELECT * FROM prestamos WHERE usuario_id = ?";
@@ -163,6 +174,12 @@ public class PrestamoMysqlRepositoryImpl {
 	    }
 
 	    return prestamos;
+	}
+	
+	public void checkCon () {
+	    if (con == null) {
+	    	this.con =  MysqlDatabaseConnector.getConnection();
+	    }
 	}
 
 }
