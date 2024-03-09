@@ -55,15 +55,11 @@ public class MysqlDatabaseConnector {
                     + "plazoDeAmortizacionEnMeses INT,"
                     + "tipoDePrestamo VARCHAR(255),"
                     + "usuario_id INT,"
+                    + "fecha_creacion DATE,"  // Nueva columna fecha_creacion de tipo DATE
                     + "FOREIGN KEY (usuario_id) REFERENCES usuarios(id)"
                     + ")";
             stmt.execute(createTablePrestamosSQL);
 
-
-            // Insertar un préstamo para Juan Pérez
-            String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario_id) VALUES "
-                    + "(120000.0, 4.5, 1, 1, 'Hipoteca', 1 )";
-            stmt.execute(insertPrestamoSQL);
         }
     }
 

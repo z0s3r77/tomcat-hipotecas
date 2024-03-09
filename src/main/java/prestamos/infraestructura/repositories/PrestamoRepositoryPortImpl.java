@@ -64,7 +64,7 @@ public class PrestamoRepositoryPortImpl implements PrestamoRepositoryPort {
     @Override
     public Prestamo save(Prestamo prestamo) {
 
-        String prestamoClass = prestamo.getClass().toString();
+        String prestamoClass = prestamo.getClass().getSimpleName();
         prestamo.setTipoPrestamo(prestamoClass);
 
         PrestamoEntity prestamoEntity = PrestamoEntity.fromDomainModel(prestamo);

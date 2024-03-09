@@ -4,6 +4,7 @@ import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
 import usuarios.infraestructura.entities.UsuarioEntity;
 
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -27,6 +28,7 @@ public class PrestamoEntity {
     private int frecuenciaDePagoEnMeses;
     private int plazoDeAmortizacionEnMeses;
     private String tipoDePrestamo;
+	protected Date fechaCreacion;
     private int usuarioId;
 
     public PrestamoEntity(){}
@@ -62,7 +64,7 @@ public class PrestamoEntity {
      */
     public Prestamo toDomainModel(Prestamo prestamo){
         if (prestamo instanceof Hipoteca) {
-            return new Hipoteca(this.id, this.capital, this.interes, this.frecuenciaDePagoEnMeses, this.plazoDeAmortizacionEnMeses, this.tipoDePrestamo, this.usuarioId);
+            return new Hipoteca(this.id, this.capital, this.interes, this.frecuenciaDePagoEnMeses, this.plazoDeAmortizacionEnMeses, this.tipoDePrestamo, this.usuarioId, this.fechaCreacion);
         }
         return new Hipoteca();
     }
@@ -119,6 +121,16 @@ public class PrestamoEntity {
         return usuarioId;
     }
 
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+	
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	
     public void setUsuarioId(int usuarioId) {
         this.usuarioId = usuarioId;
     }

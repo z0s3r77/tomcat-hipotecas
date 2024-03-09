@@ -49,8 +49,8 @@ public class PrestamoMysqlRepositoryImpl {
 		try {
 
 
-			String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario_id) "
-					+ "VALUES (?, ?, ?, ?, ?, ?)";
+			String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, fecha_creacion, usuario_id) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 			System.out.println(prestamo);
 
@@ -61,7 +61,8 @@ public class PrestamoMysqlRepositoryImpl {
 			pstmt.setInt(3, prestamo.getFrecuenciaDePagoEnMeses());
 			pstmt.setInt(4, prestamo.getPlazoDeAmortizacionEnMeses());
 			pstmt.setString(5, prestamo.getTipoDePrestamo());
-			pstmt.setInt(6, prestamo.getUsuario());
+			pstmt.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
+			pstmt.setInt(7, prestamo.getUsuario());
 
 			int affectedRows = pstmt.executeUpdate();
 
@@ -83,6 +84,7 @@ public class PrestamoMysqlRepositoryImpl {
 					prestamoEntity.setPlazoDeAmortizacionEnMeses(prestamo.getPlazoDeAmortizacionEnMeses());
 					prestamoEntity.setTipoDePrestamo(prestamo.getClass().toString());
 					prestamoEntity.setId(prestamo.getUsuario());
+					prestamoEntity.setFechaCreacion(generatedKeys.getDate("fecha_creacion"));
 				}
 			}
 
@@ -159,6 +161,8 @@ public class PrestamoMysqlRepositoryImpl {
 	                prestamo.setPlazoDeAmortizacionEnMeses(resultSet.getInt("plazoDeAmortizacionEnMeses"));
 	                prestamo.setTipoPrestamo(resultSet.getString("tipoDePrestamo"));
 	                prestamo.setUsuarioId(resultSet.getInt("usuario_id"));
+	                Date fechaCreacionSql = resultSet.getDate("fecha_creacion");
+	                prestamo.setFechaCreacion(fechaCreacionSql);
 	                prestamos.add(prestamo);
 	            }
 	        }

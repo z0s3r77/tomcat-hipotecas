@@ -1,5 +1,6 @@
 package prestamos.dominio.modelos;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public abstract class Prestamo {
 	protected int plazoDeAmortizacionEnMeses;
 	protected double cuotaMensual;
 	protected String tipoPrestamo;
+	protected Date fechaCreacion;
 	protected List<RegistroAmortizacion> cuadroDeAmortizacion = new ArrayList<RegistroAmortizacion>();
 	protected int usuarioId;
 
@@ -37,7 +39,7 @@ public abstract class Prestamo {
 	 * @param tipoPrestamo                 El tipo de préstamo.
 	 * @param usuarioId                      El usuario asociado al préstamo.
 	 */
-	public Prestamo(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoPrestamo, int usuarioId) {
+	public Prestamo(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoPrestamo, int usuarioId, Date fechaCreacion) {
 		this.id = id;
 		this.capital = capital;
 		this.interes = interes;
@@ -45,6 +47,7 @@ public abstract class Prestamo {
 		this.plazoDeAmortizacionEnMeses = plazoDeAmortizacionEnMeses;
 		this.tipoPrestamo = tipoPrestamo;
 		this.usuarioId = usuarioId;
+		this.fechaCreacion = fechaCreacion;
 	}
 
 	/**
@@ -172,6 +175,10 @@ public abstract class Prestamo {
 		return tipoPrestamo;
 	}
 
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+
 	/**
 	 * Establece el monto del préstamo.
 	 *
@@ -226,6 +233,12 @@ public abstract class Prestamo {
 		this.tipoPrestamo = tipoPrestamo;
 	}
 
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	
 	/**
 	 * Método abstracto para calcular el cuadro de amortización del préstamo.
 	 */
@@ -236,6 +249,9 @@ public abstract class Prestamo {
 	 */
 	public abstract void calcularCuotaMensual();
 
+	
+	
+	
 	/**
 	 * Representación en cadena del objeto Prestamo.
 	 *
@@ -245,7 +261,7 @@ public abstract class Prestamo {
 	public String toString() {
 		return "Prestamo [id=" + id + ", capital=" + capital + ", interes=" + interes + ", frecuenciaDePagoEnMeses="
 				+ frecuenciaDePagoEnMeses + ", plazoDeAmortizacionEnMeses=" + plazoDeAmortizacionEnMeses
-				+ ", tipoPrestamo=" + tipoPrestamo + ", usuarioId=" + usuarioId + "]";
+				+ ", tipoPrestamo=" + tipoPrestamo + ",fecha de creacion " + fechaCreacion + ", usuarioId=" + usuarioId + "]";
 	}
 
 }

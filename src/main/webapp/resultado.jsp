@@ -61,7 +61,7 @@
     <input type="submit" value="Guardar hipoteca">
 </form>
     <a href="AuthController?conf=0">Logout</a>
-
+	<a href="user-hipotecas.jsp">Ver mis hipotecas</a>
 </div>
 <%
     }

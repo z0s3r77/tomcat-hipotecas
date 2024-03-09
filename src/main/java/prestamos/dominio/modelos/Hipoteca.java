@@ -1,5 +1,7 @@
 package prestamos.dominio.modelos;
 
+import java.sql.Date;
+
 /**
  * Clase que representa una hipoteca, que es un tipo específico de préstamo, en la capa de dominio del sistema.
  * Extiende la clase abstracta Prestamo.
@@ -40,8 +42,8 @@ public class Hipoteca extends Prestamo {
 	 * @param tipoDePrestamo               El tipo de préstamo.
 	 * @param usuarioId                      El usuario asociado al préstamo.
 	 */
-	public Hipoteca(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoDePrestamo, int usuarioId) {
-		super(id, capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuarioId);
+	public Hipoteca(int id, double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnMeses, String tipoDePrestamo, int usuarioId, Date fechaCreacion) {
+		super(id, capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuarioId, fechaCreacion);
 	}
 
 	/**
