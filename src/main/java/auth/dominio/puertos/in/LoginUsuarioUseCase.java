@@ -15,5 +15,13 @@ public interface LoginUsuarioUseCase {
      * @return `true` si la autenticación fue exitosa, `false` en caso contrario.
      */
     Usuario authenticateUsuario(String email, String password);
+
+    /**
+     * Método para registrar un usuario.
+     * @param email El email del usuario a registrar.
+     * @param usuario El nombre de usuario del usuario a registrar.
+     * @param password La contraseña del usuario a registrar.
+     * @return `true` si el registro fue exitoso, `false` en caso contrario.
+     */
     boolean registerUsuario(String email, String usuario, String password);
 }

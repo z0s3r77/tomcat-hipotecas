@@ -11,7 +11,6 @@ import usuarios.dominio.modelos.Usuario;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Logger;
 
 @WebServlet(description = "Controlador para autenticar login", urlPatterns = { "/AuthController" })
 public class AuthController extends HttpServlet {

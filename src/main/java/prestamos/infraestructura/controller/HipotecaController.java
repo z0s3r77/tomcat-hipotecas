@@ -15,7 +15,7 @@ import prestamos.dominio.modelos.Prestamo;
 /**
  * Servlet implementation class PrestamoController
  */
-@WebServlet(description = "Controlador para calcular y obtener prestamos.", urlPatterns = { "/HipotecaController" })
+@WebServlet(description = "Controlador para calcular y obtener hipotecas.", urlPatterns = { "/HipotecaController" })
 public class HipotecaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	PrestamoService prestamoService;
