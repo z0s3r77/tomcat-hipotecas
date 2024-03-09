@@ -43,7 +43,7 @@ if (request.getSession() != null && user != null) {
 
 			<label for="plazoDeAmortizacionEnAnnos" class="form-label mt-2">Plazo de amortización en años:</label>
 			<input type="number" id="plazoDeAmortizacionEnAnnos" name="plazoDeAmortizacionEnAnnos" min="0" required class="form-control">
-			<input type="submit" name="action"  value="getHipoteca" class="btn btn-primary mt-3">
+			<input type="submit" name="action"  value="Calcular hipoteca" class="btn btn-primary mt-3">
 		</form>
 	</div>
 	<br>

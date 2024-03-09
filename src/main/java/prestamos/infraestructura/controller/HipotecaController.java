@@ -38,11 +38,11 @@ public class HipotecaController extends HttpServlet {
 		String action = req.getParameter("action");
 
 		switch (action) {
-			case "getHipoteca":
+			case "Calcular hipoteca":
 				makeHipoteca(req, resp);
 				break;
 
-			case "saveHipoteca":
+			case "Guardar hipoteca":
 				System.out.println(req.getParameter("usuarioId") + " Action");
 				saveHipoteca(req, resp);
 				break;

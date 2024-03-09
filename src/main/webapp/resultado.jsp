@@ -54,7 +54,7 @@
     <input type="hidden" name="frecuenciaDePagoEnMeses" value="<%= hipoteca.getFrecuenciaDePagoEnMeses() %>">
     <input type="hidden" name="plazoDeAmortizacionEnAnnos" value="<%= hipoteca.getPlazoDeAmortizacionEnMeses() %>">
     <input type="hidden" name="usuarioId" value="<%= hipoteca.getUsuarioId() %>">
-    <input type="submit" name="action" value="saveHipoteca">
+    <input type="submit" name="action" value="Guardar hipoteca">
 </form>
     <a href="AuthController?conf=0">Logout</a>
 

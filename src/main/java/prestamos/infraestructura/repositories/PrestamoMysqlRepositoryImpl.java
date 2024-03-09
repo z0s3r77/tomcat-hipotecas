@@ -42,14 +42,12 @@ public class PrestamoMysqlRepositoryImpl {
 	 */
 	public PrestamoEntity guardarPrestamo(PrestamoEntity prestamo) {
 
-		checkCon();
 
 		
 		PrestamoEntity prestamoEntity = null;
 
 		try {
 
-			System.out.println("DDeeeeeeeeeeep");
 
 			String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario_id) "
 					+ "VALUES (?, ?, ?, ?, ?, (SELECT id FROM usuarios WHERE email = ?))";
@@ -177,9 +175,9 @@ public class PrestamoMysqlRepositoryImpl {
 	}
 	
 	public void checkCon () {
-	    if (con == null) {
+	    
 	    	this.con =  MysqlDatabaseConnector.getConnection();
-	    }
+	    
 	}
 
 }

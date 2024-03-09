@@ -23,7 +23,7 @@
     <% if (prestamos != null) { %>
         <ul>
             <% for (Prestamo prestamo : prestamos) { %>
-                <li><%= prestamo.toString() %></li>
+                <li><%= prestamo.toString() %></li><a href=""></a>
             <% } %>
         </ul>
     <%
