@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import databaseConnectors.H2DatabaseConnector;
 import databaseConnectors.MysqlDatabaseConnector;
 import usuarios.infraestructura.entities.UsuarioEntity;
 
@@ -45,7 +44,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 		    pstmt.setString(1, usuario.getNombre());
 		    pstmt.setString(2, usuario.getEmail());
-		    pstmt.setString(3, usuario.getContraseña());
+		    pstmt.setString(3, usuario.getPassword());
 
 		    int affectedRows = pstmt.executeUpdate();
 
@@ -60,7 +59,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 		            usuarioGuardado.setId(usuarioId);
 		            usuarioGuardado.setEmail(usuario.getEmail());
 		            usuarioGuardado.setNombre(usuario.getNombre());
-		            usuarioGuardado.setContraseña(usuario.getContraseña());
+		            usuarioGuardado.setPassword(usuario.getPassword());
 		        }
 		    }
 		} catch (SQLException e) {
@@ -88,7 +87,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 				usuario.setId(rs.getInt("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNombre(rs.getString("nombre"));
-				usuario.setContraseña(rs.getString("contraseña"));
+				usuario.setPassword(rs.getString("contraseña"));
 				return Optional.of(usuario);
 			}
 		} catch (SQLException e) {
@@ -118,7 +117,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 				usuario.setId(rs.getInt("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNombre(rs.getString("nombre"));
-				usuario.setContraseña(rs.getString("contraseña"));
+				usuario.setPassword(rs.getString("contraseña"));
 				usuarios.add(usuario);
 			}
 
@@ -142,7 +141,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 			pstmt.setString(1, usuario.getEmail());
 			pstmt.setString(2, usuario.getNombre());
-			pstmt.setString(3, usuario.getContraseña());
+			pstmt.setString(3, usuario.getPassword());
 			pstmt.setInt(4, usuario.getId());
 
 			int affectedRows = pstmt.executeUpdate();
@@ -222,7 +221,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 				usuario.setId(rs.getInt("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNombre(rs.getString("nombre"));
-				usuario.setContraseña(rs.getString("contraseña"));
+				usuario.setPassword(rs.getString("contraseña"));
 				return Optional.of(usuario);
 			}
 		} catch (SQLException e) {

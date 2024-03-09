@@ -49,13 +49,13 @@ class UsuarioTest {
 
     @Test
     void testGetContraseña() {
-        assertEquals("password", usuario.getContraseña());
+        assertEquals("password", usuario.getPassword());
     }
 
     @Test
     void testSetContraseña() {
-        usuario.setContraseña("newPassword");
-        assertEquals("newPassword", usuario.getContraseña());
+        usuario.setPassword("newPassword");
+        assertEquals("newPassword", usuario.getPassword());
     }
 
     @Test

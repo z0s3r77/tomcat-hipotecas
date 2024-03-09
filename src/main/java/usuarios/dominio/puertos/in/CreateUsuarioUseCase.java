@@ -14,7 +14,14 @@ public interface CreateUsuarioUseCase {
 	 * @return Usuario creado.
 	 */
 	Usuario createUsuario(Usuario usuario);
-	
+
+	/**
+	 * Crea un nuevo usuario con los parámetros proporcionados.
+	 * @param correo El correo del usuario.
+	 * @param usuario El nombre de usuario.
+	 * @param password La contraseña del usuario.
+	 * @return Un objeto de usuario con los detalles proporcionados.
+	 */
 	Usuario createUsuario(String correo, String usuario, String password);
 
 }

@@ -12,7 +12,7 @@ import usuarios.dominio.modelos.Usuario;
 public class UsuarioEntity {
 
 	private int id;
-	private String contraseña;
+	private String password;
 	private String email;
 	private String nombre;
 	private List<Prestamo> prestamos;
@@ -28,14 +28,14 @@ public class UsuarioEntity {
 	/**
 	 * Constructor de la entidad de usuario.
 	 * @param id Identificador del usuario.
-	 * @param contraseña Contraseña del usuario.
+	 * @param password Contraseña del usuario.
 	 * @param email Correo electrónico del usuario.
 	 * @param nombre Nombre del usuario.
 	 * @param prestamos Lista de préstamos del usuario.
 	 */
-	public UsuarioEntity(int id, String contraseña, String email, String nombre, List<Prestamo> prestamos) {
+	public UsuarioEntity(int id, String password, String email, String nombre, List<Prestamo> prestamos) {
 		this.id = id;
-		this.contraseña = contraseña;
+		this.password = password;
 		this.email = email;
 		this.nombre = nombre;
 		this.prestamos = prestamos;
@@ -47,7 +47,7 @@ public class UsuarioEntity {
 	 * @return Entidad de usuario.
 	 */
 	public static UsuarioEntity fromDomainModel(Usuario usuario) {
-		return new UsuarioEntity(usuario.getId(), usuario.getContraseña(),
+		return new UsuarioEntity(usuario.getId(), usuario.getPassword(),
 				usuario.getEmail(), usuario.getNombre(), usuario.getPrestamos());
 	}
 
@@ -56,7 +56,7 @@ public class UsuarioEntity {
 	 * @return Modelo de dominio de usuario.
 	 */
 	public Usuario toDomainModel() {
-		return new Usuario(this.id, this.email, this.nombre, this.contraseña, this.prestamos);
+		return new Usuario(this.id, this.email, this.nombre, this.password, this.prestamos);
 	}
 	
 
@@ -68,12 +68,12 @@ public class UsuarioEntity {
 		this.id = id;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {

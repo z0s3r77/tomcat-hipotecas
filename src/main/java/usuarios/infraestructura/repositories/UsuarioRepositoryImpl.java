@@ -48,8 +48,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	@Override
 	public Usuario save(Usuario usuario) {
 
-		Usuario usuarioRegistrado = (Usuario) usuario;
-		UsuarioEntity usuarioEntity = UsuarioEntity.fromDomainModel(usuarioRegistrado);
+        UsuarioEntity usuarioEntity = UsuarioEntity.fromDomainModel(usuario);
 		UsuarioEntity usuarioSaved =  usuarioMysqlRepositoryImpl.save(usuarioEntity);
 
 		return usuarioSaved.toDomainModel();
@@ -72,11 +71,9 @@ public class UsuarioRepositoryImpl implements UsuarioRepositoryPort {
 	@Override
 	public Optional<Usuario> update(Usuario usuario) {
 
-		Usuario usuarioRegistrado = (Usuario) usuario;
-
-		if(usuarioMysqlRepositoryImpl.existsById(usuarioRegistrado.getId())) {
+        if(usuarioMysqlRepositoryImpl.existsById(((Usuario) usuario).getId())) {
 			
-			UsuarioEntity usuarioEntity = UsuarioEntity.fromDomainModel(usuarioRegistrado);
+			UsuarioEntity usuarioEntity = UsuarioEntity.fromDomainModel(usuario);
 			UsuarioEntity usuarioUpdated =  usuarioMysqlRepositoryImpl.save(usuarioEntity);
 			return Optional.of(usuarioUpdated.toDomainModel());
 			

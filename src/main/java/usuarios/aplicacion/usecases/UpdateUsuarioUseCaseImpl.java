@@ -1,6 +1,7 @@
 package usuarios.aplicacion.usecases;
 
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import usuarios.dominio.modelos.Usuario;
@@ -23,9 +24,9 @@ public class UpdateUsuarioUseCaseImpl implements UpdateUsuarioUseCase {
 
 		Optional<Usuario> updatedUsuario = usuarioRepositoryPort.update(usuarioActualizado);
 		if (updatedUsuario.isPresent()) {
-			LOGGER.info("Usuario updated with id: " + id);
+			LOGGER.log(Level.INFO, "Usuario updated with id: " + id);
 		} else {
-			LOGGER.warning("Failed to update usuario with id: " + id);
+			LOGGER.log(Level.INFO,"Failed to update usuario with id: " + id);
 		}
 		return updatedUsuario;
 	}

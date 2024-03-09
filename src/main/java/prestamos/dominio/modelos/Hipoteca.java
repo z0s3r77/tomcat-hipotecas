@@ -54,8 +54,8 @@ public class Hipoteca extends Prestamo {
 	 */
 	@Override
 	public void calcularCuadroAmortizacion() {
-		calcularCuotaMensual();
 
+		this.calcularCuotaMensual();
 		this.cuadroDeAmortizacion.clear();
 
 		double tasaInteresMensual = interes / 100 / 12;
@@ -64,12 +64,11 @@ public class Hipoteca extends Prestamo {
 		double saldoPendiente = capital;
 
 		for (int numeroDePago = 1; numeroDePago <= cuotasTotales; numeroDePago++) {
+
 			double interesesPendientes = saldoPendiente * tasaInteresMensual;
 			double amortizacion = this.cuotaMensual - interesesPendientes;
 
-			// Añadir el registro al cuadro de amortización
-			cuadroDeAmortizacion.add(new RegistroAmortizacion(numeroDePago, saldoPendiente, amortizacion, interesesPendientes, this.cuotaMensual));
-
+			this.cuadroDeAmortizacion.add(new RegistroAmortizacion(numeroDePago, saldoPendiente, amortizacion, interesesPendientes, this.cuotaMensual));
 			saldoPendiente -= amortizacion;
 		}
 	}

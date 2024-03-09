@@ -2,6 +2,7 @@ package usuarios.aplicacion.usecases;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import usuarios.dominio.modelos.Usuario;
@@ -18,17 +19,15 @@ public class RetriveUsuarioUseCaseImpl implements RetriveUsuarioUseCase {
 	public RetriveUsuarioUseCaseImpl() {
 		this.usuarioRepositoryPort = UsuarioRepositoryImpl.getInstance();
 	}
-	
-
 
 	@Override
 	public Optional<Usuario> getUsuarioById(int id) {
 
 		Optional<Usuario> usuario = usuarioRepositoryPort.findById(id);
 		if (usuario.isPresent()) {
-			LOGGER.info("Usuario retrieved with id: " + id);
+			LOGGER.log(Level.INFO, "Usuario retrieved with id: " + id);
 		} else {
-			LOGGER.warning("Failed to retrieve usuario with id: " + id);
+			LOGGER.log(Level.SEVERE,"Failed to retrieve usuario with id: " + id);
 		}
 		return usuario;
 	}
@@ -37,7 +36,7 @@ public class RetriveUsuarioUseCaseImpl implements RetriveUsuarioUseCase {
 	public List<Usuario> getAllUsuario() {
 
 		List<Usuario> usuarios = usuarioRepositoryPort.findAll();
-		LOGGER.info("Retrieved " + usuarios.size() + " usuarios");
+		LOGGER.log(Level.INFO, "Retrieved " + usuarios.size() + " usuarios");
 		return usuarios;
 	}
 
@@ -46,11 +45,10 @@ public class RetriveUsuarioUseCaseImpl implements RetriveUsuarioUseCase {
 
 		Optional<Usuario> usuario = usuarioRepositoryPort.findByEmail(email);
 		if (usuario.isPresent()) {
-			LOGGER.info("Usuario retrieved with email: " + email);
+			LOGGER.log(Level.INFO, "Usuario retrieved with email: " + email);
 		} else {
-			LOGGER.warning("Failed to retrieve usuario with email: " + email);
+			LOGGER.log(Level.SEVERE,"Failed to retrieve usuario with email: " + email);
 		}
 		return usuario;
 	}
-
 }

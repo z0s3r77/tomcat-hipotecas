@@ -44,92 +44,34 @@ public class RegistroAmortizacion {
         this.cuota = cuota;
     }
 
-    /**
-     * Obtiene el número de pago.
-     *
-     * @return El número de pago.
-     */
+
     public int getNumeroDePago() {
         return numeroDePago;
     }
-
-    /**
-     * Establece el número de pago.
-     *
-     * @param numeroDePago El número de pago.
-     */
     public void setNumeroDePago(int numeroDePago) {
         this.numeroDePago = numeroDePago;
     }
-
-    /**
-     * Obtiene la cantidad pendiente.
-     *
-     * @return La cantidad pendiente.
-     */
     public double getCantidadPendiente() {
         return cantidadPendiente;
     }
-
-    /**
-     * Establece la cantidad pendiente.
-     *
-     * @param cantidadPendiente La cantidad pendiente.
-     */
     public void setCantidadPendiente(double cantidadPendiente) {
         this.cantidadPendiente = cantidadPendiente;
     }
-
-    /**
-     * Obtiene la cantidad amortizada.
-     *
-     * @return La cantidad amortizada.
-     */
     public double getCantidadAmortizada() {
         return cantidadAmortizada;
     }
-
-    /**
-     * Establece la cantidad amortizada.
-     *
-     * @param cantidadAmortizada La cantidad amortizada.
-     */
     public void setCantidadAmortizada(double cantidadAmortizada) {
         this.cantidadAmortizada = cantidadAmortizada;
     }
-
-    /**
-     * Obtiene los intereses.
-     *
-     * @return Los intereses.
-     */
     public double getIntereses() {
         return intereses;
     }
-
-    /**
-     * Establece los intereses.
-     *
-     * @param intereses Los intereses.
-     */
     public void setIntereses(double intereses) {
         this.intereses = intereses;
     }
-
-    /**
-     * Obtiene la cuota.
-     *
-     * @return La cuota.
-     */
     public double getCuota() {
         return cuota;
     }
-
-    /**
-     * Establece la cuota.
-     *
-     * @param cuota La cuota.
-     */
     public void setCuota(double cuota) {
         this.cuota = cuota;
     }

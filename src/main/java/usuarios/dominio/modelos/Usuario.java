@@ -11,7 +11,7 @@ import prestamos.dominio.modelos.Prestamo;
 public class Usuario  {
 
 	private int id;
-	private String contraseña;
+	private String password;
 	private String email;
 	private String nombre;
 	private List<Prestamo> prestamos;
@@ -42,13 +42,13 @@ public class Usuario  {
 	 * Constructor de un usuario con un correo electrónico, nombre, contraseña y lista de préstamos.
 	 * @param email Correo electrónico del usuario.
 	 * @param nombre Nombre del usuario.
-	 * @param contraseña Contraseña del usuario.
+	 * @param password Contraseña del usuario.
 	 * @param prestamos Lista de préstamos del usuario.
 	 */
-	public Usuario(String email, String nombre, String contraseña,
+	public Usuario(String email, String nombre, String password,
 				   List<Prestamo> prestamos) {
 
-		this.contraseña = contraseña;
+		this.password = password;
 		this.email = email;
 		this.nombre = nombre;
 		this.prestamos = prestamos;
@@ -59,14 +59,14 @@ public class Usuario  {
 	 * @param id Identificador del usuario.
 	 * @param email Correo electrónico del usuario.
 	 * @param nombre Nombre del usuario.
-	 * @param contraseña Contraseña del usuario.
+	 * @param password Contraseña del usuario.
 	 * @param prestamos Lista de préstamos del usuario.
 	 */
-	public Usuario(int id, String email, String nombre, String contraseña,
+	public Usuario(int id, String email, String nombre, String password,
 				   List<Prestamo> prestamos) {
 
 		this.id = id;
-		this.contraseña = contraseña;
+		this.password = password;
 		this.email = email;
 		this.nombre = nombre;
 		this.prestamos = prestamos;
@@ -97,12 +97,12 @@ public class Usuario  {
 		this.prestamos = prestamos;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public int getId() {
@@ -115,11 +115,8 @@ public class Usuario  {
 
 	@Override
 	public String toString() {
-		return "Usuario [ id=" + id + ", contraseña=" + contraseña + ", email=" + email
+		return "Usuario [ id=" + id + ", contraseña=" + password + ", email=" + email
 				+ ", nombre=" + nombre + ", prestamos=" + prestamos + "]";
 	}
-	
-	
-	
-	
+
 }

@@ -22,14 +22,14 @@ class UsuarioEntityTest {
         UsuarioEntity usuarioEntity = new UsuarioEntity();
 
         usuarioEntity.setId(1);
-        usuarioEntity.setContraseña("password");
+        usuarioEntity.setPassword("password");
         usuarioEntity.setEmail("test@test.com");
         usuarioEntity.setNombre("Test");
         List<Prestamo> prestamos = new ArrayList<>();
         usuarioEntity.setPrestamos(prestamos);
 
         assertEquals(1, usuarioEntity.getId());
-        assertEquals("password", usuarioEntity.getContraseña());
+        assertEquals("password", usuarioEntity.getPassword());
         assertEquals("test@test.com", usuarioEntity.getEmail());
         assertEquals("Test", usuarioEntity.getNombre());
         assertEquals(prestamos, usuarioEntity.getPrestamos());
@@ -43,7 +43,7 @@ class UsuarioEntityTest {
         assertEquals(usuario.getId(), usuarioEntity.getId());
         assertEquals(usuario.getEmail(), usuarioEntity.getEmail());
         assertEquals(usuario.getNombre(), usuarioEntity.getNombre());
-        assertEquals(usuario.getContraseña(), usuarioEntity.getContraseña());
+        assertEquals(usuario.getPassword(), usuarioEntity.getPassword());
         assertEquals(usuario.getPrestamos(), usuarioEntity.getPrestamos());
     }
 
@@ -56,7 +56,7 @@ class UsuarioEntityTest {
         assertEquals(usuarioEntity.getId(), usuario.getId());
         assertEquals(usuarioEntity.getEmail(), usuario.getEmail());
         assertEquals(usuarioEntity.getNombre(), usuario.getNombre());
-        assertEquals(usuarioEntity.getContraseña(), usuario.getContraseña());
+        assertEquals(usuarioEntity.getPassword(), usuario.getPassword());
         assertEquals(usuarioEntity.getPrestamos(), usuario.getPrestamos());
     }
 }

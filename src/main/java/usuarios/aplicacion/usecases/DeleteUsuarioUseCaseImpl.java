@@ -4,6 +4,7 @@ import usuarios.dominio.puertos.in.DeleteUsuarioUseCase;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DeleteUsuarioUseCaseImpl implements DeleteUsuarioUseCase {
@@ -21,9 +22,9 @@ public class DeleteUsuarioUseCaseImpl implements DeleteUsuarioUseCase {
 
 		boolean isDeleted = usuarioRepositoryPort.deleteById(id);
 		if (isDeleted) {
-			LOGGER.info("Usuario deleted with id: " + id);
+			LOGGER.log(Level.INFO,"Usuario deleted with id: " + id);
 		} else {
-			LOGGER.warning("Failed to delete usuario with id: " + id);
+			LOGGER.log(Level.SEVERE,"Failed to delete usuario with id: " + id);
 		}
 		return isDeleted;
 	}

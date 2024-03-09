@@ -5,6 +5,7 @@ import usuarios.dominio.puertos.in.CreateUsuarioUseCase;
 import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 import usuarios.infraestructura.repositories.UsuarioRepositoryImpl;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CreateUsuarioUseCaseImpl implements CreateUsuarioUseCase {
@@ -22,9 +23,9 @@ public class CreateUsuarioUseCaseImpl implements CreateUsuarioUseCase {
 	public Usuario createUsuario(Usuario usuario) {
 		Usuario savedUsuario = usuarioRepositoryPort.save(usuario);
 		if (savedUsuario == null) {
-			LOGGER.warning("Error creating Usuario " + usuario);
+			LOGGER.log(Level.SEVERE,"Error creating Usuario " + usuario);
 		}else {
-			LOGGER.info("Usuario created with id: " + savedUsuario.getId());
+			LOGGER.log(Level.INFO, "Usuario created with id: " + savedUsuario.getId());
 		}
 		return savedUsuario;
 	}
@@ -35,9 +36,9 @@ public class CreateUsuarioUseCaseImpl implements CreateUsuarioUseCase {
 		Usuario newUsuario = new Usuario(correo, usuario, password, null);
 		Usuario savedUsuario = usuarioRepositoryPort.save(newUsuario);
 		if (savedUsuario == null) {
-			LOGGER.warning("Error creating Usuario " + usuario);
+			LOGGER.log(Level.SEVERE, "Error creating Usuario " + usuario);
 		}else {
-			LOGGER.info("Usuario created with id: " + savedUsuario.getId());
+			LOGGER.log(Level.INFO, "Usuario created with id: " + savedUsuario.getId());
 		}
 		
 		return savedUsuario;

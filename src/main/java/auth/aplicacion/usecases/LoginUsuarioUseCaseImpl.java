@@ -5,6 +5,7 @@ import usuarios.aplicacion.services.UsuarioService;
 import usuarios.dominio.modelos.Usuario;
 
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LoginUsuarioUseCaseImpl implements LoginUsuarioUseCase {
@@ -23,15 +24,13 @@ public class LoginUsuarioUseCaseImpl implements LoginUsuarioUseCase {
         Optional<Usuario> usuario = this.usuarioService.getUsuarioByEmail(email);
         		
         if (usuario.isPresent()) {
-        	if (usuario.get().getContraseña().equals(password)) {
-                LOGGER.info("Login successful for user: " + email);
+        	if (usuario.get().getPassword().equals(password)) {
+                LOGGER.log(Level.INFO, "Login successful for user: " + email);
                 return usuario.get();
         	}
         }
         
-        LOGGER.warning("Login failed for user: " + email);
-
-       
+        LOGGER.log(Level.SEVERE, "Login failed for user: " + email);
         return null;
     }
 
@@ -41,9 +40,11 @@ public class LoginUsuarioUseCaseImpl implements LoginUsuarioUseCase {
 		var newUsuario = this.usuarioService.createUsuario(email,usuario, password);
 	
 		if(newUsuario == null) {
+			LOGGER.log(Level.SEVERE, "Error creating user - Email: " + email + ", Usuario: " + usuario + ", Password: " + password);
 			return false;
 		}
 		
+		LOGGER.log(Level.INFO, "User created - Email: " + email + ", Usuario: " + usuario + ", Password: " + password);
 		return true;
 	}
 }
