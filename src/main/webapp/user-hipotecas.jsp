@@ -28,6 +28,14 @@
 						<input type="hidden" name="prestamoId" value="<%=prestamo.getId()%>">
 						<input type="submit" name="action" value="Borrar hipoteca">
 					</form>
+					<form action="HipotecaController" method="post">
+						<input type="hidden" name="prestamoId" value="<%=prestamo.getId()%>">
+						<input type="hidden" name="capital" value="<%=prestamo.getCapital()%>">
+						<input type="hidden" name="interes" value="<%=prestamo.getInteres()%>">
+						<input type="hidden" name="frecuenciaDePagoEnMeses" value="<%= prestamo.getFrecuenciaDePagoEnMeses()%>">
+						<input type="hidden" name="plazoDeAmortizacionEnAnnos" value="<%= prestamo.getPlazoDeAmortizacionEnMeses()%>">
+						<input type="submit" name="action" value="Recalcular hipoteca">
+					</form>
             <% } %>
         </ul>
     <%

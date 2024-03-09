@@ -50,10 +50,37 @@ public class HipotecaController extends HttpServlet {
 				System.out.println(req.getParameter("usuarioId") + " Action");
 				deleteHipoteca(req, resp);
 				break;
+				
+			case "Recalcular hipoteca":
+				System.out.println(req.getParameter("usuarioId") + " Action");
+				recalculateHipoteca(req, resp);
+				break;
 			default:
 				resp.sendRedirect("error.jsp");
 
 		}
+	}
+	
+	private void recalculateHipoteca(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		
+		int prestamoId = Integer.parseInt(req.getParameter("prestamoId"));
+		double capital = Double.parseDouble(req.getParameter("capital"));
+		double interes = Double.parseDouble(req.getParameter("interes"));
+		int frecuenciaDePagoEnMeses = Integer.parseInt(req.getParameter("frecuenciaDePagoEnMeses"));
+		int plazoDeAmortizacionEnAnnos = Integer.parseInt(req.getParameter("plazoDeAmortizacionEnAnnos"));
+
+		plazoDeAmortizacionEnAnnos = plazoDeAmortizacionEnAnnos * 12;
+
+		int usuarioId = (req.getSession().getAttribute("usuarioId") != null) ? (Integer) req.getSession().getAttribute("usuarioId") : 0;
+
+		Prestamo hipoteca = prestamoService.makeHipoteca(capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnAnnos, usuarioId);
+		prestamoService.calculatePrestamo(hipoteca);
+
+		req.setAttribute("hipoteca", hipoteca);
+		req.getRequestDispatcher("resultado-hipotecas.jsp").forward(req, resp);
+		
+		
+		
 	}
 	
 	private void deleteHipoteca(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
