@@ -43,7 +43,7 @@ public class HipotecaController extends HttpServlet {
 				break;
 
 			case "Guardar hipoteca":
-				System.out.println(req.getParameter("usuarioId") + " Action");
+				System.out.println("Guardar hipoteca usuario: " + req.getParameter("usuarioId"));
 				saveHipoteca(req, resp);
 				break;
 			case "Borrar hipoteca":

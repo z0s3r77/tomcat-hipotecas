@@ -243,7 +243,7 @@ public abstract class Prestamo {
 	 */
 	@Override
 	public String toString() {
-		return "Prestamo [capital=" + capital + ", interes=" + interes + ", frecuenciaDePagoEnMeses="
+		return "Prestamo [id=" + id + ", capital=" + capital + ", interes=" + interes + ", frecuenciaDePagoEnMeses="
 				+ frecuenciaDePagoEnMeses + ", plazoDeAmortizacionEnMeses=" + plazoDeAmortizacionEnMeses
 				+ ", tipoPrestamo=" + tipoPrestamo + ", usuarioId=" + usuarioId + "]";
 	}

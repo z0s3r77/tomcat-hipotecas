@@ -50,8 +50,9 @@ public class PrestamoMysqlRepositoryImpl {
 
 
 			String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, usuario_id) "
-					+ "VALUES (?, ?, ?, ?, ?, (SELECT id FROM usuarios WHERE email = ?))";
+					+ "VALUES (?, ?, ?, ?, ?, ?)";
 
+			System.out.println(prestamo);
 
 			checkCon();
 			PreparedStatement pstmt = con.prepareStatement(insertPrestamoSQL, Statement.RETURN_GENERATED_KEYS);
@@ -89,6 +90,7 @@ public class PrestamoMysqlRepositoryImpl {
 
 			System.out.println("Error al guardar el prestamo: " + e.getMessage());
 		}
+		
 
 		return prestamoEntity;
 	}
@@ -150,6 +152,7 @@ public class PrestamoMysqlRepositoryImpl {
 	        try (ResultSet resultSet = obtenerPrestamosStmt.executeQuery()) {
 	            while (resultSet.next()) {
 	                Prestamo prestamo = new Hipoteca();
+	                prestamo.setId(resultSet.getInt("id"));
 	                prestamo.setCapital(resultSet.getDouble("capital"));
 	                prestamo.setInteres(resultSet.getDouble("interes"));
 	                prestamo.setFrecuenciaDePagoEnMeses(resultSet.getInt("frecuenciaDePagoEnMeses"));

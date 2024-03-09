@@ -10,13 +10,17 @@
         System.out.println("No hay usuario logueado");
     }
     String usuarioLogueado;
+    int userId;
 
     if (request.getSession() != null && user != null) {
         System.out.println("Usuario logueado: " + user);
         usuarioLogueado = user;
+        userId = (int) request.getSession().getAttribute("usuarioId");
     } else {
         usuarioLogueado = "Anónimo";
+        userId = 0;
     }
+
 %>
 <h1>Resultados</h1>
 <p>Cuota mensual: <%= hipoteca.getCuotaMensual() %></p>
@@ -48,13 +52,13 @@
 %>
 <div>
 <form action="HipotecaController" method="post">
-    <input type="hidden" name="action" value="saveHipoteca">
+    <input type="hidden" name="action" value="Guardar hipoteca">
     <input type="hidden" name="capital" value="<%= hipoteca.getCapital() %>">
     <input type="hidden" name="interes" value="<%= hipoteca.getInteres() %>">
     <input type="hidden" name="frecuenciaDePagoEnMeses" value="<%= hipoteca.getFrecuenciaDePagoEnMeses() %>">
     <input type="hidden" name="plazoDeAmortizacionEnAnnos" value="<%= hipoteca.getPlazoDeAmortizacionEnMeses() %>">
-    <input type="hidden" name="usuarioId" value="<%= hipoteca.getUsuarioId() %>">
-    <input type="submit" name="action" value="Guardar hipoteca">
+    <input type="hidden" name="usuarioId" value="<%= userId %>">
+    <input type="submit" value="Guardar hipoteca">
 </form>
     <a href="AuthController?conf=0">Logout</a>
 
