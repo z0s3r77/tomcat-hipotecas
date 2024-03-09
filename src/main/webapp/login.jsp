@@ -3,8 +3,6 @@
 
     String sUsuario = (String) request.getSession().getAttribute("sUsuario");
 
-
-
 %>
 <html>
 <head>
@@ -18,6 +16,6 @@
         <button type="submit" name="action" value="login">Login</button>
     </form>
     
-    <a href="index.jsp">Inicio</a> 
+    <a href="index-hipotecas.jsp">Inicio</a>
 </body>
 </html>

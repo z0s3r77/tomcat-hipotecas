@@ -245,7 +245,7 @@ public abstract class Prestamo {
 	public String toString() {
 		return "Prestamo [capital=" + capital + ", interes=" + interes + ", frecuenciaDePagoEnMeses="
 				+ frecuenciaDePagoEnMeses + ", plazoDeAmortizacionEnMeses=" + plazoDeAmortizacionEnMeses
-				+ ", tipoPrestamo=" + tipoPrestamo + "]";
+				+ ", tipoPrestamo=" + tipoPrestamo + ", usuarioId=" + usuarioId + "]";
 	}
 
 }

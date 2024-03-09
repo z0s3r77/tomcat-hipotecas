@@ -2,6 +2,21 @@
 <%@ page import="prestamos.dominio.modelos.RegistroAmortizacion" %>
 <%
     Hipoteca hipoteca = (Hipoteca) request.getAttribute("hipoteca");
+	System.out.println(hipoteca);
+
+
+    String user = (String) request.getSession().getAttribute("usuario");
+    if (request.getSession() == null || user == null) {
+        System.out.println("No hay usuario logueado");
+    }
+    String usuarioLogueado;
+
+    if (request.getSession() != null && user != null) {
+        System.out.println("Usuario logueado: " + user);
+        usuarioLogueado = user;
+    } else {
+        usuarioLogueado = "Anónimo";
+    }
 %>
 <h1>Resultados</h1>
 <p>Cuota mensual: <%= hipoteca.getCuotaMensual() %></p>
@@ -24,3 +39,26 @@
     </tr>
     <% } %>
 </table>
+<%
+    if (usuarioLogueado.equals("Anónimo")) {
+%>
+<a href="login.jsp">Login</a>
+<%
+} else {
+%>
+<div>
+<form action="HipotecaController" method="post">
+    <input type="hidden" name="action" value="saveHipoteca">
+    <input type="hidden" name="capital" value="<%= hipoteca.getCapital() %>">
+    <input type="hidden" name="interes" value="<%= hipoteca.getInteres() %>">
+    <input type="hidden" name="frecuenciaDePagoEnMeses" value="<%= hipoteca.getFrecuenciaDePagoEnMeses() %>">
+    <input type="hidden" name="plazoDeAmortizacionEnAnnos" value="<%= hipoteca.getPlazoDeAmortizacionEnMeses() %>">
+    <input type="hidden" name="usuarioId" value="<%= hipoteca.getUsuarioId() %>">
+    <input type="submit" name="action" value="saveHipoteca">
+</form>
+    <a href="AuthController?conf=0">Logout</a>
+
+</div>
+<%
+    }
+%>

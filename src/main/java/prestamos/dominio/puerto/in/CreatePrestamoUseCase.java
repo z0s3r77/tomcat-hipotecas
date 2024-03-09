@@ -19,4 +19,16 @@ public interface CreatePrestamoUseCase {
      */
     Prestamo createPrestamo(Prestamo prestamo);
 
+    /**
+     * Crea un nuevo préstamo con los parámetros proporcionados.
+     *
+     * @param capital El capital inicial del préstamo.
+     * @param interes La tasa de interés anual del préstamo.
+     * @param frecuenciaDePagoEnMeses La frecuencia de pago en meses del préstamo.
+     * @param plazoDeAmortizacionEnAnnos El plazo de amortización en años del préstamo.
+     * @param usuarioId El identificador del usuario que solicita el préstamo.
+     * @return Un objeto de préstamo con los detalles proporcionados.
+     */
+    Prestamo makeHipoteca(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos, int usuarioId);
+
 }

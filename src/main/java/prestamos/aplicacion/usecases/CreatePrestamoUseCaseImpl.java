@@ -1,5 +1,6 @@
 package prestamos.aplicacion.usecases;
 
+import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
 import prestamos.dominio.puerto.in.CreatePrestamoUseCase;
 import prestamos.dominio.puerto.out.PrestamoRepositoryPort;
@@ -23,5 +24,9 @@ public class CreatePrestamoUseCaseImpl implements CreatePrestamoUseCase {
         Prestamo savedPrestamo = prestamoRepositoryPort.save(prestamo);
         LOGGER.info("Prestamo created with id: " + savedPrestamo.getId());
         return savedPrestamo;
+    }
+    @Override
+    public Prestamo makeHipoteca(double capital, double interes, int frecuenciaDePagoEnMeses, int plazoDeAmortizacionEnAnnos, int usuarioId) {
+        return new Hipoteca(capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnAnnos, usuarioId);
     }
 }

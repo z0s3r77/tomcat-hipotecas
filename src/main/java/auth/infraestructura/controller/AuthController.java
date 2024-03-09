@@ -50,7 +50,7 @@ public class AuthController extends HttpServlet {
 
             sesion.removeAttribute("usuario");
             sesion.invalidate();
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("index-hipotecas.jsp");
         }
     }
 
@@ -66,9 +66,10 @@ public class AuthController extends HttpServlet {
         boolean autenticado = authService.authenticateUsuario(usuario, password);
 
         if (autenticado) {
+        	sesion.setAttribute("usuarioId", 1);
             sesion.setAttribute("usuario", usuario);
             System.out.println(usuario + " " + password + " " + autenticado);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("index-hipotecas.jsp");
         } else {
             response.sendRedirect("error.jsp");
         }

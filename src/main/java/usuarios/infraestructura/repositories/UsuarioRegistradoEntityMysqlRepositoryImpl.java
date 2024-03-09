@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import databaseConnectors.H2DatabaseConnector;
 import databaseConnectors.MysqlDatabaseConnector;
 import usuarios.infraestructura.entities.UsuarioEntity;
 
@@ -18,7 +19,7 @@ import usuarios.infraestructura.entities.UsuarioEntity;
  */
 public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
-	static Connection con = MysqlDatabaseConnector.getConnection();
+	static Connection con = H2DatabaseConnector.getConnection();
 
 	/**
 	 * Constructor del repositorio de usuarios registrados.
