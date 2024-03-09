@@ -22,6 +22,8 @@ import java.util.List;
  */
 public class PrestamoService implements CreatePrestamoUseCase, DeletePrestamoUseCase, RetrivePrestamosUseCase {
 
+    private static PrestamoService instance = null;
+
     private final CreatePrestamoUseCase createPrestamoUseCase;
     private final DeletePrestamoUseCase deletePrestamoUseCase;
     private final RetrivePrestamosUseCase retrivePrestamosUseCase;
@@ -35,6 +37,13 @@ public class PrestamoService implements CreatePrestamoUseCase, DeletePrestamoUse
         this.createPrestamoUseCase = new CreatePrestamoUseCaseImpl();
         this.deletePrestamoUseCase = new DeletePrestamoUseCaseImpl();
         this.retrivePrestamosUseCase = new RetrivePrestamoUseCaseImpl();
+    }
+
+    public static PrestamoService getInstance() {
+        if (instance == null) {
+            instance = new PrestamoService();
+        }
+        return instance;
     }
 
     @Override

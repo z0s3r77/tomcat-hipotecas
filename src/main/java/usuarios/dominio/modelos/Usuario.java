@@ -6,11 +6,10 @@ import prestamos.dominio.modelos.Prestamo;
 
 /**
  * Modelo de dominio para un usuario.
- * Esta clase representa a un usuario en el sistema, que implementa el comportamiento de un usuario.
+ * Esta clase representa a un usuario en el sistema
  */
-public class Usuario implements UsuarioComportamiento {
+public class Usuario  {
 
-	private String ip;
 	private int id;
 	private String contraseña;
 	private String email;
@@ -24,13 +23,6 @@ public class Usuario implements UsuarioComportamiento {
 		super();
 	}
 
-	/**
-	 * Constructor de un usuario con una dirección IP.
-	 * @param ip Dirección IP del usuario.
-	 */
-	public Usuario(String ip) {
-		this.ip = ip;
-	}
 
 	/**
 	 * Constructor de un usuario con un correo electrónico, nombre y lista de préstamos.
@@ -104,15 +96,6 @@ public class Usuario implements UsuarioComportamiento {
 	public void setPrestamos(List<Prestamo> prestamos) {
 		this.prestamos = prestamos;
 	}
-	
-	public String getIp() {
-		return ip;
-	}
-	
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
 
 	public String getContraseña() {
 		return contraseña;
@@ -132,7 +115,7 @@ public class Usuario implements UsuarioComportamiento {
 
 	@Override
 	public String toString() {
-		return "Usuario [ip=" + ip + ", id=" + id + ", contraseña=" + contraseña + ", email=" + email
+		return "Usuario [ id=" + id + ", contraseña=" + contraseña + ", email=" + email
 				+ ", nombre=" + nombre + ", prestamos=" + prestamos + "]";
 	}
 	

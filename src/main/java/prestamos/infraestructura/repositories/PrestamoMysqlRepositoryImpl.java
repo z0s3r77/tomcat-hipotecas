@@ -4,7 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import infraestructuracomun.H2DatabaseConnector;
+import databaseConnectors.H2DatabaseConnector;
+import databaseConnectors.MysqlDatabaseConnector;
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
 import prestamos.infraestructura.entities.PrestamoEntity;

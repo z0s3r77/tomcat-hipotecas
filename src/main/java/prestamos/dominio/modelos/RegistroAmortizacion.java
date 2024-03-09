@@ -1,14 +1,3 @@
-/**
- * Clase que representa un registro en el cuadro de amortización de un préstamo en la capa de dominio del sistema.
- * Contiene información detallada sobre un pago específico, incluyendo el número de pago, cantidad pendiente, cantidad amortizada,
- * intereses y cuota.
- *
- * Esta clase proporciona métodos para acceder y modificar la información de cada atributo del registro de amortización.
- * También sobrescribe el método toString para obtener una representación en cadena del objeto.
- *
- * @author z0s3r
- *
- */
 package prestamos.dominio.modelos;
 
 /**

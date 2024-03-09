@@ -5,10 +5,18 @@ import auth.dominio.puertos.in.LoginUsuarioUseCase;
 
 public class AuthService implements LoginUsuarioUseCase {
 
+    private static AuthService instance = null;
     private final LoginUsuarioUseCase loginUsuarioUseCase;
 
     public AuthService() {
         this.loginUsuarioUseCase = new LoginUsuarioUseCaseImpl();
+    }
+
+    public static AuthService getInstance() {
+        if (instance == null) {
+            instance = new AuthService();
+        }
+        return instance;
     }
 
     @Override

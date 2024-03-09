@@ -1,10 +1,3 @@
-/**
- * Clase que representa una hipoteca, que es un tipo específico de préstamo, en la capa de dominio del sistema.
- * Extiende la clase abstracta Prestamo.
- *
- * @author zoser
- * @see Prestamo
- */
 package prestamos.dominio.modelos;
 
 /**

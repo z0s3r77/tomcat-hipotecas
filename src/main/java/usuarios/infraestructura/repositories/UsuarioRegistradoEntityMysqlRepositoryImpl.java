@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import infraestructuracomun.H2DatabaseConnector;
+import databaseConnectors.MysqlDatabaseConnector;
 import usuarios.infraestructura.entities.UsuarioEntity;
 
 /**
@@ -18,12 +18,13 @@ import usuarios.infraestructura.entities.UsuarioEntity;
  */
 public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
-	static Connection con = H2DatabaseConnector.getConnection();
+	static Connection con = MysqlDatabaseConnector.getConnection();
 
 	/**
 	 * Constructor del repositorio de usuarios registrados.
 	 */
 	public UsuarioRegistradoEntityMysqlRepositoryImpl(){}
+
 
 	//TODO pensar si está  clase puede ser Generalizada para todos los repositorios
 

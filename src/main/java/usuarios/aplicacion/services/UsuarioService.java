@@ -25,6 +25,15 @@ public class UsuarioService
 	private final RetriveUsuarioUseCase retriveUsuarioUseCase;
 	private final UpdateUsuarioUseCase updateUsuarioUseCase;
 
+	public UsuarioService(CreateUsuarioUseCase createUsuarioUseCase, DeleteUsuarioUseCase deleteUsuarioUseCase,
+			RetriveUsuarioUseCase retriveUsuarioUseCase, UpdateUsuarioUseCase updateUsuarioUseCase) {
+		this.createUsuarioUseCase = createUsuarioUseCase;
+		this.deleteUsuarioUseCase = deleteUsuarioUseCase;
+		this.retriveUsuarioUseCase = retriveUsuarioUseCase;
+		this.updateUsuarioUseCase = updateUsuarioUseCase;
+	}
+
+
 	/**
 	 * Constructor del servicio de usuario.
 	 * Inicializa las implementaciones concretas de los casos de uso.

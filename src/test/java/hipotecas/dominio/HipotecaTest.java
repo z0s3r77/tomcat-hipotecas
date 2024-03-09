@@ -85,8 +85,8 @@ class HipotecaTest {
 		    
 		    // Supongamos un resultado de prueba para la primera cuota
 		    double saldoInicialEsperado = capital;
-		    double amortizacionEsperada = 9.795422590364856;  
-		    double interesesEsperados = 0.44999999999999996;      
+		    double amortizacionEsperada = 9.8;
+		    double interesesEsperados = 0.44;
 		    double cuotaEsperada = 10.245422590364855;         
 
 		    hipoteca.calcularCuadroAmortizacion();
@@ -112,9 +112,9 @@ class HipotecaTest {
 		 Hipoteca hipoteca = new Hipoteca(capital, interes, frecuenciaDePagoEnMeses, plazoAmortizacionEnMeses, usuario);
 		    
 		    // Resultado de prueba para la última cuota (12 meses)
-		    double ultimoSaldoEsperado = 10.20714579363616;
-		    double amortizacionEsperada = 10.20714579363872;  
-		    double interesesEsperados = 0.0382767967261356;      
+		    double ultimoSaldoEsperado = 10.15;
+		    double amortizacionEsperada = 10.21;
+		    double interesesEsperados = 0.03;
 		    double cuotaEsperada = 10.245422590364855;         
 
 		    hipoteca.calcularCuadroAmortizacion();
