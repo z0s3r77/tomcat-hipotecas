@@ -11,6 +11,7 @@ import usuarios.dominio.modelos.Usuario;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebServlet(description = "Controlador para autenticar login", urlPatterns = { "/AuthController" })
@@ -48,7 +49,8 @@ public class AuthController extends HttpServlet {
         HttpSession sesion =  request.getSession();
         int conf = Integer.parseInt(request.getParameter("conf"));
         if (conf == 0) {
-
+        
+        	LOGGER.log(Level.INFO, "User closed session " + request.getRemoteAddr());
             sesion.removeAttribute("usuario");
             sesion.invalidate();
             response.sendRedirect("index-hipotecas.jsp");
@@ -84,9 +86,13 @@ public class AuthController extends HttpServlet {
         boolean userIsCreated = this.authService.registerUsuario(correo, usuario, password);
         
         if (userIsCreated) {
+        	
+        	LOGGER.log(Level.INFO, "User registred " + usuario + " " + request.getRemoteAddr() );
             response.sendRedirect("login.jsp");
 
         }else {
+        	
+        	LOGGER.log(Level.SEVERE, "Error while register user " + usuario + " " + request.getRemoteAddr() );
             response.sendRedirect("error.jsp");
         }
     	
@@ -103,10 +109,14 @@ public class AuthController extends HttpServlet {
         Usuario usuarioAutenticado = authService.authenticateUsuario(usuario, password);
 
         if (usuarioAutenticado != null) {
+        	
+        	LOGGER.log(Level.INFO, "User logged " + usuario + " " + request.getRemoteAddr());
         	sesion.setAttribute("usuarioId", usuarioAutenticado.getId());
             sesion.setAttribute("usuario", usuario);
             response.sendRedirect("index-hipotecas.jsp");
         } else {
+        	
+        	LOGGER.log(Level.SEVERE, "Error logging " + usuario + " " + request.getRemoteAddr());
             response.sendRedirect("error.jsp");
         }
     }

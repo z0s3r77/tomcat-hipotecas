@@ -57,7 +57,6 @@ public class PrestamoMysqlRepositoryImpl {
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 
-			checkCon();
 			PreparedStatement pstmt = con.prepareStatement(insertPrestamoSQL, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setDouble(1, prestamo.getCapital());
 			pstmt.setDouble(2, prestamo.getInteres());
@@ -107,7 +106,6 @@ public class PrestamoMysqlRepositoryImpl {
 	 */
 	public boolean eliminarPrestamo(int prestamoId) {
 
-		checkCon();
 
 		
 		String eliminarPrestamoSQL = "DELETE FROM prestamos WHERE " + "id = ? ";
@@ -144,7 +142,6 @@ public class PrestamoMysqlRepositoryImpl {
 	 */
 	public List<Prestamo> obtenerTodosLosPrestamosDeUnUsuario(int usuarioId) {
 		
-		checkCon();
 		
 	    List<Prestamo> prestamos = new ArrayList<>();
 
@@ -177,9 +174,6 @@ public class PrestamoMysqlRepositoryImpl {
 	    return prestamos;
 	}
 	
-	public void checkCon () {
-	    
-	    	this.con =  MysqlDatabaseConnector.getConnection();
-	}
+
 
 }

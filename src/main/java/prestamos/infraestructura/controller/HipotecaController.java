@@ -2,6 +2,7 @@ package prestamos.infraestructura.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import jakarta.servlet.ServletException;
@@ -20,7 +21,7 @@ public class HipotecaController extends HttpServlet {
 	
 	
 	private static final long serialVersionUID = 1L;
-	PrestamoService prestamoService;
+	private PrestamoService prestamoService;
     private static final Logger LOGGER = Logger.getLogger(HipotecaController.class.getName());
 
     
@@ -29,6 +30,8 @@ public class HipotecaController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+		LOGGER.log(Level.INFO, "Request index-hipotecas.jsp " + request.getRemoteAddr());
         response.sendRedirect("index-hipotecas.jsp");
 	}
 
@@ -53,6 +56,8 @@ public class HipotecaController extends HttpServlet {
 				recalculateHipoteca(req, resp);
 				break;
 			default:
+				
+				LOGGER.log(Level.SEVERE, "Error getting action doPost HipotecaController" + req.getRemoteAddr());
 				resp.sendRedirect("error.jsp");
 
 		}
@@ -64,7 +69,6 @@ public class HipotecaController extends HttpServlet {
 		double interes = Double.parseDouble(req.getParameter("interes"));
 		int frecuenciaDePagoEnMeses = Integer.parseInt(req.getParameter("frecuenciaDePagoEnMeses"));
 		int plazoDeAmortizacionEnAnnos = Integer.parseInt(req.getParameter("plazoDeAmortizacionEnAnnos"));
-
 		plazoDeAmortizacionEnAnnos = plazoDeAmortizacionEnAnnos * 12;
 
 		int usuarioId = (req.getSession().getAttribute("usuarioId") != null) ? (Integer) req.getSession().getAttribute("usuarioId") : 0;
