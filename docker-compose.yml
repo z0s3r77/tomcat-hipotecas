@@ -16,11 +16,16 @@ services:
       - hipotecas_network
 
   hipotecas_tomcat:
-    image: tomcat:10.0.2-jdk11-openjdk
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     networks:
       - hipotecas_network
+    volumes:
+      - ./context.xml:/usr/local/tomcat/conf/context.xml
+
     depends_on:
       - hipotecas_mysql
 
