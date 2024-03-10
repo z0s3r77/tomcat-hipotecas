@@ -11,11 +11,13 @@ import usuarios.dominio.modelos.Usuario;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Logger;
 
 @WebServlet(description = "Controlador para autenticar login", urlPatterns = { "/AuthController" })
 public class AuthController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = Logger.getLogger(AuthController.class.getName());
 
     AuthService authService;
 

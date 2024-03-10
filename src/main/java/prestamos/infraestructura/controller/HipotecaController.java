@@ -17,19 +17,19 @@ import prestamos.dominio.modelos.Prestamo;
  */
 @WebServlet(description = "Controlador para calcular y obtener hipotecas.", urlPatterns = { "/HipotecaController" })
 public class HipotecaController extends HttpServlet {
+	
+	
 	private static final long serialVersionUID = 1L;
 	PrestamoService prestamoService;
-	
-    private static final Logger log = Logger.getLogger(HipotecaController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HipotecaController.class.getName());
+
     
 	public HipotecaController() {
 		this.prestamoService = PrestamoService.getInstance();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
         response.sendRedirect("index-hipotecas.jsp");
-
 	}
 
 
@@ -43,16 +43,13 @@ public class HipotecaController extends HttpServlet {
 				break;
 
 			case "Guardar hipoteca":
-				System.out.println("Guardar hipoteca usuario: " + req.getParameter("usuarioId"));
 				saveHipoteca(req, resp);
 				break;
 			case "Borrar hipoteca":
-				System.out.println(req.getParameter("usuarioId") + " Action");
 				deleteHipoteca(req, resp);
 				break;
 				
 			case "Recalcular hipoteca":
-				System.out.println(req.getParameter("usuarioId") + " Action");
 				recalculateHipoteca(req, resp);
 				break;
 			default:
@@ -63,7 +60,6 @@ public class HipotecaController extends HttpServlet {
 	
 	private void recalculateHipoteca(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		
-		int prestamoId = Integer.parseInt(req.getParameter("prestamoId"));
 		double capital = Double.parseDouble(req.getParameter("capital"));
 		double interes = Double.parseDouble(req.getParameter("interes"));
 		int frecuenciaDePagoEnMeses = Integer.parseInt(req.getParameter("frecuenciaDePagoEnMeses"));
@@ -90,7 +86,6 @@ public class HipotecaController extends HttpServlet {
 		boolean resultado = this.prestamoService.deletePrestamo(prestamoId);
 		
 		if (resultado) {
-			System.out.println("Borrar prestamo "+ prestamoId);
 			req.getRequestDispatcher("user-hipotecas.jsp").forward(req, resp);
 		
 		}else {
@@ -111,11 +106,9 @@ public class HipotecaController extends HttpServlet {
 		plazoDeAmortizacionEnAnnos = plazoDeAmortizacionEnAnnos * 12;
 
 		if (req.getSession().getAttribute("usuarioId") == null) {
-			System.out.println("error controlador al guardar hipoteca");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		}
 
-		System.out.println(req.getParameter("usuarioId") + " Parametros");
 		
 		int usuarioId = Integer.parseInt(req.getParameter("usuarioId")) ;
 
