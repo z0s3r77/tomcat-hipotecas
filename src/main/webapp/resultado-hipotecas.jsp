@@ -4,18 +4,13 @@
 <%@ page import="prestamos.dominio.modelos.RegistroAmortizacion" %>
 <%
     Hipoteca hipoteca = (Hipoteca) request.getAttribute("hipoteca");
-    System.out.println(hipoteca);
 
 
     String user = (String) request.getSession().getAttribute("usuario");
-    if (request.getSession() == null || user == null) {
-        System.out.println("No hay usuario logueado");
-    }
     String usuarioLogueado;
     int userId;
 
     if (request.getSession() != null && user != null) {
-        System.out.println("Usuario logueado: " + user);
         usuarioLogueado = user;
         userId = (int) request.getSession().getAttribute("usuarioId");
     } else {
