@@ -2,15 +2,28 @@
 <%@ page import="prestamos.dominio.modelos.Prestamo" %>
 <%@ page import="java.util.List" %>
 <%@ page import="prestamos.aplicacion.service.PrestamoService" %>
+<%@ page import="java.util.logging.Logger" %>
+
 
 <%
 
+    Logger LOGGER = Logger.getLogger("user-hipotecas.jsp");
     PrestamoService prestamoService = PrestamoService.getInstance();
 
-    String user = (String) request.getSession().getAttribute("usuario");
-    int userId = (int) request.getSession().getAttribute("usuarioId");
+    String user = null;
+    int userId = 0;
+    List<Prestamo> prestamos = null;
+    
+	try {
+	     user = (String) request.getSession().getAttribute("usuario");
+	     userId = (int) request.getSession().getAttribute("usuarioId");
+	     prestamos = prestamoService.getPrestamosFromUsuario(userId);
+	} catch (Exception e){
+		LOGGER.warning("There is not user logged");
+		response.sendRedirect("index-hipotecas.jsp");
+	}
 
-    List<Prestamo> prestamos = prestamoService.getPrestamosFromUsuario(userId);
+
 %>
 
 <html>
@@ -58,30 +71,41 @@
 <body>
 <h1>Hipotecas del Usuario | Usuario: <%=user%>
 </h1>
-
 <% if (prestamos != null && !prestamos.isEmpty()) { %>
-<ul>
+<table>
+    <tr>
+        <th>Capital</th>
+        <th>Interés</th>
+        <th>Frecuencia de Pago (Meses)</th>
+        <th>Plazo de Amortización (Meses)</th>
+        <th>Fecha de Creación</th>
+    </tr>
     <% for (Prestamo prestamo : prestamos) { %>
-    <li><%= prestamo.toString() %>
-    </li>
-    <form action="HipotecaController" method="post">
-        <input type="hidden" name="prestamoId" value="<%=prestamo.getId()%>">
-        <input type="submit" name="action" value="Borrar hipoteca">
-    </form>
-    <form action="HipotecaController" method="post">
-        <input type="hidden" name="prestamoId" value="<%=prestamo.getId()%>">
-        <input type="hidden" name="capital" value="<%=prestamo.getCapital()%>">
-        <input type="hidden" name="interes" value="<%=prestamo.getInteres()%>">
-        <input type="hidden" name="frecuenciaDePagoEnMeses" value="<%= prestamo.getFrecuenciaDePagoEnMeses()%>">
-        <input type="hidden" name="plazoDeAmortizacionEnAnnos" value="<%= prestamo.getPlazoDeAmortizacionEnMeses()%>">
-        <input type="submit" name="action" value="Recalcular hipoteca">
-    </form>
+    <tr>
+        <td><%= prestamo.getCapital() %></td>
+        <td><%= prestamo.getInteres() %></td>
+        <td><%= prestamo.getFrecuenciaDePagoEnMeses() %></td>
+        <td><%= prestamo.getPlazoDeAmortizacionEnMeses() %></td>
+        <td><%= prestamo.getFechaCreacion() %></td>
+        <td><form action="HipotecaController" method="post">
+            <input type="hidden" name="prestamoId" value="<%=prestamo.getId()%>">
+            <input type="submit" name="action" value="Borrar hipoteca">
+        </form></td>
+        <td> <form action="HipotecaController" method="post">
+            <input type="hidden" name="prestamoId" value="<%=prestamo.getId()%>">
+            <input type="hidden" name="capital" value="<%=prestamo.getCapital()%>">
+            <input type="hidden" name="interes" value="<%=prestamo.getInteres()%>">
+            <input type="hidden" name="frecuenciaDePagoEnMeses" value="<%= prestamo.getFrecuenciaDePagoEnMeses()%>">
+            <input type="hidden" name="plazoDeAmortizacionEnAnnos" value="<%= prestamo.getPlazoDeAmortizacionEnMeses()%>">
+            <input type="submit" name="action" value="Recalcular hipoteca">
+        </form></td>
+    </tr>
     <% } %>
-</ul>
+</table>
 <% } else { %>
 <p>No hay Hipotecas</p>
 <% } %>
 
-<a href="index-hipotecas.jsp">Calcular hipoteca</a>
+<a href="index-hipotecas.jsp">Inicio</a>
 </body>
 </html>

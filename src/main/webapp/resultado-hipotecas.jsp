@@ -2,22 +2,29 @@
          pageEncoding="UTF-8" %>
 <%@ page import="prestamos.dominio.modelos.Hipoteca" %>
 <%@ page import="prestamos.dominio.modelos.RegistroAmortizacion" %>
+<%@ page import="java.util.logging.Logger" %>
 <%
-    Hipoteca hipoteca = (Hipoteca) request.getAttribute("hipoteca");
+
+	Logger LOGGER = Logger.getLogger("resultado-hipotecas.jsp");
 
 
-    String user = (String) request.getSession().getAttribute("usuario");
+	Hipoteca hipoteca = null;
     String usuarioLogueado;
-    int userId;
+    String user = null;
+    int userId = 0;
+    
+	try {
+	     hipoteca = (Hipoteca) request.getAttribute("hipoteca");
+	     user = (String) request.getSession().getAttribute("usuario");
+	     usuarioLogueado = user;
+	     userId = (int) request.getSession().getAttribute("usuarioId");
+	} catch (Exception e){
+		LOGGER.warning("There is not user logged");
+		response.sendRedirect("index-hipotecas.jsp");
+	}
 
-    if (request.getSession() != null && user != null) {
-        usuarioLogueado = user;
-        userId = (int) request.getSession().getAttribute("usuarioId");
-    } else {
-        usuarioLogueado = "Anónimo";
-        userId = 0;
-    }
-
+    
+    
 %>
 <!DOCTYPE html>
 <html>

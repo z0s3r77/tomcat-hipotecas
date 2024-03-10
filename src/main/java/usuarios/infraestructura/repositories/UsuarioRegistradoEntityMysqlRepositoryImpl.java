@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import databaseConnectors.MysqlDatabaseConnector;
 import usuarios.infraestructura.entities.UsuarioEntity;
@@ -19,6 +21,7 @@ import usuarios.infraestructura.entities.UsuarioEntity;
 public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 	static Connection con = MysqlDatabaseConnector.getConnection();
+	private static final Logger LOGGER = Logger.getLogger(UsuarioRegistradoEntityMysqlRepositoryImpl.class.getName());
 
 	/**
 	 * Constructor del repositorio de usuarios registrados.
@@ -38,7 +41,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 		UsuarioEntity usuarioGuardado = null;
 
 		try {
-		    String insertUsuarioSQL = "INSERT INTO usuarios (nombre, email, contraseña) VALUES (?, ?, ?)";
+		    String insertUsuarioSQL = "INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)";
 
 		    PreparedStatement pstmt = con.prepareStatement(insertUsuarioSQL, Statement.RETURN_GENERATED_KEYS);
 
@@ -91,7 +94,8 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 				return Optional.of(usuario);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+
+			LOGGER.log(Level.SEVERE, "Error saving finding User " + e.getMessage());
 		}
 
 		return Optional.empty();
@@ -122,7 +126,8 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+
+			LOGGER.log(Level.SEVERE, "Error saving finding all User " + e.getMessage());
 		}
 
 		return usuarios;
@@ -150,7 +155,8 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 				return Optional.of(usuario);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+
+			LOGGER.log(Level.SEVERE, "Error updating User " + e.getMessage());
 		}
 
 		return Optional.empty();
@@ -172,7 +178,8 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 
 			return affectedRows > 0;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
+			LOGGER.log(Level.SEVERE, "Error deleting User " + e.getMessage());
 		}
 
 		return false;
@@ -197,7 +204,8 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
                 return rowCount > 0;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+        	
+			LOGGER.log(Level.SEVERE, "Error cheking User " + e.getMessage());
         }
 
         return false;
@@ -225,7 +233,8 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 				return Optional.of(usuario);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+
+			LOGGER.log(Level.SEVERE, "Error finding User by email " + e.getMessage());
 		}
 
 		return Optional.empty();

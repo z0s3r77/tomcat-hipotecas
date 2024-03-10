@@ -3,8 +3,9 @@ package prestamos.infraestructura.repositories;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import databaseConnectors.H2DatabaseConnector;
 import databaseConnectors.MysqlDatabaseConnector;
 import prestamos.dominio.modelos.Hipoteca;
 import prestamos.dominio.modelos.Prestamo;
@@ -31,7 +32,10 @@ import usuarios.dominio.puertos.out.UsuarioRepositoryPort;
 public class PrestamoMysqlRepositoryImpl {
 
 	static Connection con = MysqlDatabaseConnector.getConnection();
+	private static final Logger LOGGER = Logger.getLogger(PrestamoMysqlRepositoryImpl.class.getName());
 
+	
+	
 	public PrestamoMysqlRepositoryImpl() {}
 
 	/**
@@ -52,7 +56,6 @@ public class PrestamoMysqlRepositoryImpl {
 			String insertPrestamoSQL = "INSERT INTO prestamos (capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnMeses, tipoDePrestamo, fecha_creacion, usuario_id) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-			System.out.println(prestamo);
 
 			checkCon();
 			PreparedStatement pstmt = con.prepareStatement(insertPrestamoSQL, Statement.RETURN_GENERATED_KEYS);
@@ -70,7 +73,6 @@ public class PrestamoMysqlRepositoryImpl {
 			if (affectedRows > 0) {
 
 				ResultSet generatedKeys = pstmt.getGeneratedKeys();
-				System.out.println(generatedKeys);
 
 				if (generatedKeys.next()) {
 
@@ -90,7 +92,7 @@ public class PrestamoMysqlRepositoryImpl {
 
 		} catch (SQLException e) {
 
-			System.out.println("Error al guardar el prestamo: " + e.getMessage());
+			LOGGER.log(Level.SEVERE, "Error saving PRESTAMO " + e.getMessage());
 		}
 		
 
@@ -117,17 +119,17 @@ public class PrestamoMysqlRepositoryImpl {
 			int filasAfectadas = eliminarPrestamoStmt.executeUpdate();
 
 			if (filasAfectadas > 0) {
-				System.out.println("Se eliminó el préstamo con éxito.");
+				
 				return true;
 
 			} else {
-				System.out.println("No se encontró un préstamo con los atributos proporcionados.");
-				return true;
 
+				return true;
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace(); // Manejar la excepción adecuadamente en tu aplicación
+
+			LOGGER.log(Level.SEVERE, "Error deleting PRESTAMO " + e.getMessage());
 		}
 
 		return true;
@@ -168,7 +170,8 @@ public class PrestamoMysqlRepositoryImpl {
 	        }
 
 	    } catch (SQLException e) {
-	        e.printStackTrace(); // Manejar la excepción adecuadamente en tu aplicación
+
+	    	LOGGER.log(Level.SEVERE, "Error getting PRESTAMO " + e.getMessage());
 	    }
 
 	    return prestamos;
@@ -177,7 +180,6 @@ public class PrestamoMysqlRepositoryImpl {
 	public void checkCon () {
 	    
 	    	this.con =  MysqlDatabaseConnector.getConnection();
-	    
 	}
 
 }
