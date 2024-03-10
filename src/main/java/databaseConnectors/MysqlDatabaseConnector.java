@@ -34,7 +34,7 @@ public class MysqlDatabaseConnector {
             // Crear la tabla de usuarios
             String createTableUsuariosSQL = "CREATE TABLE IF NOT EXISTS usuarios (\n"
                     + "    id INT AUTO_INCREMENT PRIMARY KEY,\n" + "    email VARCHAR(255) UNIQUE NOT NULL,\n"
-                    + "    nombre VARCHAR(255) NOT NULL,\n" + "    contraseña VARCHAR(255) NOT NULL\n" + ");";
+                    + "    nombre VARCHAR(255) NOT NULL,\n" + "    password VARCHAR(255) NOT NULL\n" + ");";
             stmt.execute(createTableUsuariosSQL);
 
 

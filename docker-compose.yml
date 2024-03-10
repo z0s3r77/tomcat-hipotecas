@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  hipotecas_mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: administracion
+      MYSQL_USER: z0s3r77
+      MYSQL_PASSWORD: supersecret
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - hipotecas_network
+
+  hipotecas_tomcat:
+    image: tomcat:10.0.2-jdk11-openjdk
+    ports:
+      - "8080:8080"
+    networks:
+      - hipotecas_network
+    depends_on:
+      - hipotecas_mysql
+
+networks:
+  hipotecas_network:
+    driver: bridge

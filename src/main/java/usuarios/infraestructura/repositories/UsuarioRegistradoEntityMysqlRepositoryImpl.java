@@ -87,7 +87,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 				usuario.setId(rs.getInt("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNombre(rs.getString("nombre"));
-				usuario.setPassword(rs.getString("contraseña"));
+				usuario.setPassword(rs.getString("password"));
 				return Optional.of(usuario);
 			}
 		} catch (SQLException e) {
@@ -117,7 +117,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 				usuario.setId(rs.getInt("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNombre(rs.getString("nombre"));
-				usuario.setPassword(rs.getString("contraseña"));
+				usuario.setPassword(rs.getString("password"));
 				usuarios.add(usuario);
 			}
 
@@ -136,7 +136,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 	public Optional<UsuarioEntity> update(UsuarioEntity usuario) {
 
 		try {
-			String updateUsuarioSQL = "UPDATE usuarios SET email=?, nombre=?, contraseña=? WHERE id=?";
+			String updateUsuarioSQL = "UPDATE usuarios SET email=?, nombre=?, password=? WHERE id=?";
 			PreparedStatement pstmt = con.prepareStatement(updateUsuarioSQL);
 
 			pstmt.setString(1, usuario.getEmail());
@@ -221,7 +221,7 @@ public class UsuarioRegistradoEntityMysqlRepositoryImpl {
 				usuario.setId(rs.getInt("id"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setNombre(rs.getString("nombre"));
-				usuario.setPassword(rs.getString("contraseña"));
+				usuario.setPassword(rs.getString("password"));
 				return Optional.of(usuario);
 			}
 		} catch (SQLException e) {
