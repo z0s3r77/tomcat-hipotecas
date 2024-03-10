@@ -11,6 +11,7 @@ WORKDIR /usr/src/app
 
 COPY pom.xml .
 COPY src ./src
+COPY context.xml /usr/local/tomcat/conf/
 
 RUN mvn clean package
 
