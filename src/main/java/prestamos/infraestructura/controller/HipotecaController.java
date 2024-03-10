@@ -65,6 +65,7 @@ public class HipotecaController extends HttpServlet {
 	
 	private void recalculateHipoteca(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		
+		LOGGER.log(Level.INFO, "Recalculating Hipoteca " + req.getRemoteAddr());
 		double capital = Double.parseDouble(req.getParameter("capital"));
 		double interes = Double.parseDouble(req.getParameter("interes"));
 		int frecuenciaDePagoEnMeses = Integer.parseInt(req.getParameter("frecuenciaDePagoEnMeses"));
@@ -90,9 +91,11 @@ public class HipotecaController extends HttpServlet {
 		boolean resultado = this.prestamoService.deletePrestamo(prestamoId);
 		
 		if (resultado) {
+			LOGGER.log(Level.INFO, "Deleting Hipoteca with ID: "+ prestamoId +" " + req.getRemoteAddr());
 			req.getRequestDispatcher("user-hipotecas.jsp").forward(req, resp);
 		
 		}else {
+			LOGGER.log(Level.SEVERE, "Error during deleting Hipoteca with ID: "+ prestamoId +" " + req.getRemoteAddr());
 			resp.sendRedirect("error.jsp");
 		}
 		
@@ -102,7 +105,6 @@ public class HipotecaController extends HttpServlet {
 
 	private void saveHipoteca(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		
 		double capital = Double.parseDouble(req.getParameter("capital"));
 		double interes = Double.parseDouble(req.getParameter("interes"));
 		int frecuenciaDePagoEnMeses = Integer.parseInt(req.getParameter("frecuenciaDePagoEnMeses"));
@@ -110,15 +112,15 @@ public class HipotecaController extends HttpServlet {
 		plazoDeAmortizacionEnAnnos = plazoDeAmortizacionEnAnnos * 12;
 
 		if (req.getSession().getAttribute("usuarioId") == null) {
+			LOGGER.log(Level.SEVERE, "Error saving Hipoteca: User there is not user logged " + req.getRemoteAddr());
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		}
 
-		
 		int usuarioId = Integer.parseInt(req.getParameter("usuarioId")) ;
-
 		Prestamo hipoteca = prestamoService.makeHipoteca(capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnAnnos, usuarioId);
-
 		prestamoService.createPrestamo(hipoteca);
+		
+		LOGGER.log(Level.INFO, "Saving Hipoteca with User ID: "+ usuarioId  + req.getRemoteAddr());
 		List<Prestamo> prestamosDelUsuario = prestamoService.getPrestamosFromUsuario(usuarioId);
 		req.setAttribute("prestamos", prestamosDelUsuario);
 		req.getRequestDispatcher("user-hipotecas.jsp").forward(req, resp);
@@ -129,6 +131,7 @@ public class HipotecaController extends HttpServlet {
 
 	private void makeHipoteca(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
 		double capital = Double.parseDouble(req.getParameter("capital"));
 		double interes = Double.parseDouble(req.getParameter("interes"));
 		int frecuenciaDePagoEnMeses = Integer.parseInt(req.getParameter("frecuenciaDePagoEnMeses"));
@@ -137,6 +140,8 @@ public class HipotecaController extends HttpServlet {
 		plazoDeAmortizacionEnAnnos = plazoDeAmortizacionEnAnnos * 12;
 
 		int usuarioId = (req.getSession().getAttribute("usuarioId") != null) ? (Integer) req.getSession().getAttribute("usuarioId") : 0;
+
+		LOGGER.log(Level.INFO, "Making Hipoteca"  + req.getRemoteAddr());
 
 		Prestamo hipoteca = prestamoService.makeHipoteca(capital, interes, frecuenciaDePagoEnMeses, plazoDeAmortizacionEnAnnos, usuarioId);
 		prestamoService.calculatePrestamo(hipoteca);
