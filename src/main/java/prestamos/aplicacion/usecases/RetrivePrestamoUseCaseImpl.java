@@ -6,8 +6,10 @@ import prestamos.dominio.puerto.out.PrestamoRepositoryPort;
 import prestamos.infraestructura.repositories.PrestamoRepositoryPortImpl;
 
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class RetrivePrestamoUseCaseImpl implements RetrivePrestamosUseCase {
 
@@ -16,6 +18,17 @@ public class RetrivePrestamoUseCaseImpl implements RetrivePrestamosUseCase {
 
     public RetrivePrestamoUseCaseImpl(){
         this.prestamoRepositoryPort = PrestamoRepositoryPortImpl.getInstance();
+
+        try {
+            // Crear un FileHandler para escribir los registros en un archivo
+            FileHandler fileHandler = new FileHandler("application.log", true);
+            fileHandler.setFormatter(new SimpleFormatter());
+
+            // Agregar el FileHandler al Logger
+            LOGGER.addHandler(fileHandler);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Error al configurar el FileHandler.", e);
+        }
     }
 
     @Override

@@ -52,6 +52,21 @@
             margin: 10px 2px;
             cursor: pointer;
         }
+            .button-link {
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #4CAF50; /* Color de fondo del botón (puedes cambiarlo) */
+        color: white;
+        border: 1px solid #4CAF50; /* Color del borde del botón (puedes cambiarlo) */
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .button-link:hover {
+        background-color: #45a049; /* Cambia el color de fondo cuando el mouse pasa sobre el botón */
+    }
     </style>
 </head>
 <body>
@@ -90,10 +105,9 @@
 <%
 } else {
 %>
-<p>
-    <a href="AuthController?conf=0">Logout</a>
-    <a href="user-hipotecas.jsp">Ver mis hipotecas</a>
-</p>
+
+<a href="AuthController?conf=0" class="button-link">Logout</a>
+    <a href="user-hipotecas.jsp" class="button-link">Ver mis hipotecas</a>
 <%
     }
 %>
