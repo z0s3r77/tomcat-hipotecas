@@ -18,10 +18,6 @@
             font-family: Arial, sans-serif;
         }
 
-        .container {
-            width: 80%;
-            margin: auto;
-        }
 
         .form-control {
             width: 100%;
@@ -29,27 +25,45 @@
             margin: 10px 0;
         }
 
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px 2px;
-            cursor: pointer;
-        }
+           .button-link {
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #4CAF50; 
+        color: white;
+        border: 1px solid #4CAF50; 
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+               .button-link-blue {
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        background-color: blue; 
+        color: white;
+        border: 1px solid #4CAF50; 
+        border-radius: 5px;
+        cursor: pointer;
+    }
     </style>
 </head>
 <body>
 <h1>Aplicación de las hipotecas | Login </h1>
+    <br>
+    <br>
+    <!-- Formulario de Login  -->
     <form action="AuthController" method="post">
-        <input type="text" name="usuario" placeholder="usuario">
-        <input type="text" name="contraseña" placeholder="contraseña">
-        <button type="submit" name="action" value="login">Login</button>
+        <input type="text" name="usuario" placeholder="correo">
+        <input type="password" name="contraseña" placeholder="contraseña">
+        <button type="submit" name="action" value="login" class="button-link-blue" >Login</button>
     </form>
-<a href="index-hipotecas.jsp">Inicio</a>
-<a href="register.jsp">Registrarse</a>
+    <br>
+    <br>
+    
+<a href="index-hipotecas.jsp"  class="button-link">Inicio</a>
+<a href="register.jsp"  class="button-link">Registrarse</a>
 </body>
 </html>

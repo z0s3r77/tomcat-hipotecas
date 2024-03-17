@@ -131,6 +131,29 @@ public abstract class Prestamo {
 		this.id = id;
 	}
 
+
+	/**
+	 * Método que devuelve la frecuencia de amortización en String
+	 * 
+	 * @return String
+	 */
+	public String getFrecuenciaAmortizacion() {
+		
+		if (this.frecuenciaDePagoEnMeses == 1) {
+			return "mensual";
+		}
+		
+		if (this.frecuenciaDePagoEnMeses == 3) {
+			return "trimestral";
+		}
+		
+		
+		if (this.frecuenciaDePagoEnMeses == 12) {
+			return "anual";
+		}
+		
+		return null;
+	}
 	
 	/**
 	 * Método abstracto para calcular el cuadro de amortización del préstamo.

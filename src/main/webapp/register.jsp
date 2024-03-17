@@ -2,55 +2,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registrarse</title>
+    <title>Registro</title>
     <style>
         a {
             color: #333;
             text-decoration: none;
         }
-
         a:hover {
             color: #007BFF;
             text-decoration: underline;
         }
-
         body {
             font-family: Arial, sans-serif;
         }
-
-        .container {
-            width: 80%;
-            margin: auto;
-        }
-
         .form-control {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
         }
-
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px 2px;
-            cursor: pointer;
-        }
+        .button-link {
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #4CAF50; 
+        color: white;
+        border: 1px solid #4CAF50; 
+        border-radius: 5px;
+        cursor: pointer;
+    }
     </style>
 </head>
 <body>
-<h1>Aplicación de las hipotecas | Registrarse </h1>
+<h1>Aplicación de las hipotecas | Registro </h1>
+    <br>
+    <br>
+
+	<!-- Formulario de Registro -->
     <form action="AuthController" method="post">
         <input type="text" name="correo" placeholder="correo">
         <input type="text" name="usuario" placeholder="usuario">
-        <input type="text" name="contraseña" placeholder="contraseña">
-        <button type="submit" name="action" value="Registrarse">Login</button>
+        <input type="password" name="contraseña" placeholder="contraseña">
+        <button type="submit" name="action" value="Registrarse">Registrarse</button>
     </form>
-<a href="index-hipotecas.jsp">Inicio</a>
-<a href="register.jsp">Registrarse</a>
+        <br>
+        <br>
+    
+<a href="index-hipotecas.jsp"  class="button-link">Inicio</a>
+<a href="register.jsp"  class="button-link">Registrarse</a>
 </body>
 </html>
