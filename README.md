@@ -7,7 +7,7 @@ Repositorio de la tarea "Hipoteques" de la asignatura de "despliegue de aplicaci
 - Clonamos este repositorio
   `https://github.com/z0s3r77/tomcat-hipotecas.git`
   
-- Dentro del repositorio `tomcat-hipotecas` ejecutamos
+- Dentro del directorio `tomcat-hipotecas` ejecutamos
   `docker-compose up -d`
 
 - Abrimos el navegador y vamos a `localhost:8080/tomcat-hipotecas/index-hipotecas.jsp`
