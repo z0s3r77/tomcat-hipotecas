@@ -1,6 +1,7 @@
 # HIPOTECAS
 
-Repositorio de la tarea "Hipoteques" de la asignatura de "despliegue de aplicaciones web"
+Repositorio de la tarea "Hipoteques" de la asignatura de "despliegue de aplicaciones web". 
+La aplicación está construida sobre una arquitectura hexagonal.
 
 ## Modo de Uso
 
