@@ -2,6 +2,16 @@
 
 Repositorio de la tarea "Hipoteques" de la asignatura de "despliegue de aplicaciones web"
 
+## Modo de Uso
+
+- Clonamos este repositorio
+  `https://github.com/z0s3r77/tomcat-hipotecas.git`
+  
+- Dentro del repositorio `tomcat-hipotecas` ejecutamos
+  `docker-compose up -d`
+
+- Abrimos el navegador y vamos a `localhost:8080/tomcat-hipotecas/index-hipotecas.jsp`
+
 
 ## Requisitos funcionales
 
@@ -15,30 +25,20 @@ Requisitos Funcionales:
 - Se deben registrar los errores como errores en un archivo llamado AppHipoteques.txt.
 - Se debe registrar como debug en un archivo llamado AppHipoteques.txt todas las simulaciones que se realicen, tanto de un usuario identificado como si no lo es. Esto debe incluir la fecha, hora, IP, nombre de usuario y los datos de la simulación de la hipoteca (importe, interés y meses).
 
+## Técnologias empleadas de desarrollo
+### Java 15
+### Junit 5 & Mockito
+Junit5 y Mockito para tests.
+### Maven
+Gestor de dependencias.
 
-## Junit 5 & Mockito
-Se pretende usar Junit5 para implementar o no tdd, pero implementar test.
+## Técnologias de infraestructura
+### Tomcat
+### MySQL
+### Docker
+### Jenkins
 
+![Página principal](https://github.com/z0s3r77/tomcat-hipotecas/assets/80277545/160076e5-7ac4-4af9-a577-640a8e39699b)
 
-## Maven
-Es el gestor de dependencias del proyecto
-
-## Java 15
-
-## Docker
-
-`docker build -t z0s3r77/tomcat-hipotecas:v1 .`
-`docker run -p 7070:8080 -d --name tomcat-hipotecas-container z0s3r77/tomcat-hipotecas:v1`
-`docker commit tomcat-hipotecas-container z0s3r77/tomcat-hipotecas`
-
-Login en Docker
-
-`docker push z0s3r77/tomcat-hipotecas`
-
-
-
-## Jenkins
-
-Probando webhook
 
 
